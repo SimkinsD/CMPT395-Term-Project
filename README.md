@@ -4,6 +4,9 @@ https://drive.google.com/open?id=191UDMXgwu91dLT6G-qREgf1sB2oeZAKi
 Moqups Project (For UI Design):
 https://app.moqups.com/simkinsd/nhzk0fyHlW/view/page/aa08d8375
 
+Discord Channel Link:
+https://discord.gg/VYRCDaq
+
 Don't forget to add descriptive commit messages (it really helps!)
 
 WIP Merge requests are awesome, and we should all be aware that they exist and
