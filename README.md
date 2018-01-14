@@ -1,3 +1,5 @@
+Scrum Meeting: Mo, We, Fr 6pm
+
 Google Drive Folder:
 https://drive.google.com/open?id=191UDMXgwu91dLT6G-qREgf1sB2oeZAKi
 
@@ -11,6 +13,7 @@ Don't forget to add descriptive commit messages (it really helps!)
 
 WIP Merge requests are awesome, and we should all be aware that they exist and
 should try to get in the habit of using them:
+
 https://docs.gitlab.com/ce/user/project/merge_requests/work_in_progress_merge_requests.html
 
 Setup the Windows subsystem for linux on Windows 10 (i.e. run a linux terminal on windows):
