@@ -2,7 +2,7 @@ Google Drive Folder:
 https://drive.google.com/open?id=191UDMXgwu91dLT6G-qREgf1sB2oeZAKi
 
 Moqups Project (For UI Design):
-https://app.moqups.com/simkinsd/nhzk0fyHlW/view/page/aa08d8375
+https://app.moqups.com/simkinsd/nhzk0fyHlW/view/page/adbbb0b6d
 
 Discord Channel Link:
 https://discord.gg/VYRCDaq
