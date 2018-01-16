@@ -1,5 +1,10 @@
 Scrum Meeting: Mo, We, Fr 6pm
 
+Weekly Meetup: Thursday 1pm in lab
+
+SSH Setup:
+https://docs.gitlab.com/ce/ssh/README.html
+
 Google Drive Folder:
 https://drive.google.com/open?id=191UDMXgwu91dLT6G-qREgf1sB2oeZAKi
 
