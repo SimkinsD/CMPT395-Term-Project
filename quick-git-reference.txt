@@ -1,8 +1,12 @@
+For a quick guide: rogerdudler.github.io/git-guide/
+
 To setup git repository in current directory: git init
 To get a remote repository (after git init): git clone user@host:/project/path
   e.g: git clone git@gitlab.com:DecoSimkins/CMPT-395-Term-Project.git
 
-Update local repository: git pull
+Update local repository (not always clean): git pull
+Update local cleanly: git fetch origin; git rebase -p origin/<branch-name>
+For more info: https://www.derekgourlay.com/blog/git-when-to-merge-vs-when-to-rebase/
 
 Add changed file to index (staging area): git add <filename>
   ^ Can be done to index deleted files as well
