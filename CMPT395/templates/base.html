@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+
+<head>
+  {% block title %}<title>Caraway Scheduler</title>{% endblock %}
+  
+  <!-- Additional CSS to be loaded from /static -->
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/base.css' %}" />
+</head>
+
+
+<body>
+  <div id="pagewrap">
+    <div id="header">
+      <img id="school-logo" src="http://carawayschool.ca/files/2017/02/Caraway-logo-noSeeds-960x777.png" alt="Caraway School Logo">
+      <h2 class="inline">Caraway Scheduler</h2>
+      <div id="hours-tracker">
+        <ul>
+          {% block weeklyHours %}<li>This Week: 0/5 hours</li>{% endblock %}
+          {% block monthlyHours %}<li>This Month: 0/20 hours</li>{% endblock %}
+        </ul>
+      </div>
+    </div>
+  
+  {% block content %}
+  {% endblock %}
+  </div>
+</body>
+
+</html>
