@@ -7,7 +7,7 @@
   
   <!-- Additional CSS to be loaded from /static -->
   {% load static %}
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/base.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
 </head>
 
 
@@ -15,18 +15,40 @@
   <div id="pagewrap">
     <div id="header">
       <img id="school-logo" src="http://carawayschool.ca/files/2017/02/Caraway-logo-noSeeds-960x777.png" alt="Caraway School Logo">
-      <h2 class="inline">Caraway Scheduler</h2>
+      <h2>Caraway Scheduler</h2>
+
       <div id="hours-tracker">
         <ul>
           {% block weeklyHours %}<li>This Week: 0/5 hours</li>{% endblock %}
           {% block monthlyHours %}<li>This Month: 0/20 hours</li>{% endblock %}
         </ul>
-      </div>
-    </div>
-  
-  {% block content %}
-  {% endblock %}
-  </div>
+      </div> <!-- End hours-tracker -->
+    </div> <!-- End header -->
+
+    <div id="main-body">
+      <div id="sidebar">
+        <div id="sidebar-menu">
+          <ul>
+            <li>
+              <a href="">"Calendar"</a>
+            </li>
+            <li>
+              <a href="">"Statistics"</a>
+            </li>
+            <li>
+              <a href="">"Etc..."</a>
+            </li>
+          </ul>
+        </div> <!-- End sidebar-menu -->
+      </div> <!-- End sidebar -->
+
+
+      <div id="content-body">
+        {% block content %}
+        {% endblock %} <!-- End content block -->
+      </div> <!-- End content-body -->
+    </div> <!-- End main-body -->
+  </div> <!-- End pagewrap -->
 </body>
 
 </html>
