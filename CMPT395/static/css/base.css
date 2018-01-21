@@ -20,7 +20,7 @@ body {
 }
 
 #sidebar {
-    width: 125px;
+    width: 150px;
     height: 100%;
     position: relative;
     text-align: center;
@@ -71,6 +71,7 @@ body {
 #content-body {
     top: 10px;
     margin-left: 150px;
+    min-height: 200px;
 }
 
 #hours-tracker {
@@ -97,4 +98,8 @@ body {
 
 .inline {
     display: inline;
+}
+
+.clear {
+    clear: both;
 }
