@@ -1,21 +1,30 @@
 #calendar {
     position: relative;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
     text-align: center;
 }
 
 .day {
     display: inline-block;
-    min-width: 10%;
+    min-width: 12%;
     max-width: 14%;
     border: solid black 1px;
-    margin: 1%;
+    border-radius: 4px;
+    box-shadow: 4px 4px 6px #4b4b4b;
+    margin: 0.5%;
 }
 
 .day-title {
-    min-height: 20px;
     border-bottom: solid black 1px;
+}
+
+.day-title h3 {
+    margin: 5px;
+}
+
+.day-title h5 {
+    margin: 5px;
 }
 
 .day-schedule {

@@ -16,12 +16,12 @@
       <div class="day">
         <div class="day-title">
           <h3>{{ day.0 }}</h3> <!-- (Day: Sunday, Monday, ..., Saturday) -->
-          <h3>{{ day.1 }}</h3> <!-- (Date: e.g. Jan. 19, 2018) -->
+          <h5>{{ day.1 }}</h5> <!-- (Date: e.g. Jan. 19, 2018) -->
         </div> <!-- End day-title -->
 
         <div class="day-schedule">
           <h3>Day Schedule</h3>
-          <!--
+          <!-- Ideally how a daily schedule would be populated
           {% for event in day %}
             <div class="day-event">
               <p>{{ event.start }} - {{ event.end }}</br></p>
@@ -36,6 +36,6 @@
       <h3>List Empty</h3>
 
     {% endfor %}
-    <div class="clear"></div>
+    <div class="clear"></div> <!-- Extend height to fit content -->
   </div> <!-- End calendar -->
 {% endblock content %}
