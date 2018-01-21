@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <title>Caraway Calendar</title>
+{% endblock title %}
+
+{% block add_css %}
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/calendar.css' %}" />
+{% endblock add_css %}
+
+
+{% block content %}
+  <div id="calendar">
+    {% for day in view.day_and_name %}
+      <div class="day">
+        <div class="day-title">
+          <h3>{{ day.0 }}</h3>
+          <h3>{{ day.1 }}</h3>
+        </div> <!-- End day-title -->
+
+        <div class="day-schedule">
+          <h3>Day Schedule</h3>
+          <!--
+          {% for event in day %}
+            <div class="day-event">
+              <p>{{ event.start }} - {{ event.end }}</br></p>
+              <p>{{ event.facilitator }}</p>
+            </div>
+          {% endfor %}
+          -->
+        </div> <!-- End day-schedule -->
+      </div> <!-- End day -->
+
+    {% empty %}
+      <h3>List Empty</h3>
+
+    {% endfor %}
+    <div class="clear"></div>
+  </div> <!-- End calendar -->
+{% endblock content %}
