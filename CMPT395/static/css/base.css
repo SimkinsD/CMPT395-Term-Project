@@ -17,14 +17,16 @@ body {
 #main-body {
     height: 100%;
     display: block;
+    background-color: #555;
 }
 
 #sidebar {
-    width: 125px;
+    width: 50px;
     height: 100%;
     position: relative;
     text-align: center;
     background-color: #333;
+    color: white;
     float: left;
 }
 
@@ -43,7 +45,13 @@ body {
     color: white;
     text-decoration: none;
     display: block;
+    height: 40px;
+    width: 40px;
     padding: 5px;
+}
+
+#sidebar-menu li a i {
+    font-size: 35px;
 }
 
 #sidebar-menu li a:hover {
@@ -52,31 +60,38 @@ body {
 }
 
 #school-logo {
-    width: 125px;
-    height: 100px;
+    width: 65px;
+    height: 50px;
+    float: left;
+    padding: 5px;
+}
+
+#site-title {
+    padding: 5px;
     float: left;
 }
 
 #header {
-    min-height: 100px;
-    max-height: 150px;
+    height: 60px;
     width: 100%;
     text-align: center;
     position: sticky;
     top: 0;
     z-index: 10;
     background-color: white;
+    overflow: hidden;
 }
 
 #content-body {
     top: 10px;
     margin-left: 150px;
+    overflow: hidden;
 }
 
 #hours-tracker {
     height: 50px;
     text-align: center;
-    border-bottom: solid black 2px;
+    float: right;
 }
 
 #hours-tracker ul {
@@ -97,4 +112,8 @@ body {
 
 .inline {
     display: inline;
+}
+
+.clear {
+    clear: both;
 }
