@@ -20,15 +20,52 @@
         </div> <!-- End day-title -->
 
         <div class="day-schedule">
-          <h3>Day Schedule</h3>
-          <!-- Ideally how a daily schedule would be populated
-          {% for event in day %}
+          <div class="time-slot">
+            <h4>Morning Time Slot</h4>
             <div class="day-event">
-              <p>{{ event.start }} - {{ event.end }}</br></p>
-              <p>{{ event.facilitator }}</p>
+              <p>9:00 - 10:30</p>
+              <p>Facilitator Name 1</p>
             </div>
-          {% endfor %}
-          -->
+            <div class="day-event">
+              <p>9:15 - 10:30</p>
+              <p>Facilitator Name 2</p>
+            </div>
+            <!-- Ideal method of populating
+            {% for event in morning %}
+              <div class="day-event">
+                <p>{{ event.start_time }} - {{ event.end_time }}</br></p>
+                <p>{{ event.facilitator_name }}</p>
+              </div>
+            {% endfor %}
+            morning list would be populated in the view by
+            accessing the database -->
+          </div> <!-- End Morning Time Slot -->
+
+          <div class="time-slot">
+            <h4>Noon Time Slot</h4>
+            <!-- Ideal method of populating
+            {% for event in noon %}
+              <div class="day-event">
+                <p>{{ event.start_time }} - {{ event.end_time }}</br></p>
+                <p>{{ event.facilitator_name }}</p>
+              </div>
+            {% endfor %}
+            noon list would be populated in the view by
+            accessing the database -->
+          </div> <!-- End Noon Time Slot -->
+
+          <div class="time-slot">
+            <h4>Afternoon Time Slot</h4>
+            <!-- Ideal method of populating
+            {% for event in afternoon %}
+              <div class="day-event">
+                <p>{{ event.start_time }} - {{ event.end_time }}</br></p>
+                <p>{{ event.facilitator_name }}</p>
+              </div>
+            {% endfor %}
+            afternoon list would be populated in the view by
+            accessing the database -->
+          </div> <!-- End Afternoon Time Slot -->
         </div> <!-- End day-schedule -->
       </div> <!-- End day -->
 

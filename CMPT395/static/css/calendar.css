@@ -7,16 +7,15 @@
 
 .day {
     display: inline-block;
+    /* For Sunday-Saturday
     min-width: 12%;
-    max-width: 14%;
+    max-width: 14%;*/
+    /* For Monday-Friday */
+    width: 18%;
     border: solid black 1px;
     border-radius: 4px;
     box-shadow: 4px 4px 6px #4b4b4b;
     margin: 0.5%;
-}
-
-.day-title {
-    border-bottom: solid black 1px;
 }
 
 .day-title h3 {
@@ -29,4 +28,17 @@
 
 .day-schedule {
     min-height: 20px;
+}
+
+.time-slot {
+    border-top: solid black 2px;
+}
+
+.day-event {
+    border-top: dotted gray 1px;
+}
+
+.day-event p {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
