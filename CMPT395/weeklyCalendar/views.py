@@ -14,6 +14,7 @@ class WeeklyCalendarView(TemplateView):
     self.week = self.getWeek()
 
     self.day_and_name = self.pairDayName()
+    self.day_and_name = self.day_and_name[1:-1]
 
   def getWeek(self):
     """ Returns list of 7 datetime objects which represent the current week """
