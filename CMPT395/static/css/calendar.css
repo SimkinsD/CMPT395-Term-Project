@@ -10,21 +10,31 @@
     background: rgba(80, 80, 80, 0.7);
 }
 
-#sign-up-form {
+#sign-up-popup {
   width: 300px;
   margin-top: 250px;
   margin-left: auto;
   margin-right: auto;
   border: 1px solid black;
+  border-radius: 4px;
+  box-shadow: 4px 4px 6px #4b4b4b;
   padding: 10px;
   text-align: center;
   background-color: rgba(255, 255, 255, 1);
 }
-#sign-up-form i {
-    font-size: 20px;
+
+#sign-up-popup-close {
+    margin-left: auto;
+    width: 100%;
 }
 
-#sign-up-form i:hover {
+#sign-up-popup i {
+    float: right;
+    font-size: 20px;
+    clear: both;
+}
+
+#sign-up-popup i:hover {
     cursor: pointer;
     color: red;
 }

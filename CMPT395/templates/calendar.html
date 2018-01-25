@@ -14,9 +14,19 @@
 
 {% block content %}
   <div id="sign-up-overlay">
-    <div id="sign-up-form">
-      <p>Put sign up stuff here</p>
-      <i class="fa fa-times-circle" onclick="toggle_popup('sign-up-overlay')"></i>
+    <div id="sign-up-popup">
+      <div id="sign-up-popup-close">
+        <i class="fa fa-times-circle" onclick="toggle_popup('sign-up-overlay')"></i>
+        <div class="clear"></div>
+      </div>
+
+      <form>
+        <fieldset>
+          <legend>Sign-up Information: </legend>
+          <input type="submit" value="Submit">
+          <input type="submit" value="Cancel">
+        </fieldset>
+      </form>
     </div> <!-- End sign-up-form -->
   </div> <!-- End sign-up-overlay -->
 

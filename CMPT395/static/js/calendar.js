@@ -17,6 +17,24 @@ function toggle_popup(elemId) {
     }
 }
 
+function struct_sign_up(time_start, time_end, day, date) {
+    this.time_start = time_start;
+    this.time_end = time_end;
+    this.day = day;
+    this.date = date;
+}
+
+function populate_signup_form(elem, sign_up_info, date) {
+    var day_date = document.createElement("P").appendChild
+      (document.createTextNode(day + date));
+    var info = document.createElement("P").appendChild
+      (document.createTextNode(sign_up_info));
+
+    elem.appendChild(day_date);
+    elem.appendChild(info);
+    
+}
+
 function apply_popup_links() {
     var all_divs = document.getElementsByTagName("div");
     for (var i = 0; i < all_divs.length; i++) {
