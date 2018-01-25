@@ -1,3 +1,34 @@
+/* sign-up-overlay Styles */
+#sign-up-overlay {
+    visibility: hidden;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    top: 0px;
+    left: 0px;
+    background: rgba(80, 80, 80, 0.7);
+}
+
+#sign-up-form {
+  width: 300px;
+  margin-top: 250px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 1);
+}
+#sign-up-form i {
+    font-size: 20px;
+}
+
+#sign-up-form i:hover {
+    cursor: pointer;
+    color: red;
+}
+
 /* calendar Styles */
 #calendar {
     position: relative;
@@ -60,8 +91,9 @@
     text-decoration: none;
 }
 
-.time-slot-add a:hover {
+.time-slot-add:hover {
     color: green;
+    cursor: pointer;
 }
 /*
   End time-slot Styles

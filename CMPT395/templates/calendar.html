@@ -1,16 +1,26 @@
 {% extends 'base.html' %}
 
+
 {% block title %}
   <title>Caraway Calendar</title>
 {% endblock title %}
 
 {% block add_css %}
   {% load static %}
+  <script src="{% static 'js/calendar.js' %}"></script>
   <link rel="stylesheet" type="text/css" href="{% static 'css/calendar.css' %}" />
 {% endblock add_css %}
 
 
 {% block content %}
+  <div id="sign-up-overlay">
+    <div id="sign-up-form">
+      <p>Put sign up stuff here</p>
+      <i class="fa fa-times-circle" onclick="toggle_popup('sign-up-overlay')"></i>
+    </div> <!-- End sign-up-form -->
+  </div> <!-- End sign-up-overlay -->
+
+
   <div id="calendar">
     {% for day in view.date_and_name %}
       <div class="day">
@@ -25,7 +35,7 @@
               <h4 class="time-slot-title">Morning Time Slot [8:45 - 11:00]</h4>
 
               <div class="time-slot-add">
-                <a href=""><i class="fa fa-plus-circle"></i></a>
+                <i class="fa fa-plus-circle"></i>
               </div> <!-- End time slot add -->
 
               <div class="clear"></div> <!-- Expand height to fit content -->
@@ -58,7 +68,7 @@
               <h4 class="time-slot-title">Noon Time Slot [11:00 - 12:00]</h4>
 
               <div class="time-slot-add">
-                <a href=""><i class="fa fa-plus-circle"></i></a>
+                <i class="fa fa-plus-circle"></i>
               </div> <!-- End time slot add -->
 
               <div class="clear"></div> <!-- Expand height to fit content -->
@@ -80,7 +90,7 @@
               <h4 class="time-slot-title">Afternoon Time Slot [12:00 - 15:00]</h4>
 
               <div class="time-slot-add">
-                <a href=""><i class="fa fa-plus-circle"></i></a>
+                <i class="fa fa-plus-circle"></i>
               </div> <!-- End time slot add -->
 
               <div class="clear"></div> <!-- Expand height to fit content -->
