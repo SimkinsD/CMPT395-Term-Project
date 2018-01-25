@@ -11,22 +11,39 @@ class WeeklyCalendarView(TemplateView):
                , "Thursday", "Friday", "Saturday"]
 
   def __init__(self):
-    self.week = self.getWeek()
+    self.date_and_name = self.pair_date_name(self.WEEK_DAYS, self.get_week())
+    self.date_and_name = self.date_and_name[1:-1] # Trim week to Monday-Friday
 
-    self.day_and_name = self.pairDayName()
-    self.day_and_name = self.day_and_name[1:-1]
-
-  def getWeek(self):
-    """ Returns list of 7 datetime objects which represent the current week """
+  def get_week(self):
+    """ Returns the current week represented by datetime objects
+        Pre: None
+        Post: None
+        Parameters: None
+        Return: List of 7 datetime objects representing the current week
+    """
     date = datetime.datetime.now()
+    # Get this month's calendar with the first day of the week as Sunday
+    #   hence calendar.Calendar(6)
     month = calendar.Calendar(6).monthdatescalendar(date.year, date.month)
     for week in month:
       for day in week:
         if date.day == day.day:
           return week
 
-  def pairDayName(self):
+  def pair_date_name(self, week_days, dates):
+    """ Creates and returns list of tuples (string weekday, datetime date)
+        Pre: week_days and dates are populated & ordered lists of strings and
+          datetimes
+        Post: None
+        Param: week_days: Ordered list of string week day names
+          e.g. ("Sunday", "Monday", etc.);
+          dates: Ordered list of datetime objects;
+          week_days and dates should be parallel
+            (i.e. The first day in week_days should correspond to the first
+            day in dates)
+        Return: List of tuples of paired day names and datetimes
+    """
     day_name = []
-    for i in range(len(self.week)):
-      day_name.append((self.WEEK_DAYS[i], self.week[i]))
+    for i in range(len(dates)):
+      day_name.append((week_days[i], dates[i]))
     return day_name

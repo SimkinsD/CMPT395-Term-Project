@@ -14,11 +14,13 @@ body {
     height: 100%;
 }
 
+/* main-body Styles */
 #main-body {
     height: 100%;
     display: block;
 }
 
+/* sidebar Styles */
 #sidebar {
     width: 150px;
     height: 100%;
@@ -28,6 +30,7 @@ body {
     float: left;
 }
 
+/* sidebar-menu Styles */
 #sidebar-menu ul {
     list-style: none;
     margin: 0;
@@ -50,13 +53,24 @@ body {
     color: black;
     background-color: #ddd;
 }
+/*
+  End sidebar-menu Styles
+  End sidebar Styles
+*/
 
-#school-logo {
-    width: 125px;
-    height: 100px;
-    float: left;
+/* content-body Styles */
+#content-body {
+    top: 10px;
+    margin-left: 150px;
+    min-height: 200px;
 }
+/*
+  End content-body Styles
+  End main-body Styles
+*/
 
+
+/* header Styles */
 #header {
     min-height: 100px;
     max-height: 150px;
@@ -68,12 +82,7 @@ body {
     background-color: white;
 }
 
-#content-body {
-    top: 10px;
-    margin-left: 150px;
-    min-height: 200px;
-}
-
+/* hours-tracker Styles */
 #hours-tracker {
     height: 50px;
     text-align: center;
@@ -91,7 +100,23 @@ body {
     display: inline-block;
     padding: 10px;
 }
+/*
+  End hours-tracker Styles
+*/
 
+/* school-logo Styles */
+#school-logo {
+    width: 125px;
+    height: 100px;
+    float: left;
+}
+/*
+  End school-logo Styles
+  End header Styles
+*/
+
+
+/* Misc Tiny Classes */
 .right {
     float: right;
 }
@@ -103,3 +128,6 @@ body {
 .clear {
     clear: both;
 }
+/*
+  End Misc Tiny Classes
+*/

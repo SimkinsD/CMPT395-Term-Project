@@ -1,3 +1,4 @@
+/* calendar Styles */
 #calendar {
     position: relative;
     padding-left: 5px;
@@ -5,6 +6,7 @@
     text-align: center;
 }
 
+/* day Styles */
 .day {
     display: inline-block;
     /* For Sunday-Saturday
@@ -18,6 +20,7 @@
     margin: 0.5%;
 }
 
+/* day-title Styles */
 .day-title h3 {
     margin: 5px;
 }
@@ -25,19 +28,31 @@
 .day-title h5 {
     margin: 5px;
 }
+/*
+  End day-title Styles
+  End day Styles
+*/
 
-.day-schedule {
-    min-height: 20px;
-}
-
+/* time-slot Styles */
 .time-slot {
     border-top: solid black 2px;
 }
 
+/* time-slot-title Styles */
 .time-slot-title {
     display: inline-block;
     margin: 10px;
     padding: 5px;
+}
+/*
+  End time-slot-title Styles
+*/
+
+/* time-slot-add Styles */
+.time-slot-add {
+    display: inline-block;
+    color: black;
+    font-size: 20px;
 }
 
 .time-slot-add a {
@@ -48,13 +63,12 @@
 .time-slot-add a:hover {
     color: green;
 }
+/*
+  End time-slot Styles
+  End time-slot-add Styles
+*/
 
-.time-slot-add {
-    display: inline-block;
-    color: black;
-    font-size: 20px;
-}
-
+/* day-event Styles */
 .day-event {
     border-top: dotted gray 1px;
 }
@@ -63,3 +77,7 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
+/*
+  End day-event Styles
+  End calendar Styles
+*/

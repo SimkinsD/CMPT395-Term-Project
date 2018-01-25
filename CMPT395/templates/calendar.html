@@ -12,7 +12,7 @@
 
 {% block content %}
   <div id="calendar">
-    {% for day in view.day_and_name %}
+    {% for day in view.date_and_name %}
       <div class="day">
         <div class="day-title">
           <h3>{{ day.0 }}</h3> <!-- (Day: Sunday, Monday, ..., Saturday) -->
@@ -31,6 +31,7 @@
               <div class="clear"></div> <!-- Expand height to fit content -->
             </div> <!-- End time slot header -->
 
+            <!-- Example sign-ups -->
             <div class="day-event">
               <p>9:00 - 10:30</p>
               <p>Facilitator Name 1</p>
@@ -39,6 +40,7 @@
               <p>9:15 - 10:30</p>
               <p>Facilitator Name 2</p>
             </div>
+            <!-- End Example sign-ups -->
             
             <!-- Ideal method of populating
             {% for event in morning %}
