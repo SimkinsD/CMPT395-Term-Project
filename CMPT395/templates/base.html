@@ -5,6 +5,8 @@
 <head>
   {% block title %}<title>Caraway Scheduler</title>{% endblock %}
   
+  <!-- Icon Pack -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Additional CSS to be loaded from /static -->
   {% load static %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
@@ -15,7 +17,10 @@
   <div id="pagewrap">
     <div id="header">
       <img id="school-logo" src="http://carawayschool.ca/files/2017/02/Caraway-logo-noSeeds-960x777.png" alt="Caraway School Logo">
-      <h2>Caraway Scheduler</h2>
+
+      <div id="site-title">
+        <p>Facilitation Scheduler</p>
+      </div> <!-- End Site Title -->
 
       <div id="hours-tracker">
         <ul>
@@ -23,6 +28,7 @@
           {% block monthlyHours %}<li>This Month: 0/20 hours</li>{% endblock %}
         </ul>
       </div> <!-- End hours-tracker -->
+      <div class="clear"></div> <!-- Expand height to fit content -->
     </div> <!-- End header -->
 
     <div id="main-body">
@@ -30,13 +36,10 @@
         <div id="sidebar-menu">
           <ul>
             <li>
-              <a href="">"Calendar"</a>
+              <a href=""><i class="fa fa-calendar"></i></a>
             </li>
             <li>
-              <a href="">"Statistics"</a>
-            </li>
-            <li>
-              <a href="">"Etc..."</a>
+              <a href=""><i class="fa fa-line-chart"></i></a>
             </li>
           </ul>
         </div> <!-- End sidebar-menu -->
@@ -46,7 +49,9 @@
       <div id="content-body">
         {% block content %}
         {% endblock %} <!-- End content block -->
+        <div class="clear"></div> <!-- Expand height to fit content -->
       </div> <!-- End content-body -->
+      <div class="clear"></div> <!-- Expand height to fit content -->
     </div> <!-- End main-body -->
   </div> <!-- End pagewrap -->
 </body>
