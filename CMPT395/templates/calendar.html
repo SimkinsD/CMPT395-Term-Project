@@ -11,18 +11,20 @@
 
 
 {% block content %}
-  <div id="calendar">
+  <section id="calendar">
     {% for day in view.date_and_name %}
-      <div class="day">
-        <div class="day-title">
+      <section class="day">
+        <section class="day-title">
           <h3>{{ day.0 }}</h3> <!-- (Day: Sunday, Monday, ..., Saturday) -->
           <h5>{{ day.1 }}</h5> <!-- (Date: e.g. Jan. 19, 2018) -->
-        </div> <!-- End day-title -->
+        </section> <!-- End day-title -->
 
-        <div class="day-schedule">
+        <section class="day-schedule">
+          {% for slot in view.TIME_SLOTS %}
           <div class="time-slot">
             <div class="time-slot-header">
-              <h4 class="time-slot-title">Morning Time Slot [8:45 - 11:00]</h4>
+              <!-- e.g. Morning [8:45 - 11:00] -->
+              <h4 class="time-slot-title">{{slot.0}} [{{slot.1}}]</h4>
 
               <div class="time-slot-add">
                 <a href=""><i class="fa fa-plus-circle"></i></a>
@@ -52,57 +54,14 @@
             morning list would be populated in the view by
             accessing the database -->
           </div> <!-- End Morning Time Slot -->
-
-          <div class="time-slot">
-            <div class="time-slot-header">
-              <h4 class="time-slot-title">Noon Time Slot [11:00 - 12:00]</h4>
-
-              <div class="time-slot-add">
-                <a href=""><i class="fa fa-plus-circle"></i></a>
-              </div> <!-- End time slot add -->
-
-              <div class="clear"></div> <!-- Expand height to fit content -->
-            </div> <!-- End time slot header -->
-
-            <!-- Ideal method of populating
-            {% for event in noon %}
-              <div class="day-event">
-                <p>{{ event.start_time }} - {{ event.end_time }}</br></p>
-                <p>{{ event.facilitator_name }}</p>
-              </div>
-            {% endfor %}
-            noon list would be populated in the view by
-            accessing the database -->
-          </div> <!-- End Noon Time Slot -->
-
-          <div class="time-slot">
-            <div class="time-slot-header">
-              <h4 class="time-slot-title">Afternoon Time Slot [12:00 - 15:00]</h4>
-
-              <div class="time-slot-add">
-                <a href=""><i class="fa fa-plus-circle"></i></a>
-              </div> <!-- End time slot add -->
-
-              <div class="clear"></div> <!-- Expand height to fit content -->
-            </div> <!-- End time slot header -->
-
-            <!-- Ideal method of populating
-            {% for event in afternoon %}
-              <div class="day-event">
-                <p>{{ event.start_time }} - {{ event.end_time }}</br></p>
-                <p>{{ event.facilitator_name }}</p>
-              </div>
-            {% endfor %}
-            afternoon list would be populated in the view by
-            accessing the database -->
-          </div> <!-- End Afternoon Time Slot -->
-        </div> <!-- End day-schedule -->
-      </div> <!-- End day -->
+          {% endfor %}
+        </section> <!-- End day-schedule -->
+      </section> <!-- End day -->
 
     {% empty %}
       <h3>List Empty</h3>
 
     {% endfor %}
     <div class="clear"></div> <!-- Extend height to fit content -->
-  </div> <!-- End calendar -->
+  </section> <!-- End calendar -->
 {% endblock content %}
