@@ -9,6 +9,7 @@ class WeeklyCalendarView(TemplateView):
   template_name = "calendar.html"
   WEEK_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday"
                , "Thursday", "Friday", "Saturday"]
+  TIME_SLOTS = [("Morning", "8:45 - 11:00"), ("Noon", "11:00 - 12:00"), ("Afternoon", "12:00 - 3:00")]
 
   def __init__(self):
     self.date_and_name = self.pair_date_name(self.WEEK_DAYS, self.get_week())
