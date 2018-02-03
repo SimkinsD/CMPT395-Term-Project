@@ -1,20 +1,20 @@
 /* sign-up-overlay Styles */
 #sign-up-overlay {
+    float: left;
+    position: fixed;
     visibility: hidden;
-    position: absolute;
     height: 100%;
     width: 100%;
     z-index: 100;
-    top: 0px;
-    left: 0px;
     background: rgba(80, 80, 80, 0.7);
 }
 
 #sign-up-popup {
+  position: fixed;
   width: 300px;
   margin-top: 250px;
-  margin-left: auto;
-  margin-right: auto;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border: 1px solid black;
   border-radius: 4px;
   box-shadow: 4px 4px 6px #4b4b4b;
@@ -42,8 +42,6 @@
 /* calendar Styles */
 #calendar {
     position: relative;
-    padding-left: 5px;
-    padding-right: 5px;
     text-align: center;
 }
 
