@@ -10,6 +10,7 @@
   <!-- Additional CSS to be loaded from /static -->
   {% load static %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
+  {% block add_css %}{% endblock add_css %}
 </head>
 
 
@@ -53,6 +54,7 @@
       </div> <!-- End content-body -->
       <div class="clear"></div> <!-- Expand height to fit content -->
     </div> <!-- End main-body -->
+    <div class="clear"></div>
   </div> <!-- End pagewrap -->
 </body>
 

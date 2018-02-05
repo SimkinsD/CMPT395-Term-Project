@@ -55,8 +55,10 @@
     width: 18%;
     border: solid black 1px;
     border-radius: 4px;
-    box-shadow: 4px 4px 6px #4b4b4b;
+    box-shadow: 4px 4px 6px #222;
     margin: 0.5%;
+    background-color: #a1a1a1;
+    color: #111;
 }
 
 /* day-title Styles */

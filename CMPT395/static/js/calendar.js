@@ -1,3 +1,11 @@
+window.onload = function() {
+    var all_divs = document.getElementsByClassName("time-slot-add");
+    for (var i = 0; i < all_divs.length; i++) {
+        var currentDiv = all_divs[i];
+        currentDiv.onclick = function() { toggle_popup('sign-up-overlay'); }
+    }
+}
+
 function toggle_popup(elemId) {
     /*
       Toggles visibility of an html element
@@ -17,30 +25,3 @@ function toggle_popup(elemId) {
     }
 }
 
-function struct_sign_up(time_start, time_end, day, date) {
-    this.time_start = time_start;
-    this.time_end = time_end;
-    this.day = day;
-    this.date = date;
-}
-
-function populate_signup_form(elem, sign_up_info, date) {
-    var day_date = document.createElement("P").appendChild
-      (document.createTextNode(day + date));
-    var info = document.createElement("P").appendChild
-      (document.createTextNode(sign_up_info));
-
-    elem.appendChild(day_date);
-    elem.appendChild(info);
-    
-}
-
-function apply_popup_links() {
-    var all_divs = document.getElementsByTagName("div");
-    for (var i = 0; i < all_divs.length; i++) {
-        var currentDiv = all_divs[i];
-        if (currentDiv.className == "time-slot-add") {
-            currentDiv.onclick = function() { toggle_popup('sign-up-overlay'); }
-        }
-    }
-}

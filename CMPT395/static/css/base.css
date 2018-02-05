@@ -97,7 +97,7 @@ body {
 
 #content-body {
     top: 10px;
-    margin-left: 150px;
+    margin-left: 50px;
     overflow: hidden;
 }
 
@@ -120,16 +120,6 @@ body {
 }
 /*
   End hours-tracker Styles
-*/
-
-/* school-logo Styles */
-#school-logo {
-    width: 125px;
-    height: 100px;
-    float: left;
-}
-/*
-  End school-logo Styles
   End header Styles
 */
 
