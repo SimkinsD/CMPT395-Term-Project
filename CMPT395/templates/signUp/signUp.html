@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>
+            John's Sign up page
+        </title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/signUp.css' %}" />
+    </head>
+    <body>
+        <div>
+            <h1 id="sign_up_title">Sign Up Form</h1>
+            <form method="POST">{% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit Time</button>
+            </form>
+        </div>
+    </body>
+</html>
