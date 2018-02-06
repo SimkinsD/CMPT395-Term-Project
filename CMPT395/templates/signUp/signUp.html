@@ -9,7 +9,7 @@
     <body>
         <div>
             <h1 id="sign_up_title">Sign Up Form</h1>
-            <form method="POST">{% csrf_token %}
+            <form id="signUpForm" method="POST">{% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit">Submit Time</button>
             </form>

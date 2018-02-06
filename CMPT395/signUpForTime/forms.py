@@ -5,5 +5,5 @@ class SignUpForm(forms.ModelForm):
 
     class Meta:
         model = signUp
-        fields = ("classroom","startTime", "endTime",)
+        fields = ("classroom","startTime", "endTime","emailReminder",)
     
