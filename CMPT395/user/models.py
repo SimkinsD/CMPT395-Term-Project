@@ -8,6 +8,12 @@ class MyUserManager(UserManager):
 class MyUser(AbstractUser):
     objects = MyUserManager()
 
+class Teacher(MyUser):
+    objects = MyUserManager()
+    class Meta:
+        verbose_name = 'Teacher'
+        verbose_name_plural = 'Teachers'
+
 class Person(models.Model):
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE,)
     name = models.CharField(max_length=32)
