@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <p><a href="{% url 'logout' %}">logout</a></p>
+  <hr>
+  <a href="{% url 'view_family' %}">view family</a> 
+{% else %}
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+{% if request.user.is_superuser %}
+    <hr>
+    <a href="{% url 'registor' %}">registor a new account</a>
+    <hr>
+    <a href="{% url 'person' %}">add a new person</a>
+{% else %}
+{% endif %}
+{% endblock %}
+

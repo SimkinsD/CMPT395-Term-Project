@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{user_obj}}</h1>
+<hr>
+{% if person_obj %}
+    <p>{{person_obj}}</p>
+{% else %}
+    <p>No body found.</p>
+{% endif %}
+{% endblock %}
