@@ -1,10 +1,10 @@
 {% extends "base.html" %}
+
 {% block content %}
-<h1>{{user_obj}}</h1>
-<hr>
-{% if person_obj %}
-    <p>{{person_obj}}</p>
-{% else %}
-    <p>No body found.</p>
-{% endif %}
-{% endblock %}
+  {% for post in object_list %}
+    <div class="post-entry">
+      <h1>{{ post.name }}</h1>
+      <h1>{{ post.hours }}</h1>
+    </div>
+  {% endfor %}
+{% endblock content %}

@@ -7,6 +7,10 @@
   <p><a href="{% url 'logout' %}">logout</a></p>
   <hr>
   <a href="{% url 'view_family' %}">view family</a> 
+  <br>
+  <a href="{% url 'password_change' %}">
+    Change password
+  </a>
 {% else %}
   <a href="{% url 'login' %}">login</a>
 {% endif %}

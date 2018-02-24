@@ -24,11 +24,14 @@ class AddPerson(CreateView):
     template_name = 'add_person.html'
     fields = ['user','name', 'hours']
 
+class ViewFamily(generic.ListView):
+    model = Person
+    template_name = 'family.html'
 
-def ViewFamily(request):
-    user_obj = MyUser.objects.get(id=request.user.id)
-    person_obj = user_obj.person_set.all()
-    print(user_obj)
-    print(person_obj)
-    context = {'user_obj':user_obj, 'person_obj':person_obj}
-    return render(request, 'family.html', context)
+class PasswordChange(generic.CreateView):
+    template_name = 'password_change.html'
+
+class UpdateUser(generic.CreateView):
+    model = MyUser
+    template_name = 'edit_user.html'
+    fields = ['first_name', 'last_name', 'email']
