@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+  <title>Caraway Calendar</title>
+{% endblock title %}
+
+{% block add_css %}
+  {% load static %}
+  <script src="{% static 'js/calendar.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/calendar.css' %}" />
+{% endblock add_css %}
+
+
+{% block content %}
+  <section id="calendar">
+    <div id="sign-up-overlay">
+      <div id="sign-up-popup">
+        <div id="sign-up-popup-close">
+          <i class="fa fa-times-circle" onclick="toggle_popup('sign-up-overlay')"></i>
+          <div class="clear"></div>
+        </div>
+
+        <form method="post">
+          {% csrf_token %}
+          <fieldset>
+            <legend>Sign-up Information: </legend>
+            <label for="From">From: </label>
+            <input id="From" type="text" name="From">
+            <input type="submit" value="Submit">
+            <input type="submit" value="Cancel">
+          </fieldset>
+        </form>
+      </div> <!-- End sign-up-form -->
+    </div> <!-- End sign-up-overlay -->
+
+    {% for day in view.date_and_name %}
+      <section class="day">
+        <section class="day-title">
+          <h3>{{ day.0 }}</h3> <!-- (Day: Sunday, Monday, ..., Saturday) -->
+          <h5>{{ day.1 }}</h5> <!-- (Date: e.g. Jan. 19, 2018) -->
+        </section> <!-- End day-title -->
+
+        <section class="day-schedule">
+          {% for slot in view.TIME_SLOTS %}
+          <div class="time-slot">
+            <div class="time-slot-header">
+              <!-- e.g. Morning [8:45 - 11:00] -->
+              <h4 class="time-slot-title">{{slot.0}} [{{slot.1}}]</h4>
+
+              <div class="time-slot-add">
+                <i class="fa fa-plus-circle"></i>
+              </div> <!-- End time slot add -->
+
+              <div class="clear"></div> <!-- Expand height to fit content -->
+            </div> <!-- End time slot header -->
+
+            <!-- Example sign-ups -->
+            <div class="day-event">
+              <p>9:00 - 10:30</p>
+              <p>Facilitator Name 1</p>
+            </div>
+            <div class="day-event">
+              <p>9:15 - 10:30</p>
+              <p>Facilitator Name 2</p>
+            </div>
+            <!-- End Example sign-ups -->
+          </div> <!-- End Morning Time Slot -->
+          {% endfor %}
+        </section> <!-- End day-schedule -->
+      </section> <!-- End day -->
+
+    {% empty %}
+      <h3>List Empty</h3>
+
+    {% endfor %}
+    <div class="clear"></div> <!-- Extend height to fit content -->
+  </section> <!-- End calendar -->
+{% endblock content %}
