@@ -3,10 +3,16 @@ from django.views import generic
 from django.views.generic.edit import CreateView
 from django.shortcuts import render
 
-from .forms import MyUserCreationForm, MyTeacherCreationForm
+from .forms import *
 from django.db import models
 from . models import Person
 from . models import MyUser
+
+class Register(generic.CreateView):
+    form_class = UserForm 
+    success_url = reverse_lazy('registor')
+    template_name = 'registor.html'
+
 
 class Registor(generic.CreateView):
     form_class = MyUserCreationForm
