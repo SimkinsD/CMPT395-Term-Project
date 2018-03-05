@@ -52,7 +52,7 @@ class WeeklyCalendarView(TemplateView):
     return day_name
   
 
-  def get(self, request):
-    sign_up_form = SignUpForm()
-    return render(request, self.template_name, {'sign_up_form':sign_up_form})
+  # def get(self, request):
+  #   sign_up_form = SignUpForm()
+  #   return render(request, self.template_name, {'sign_up_form':sign_up_form})
 
