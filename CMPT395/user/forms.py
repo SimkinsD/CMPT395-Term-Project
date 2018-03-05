@@ -14,3 +14,10 @@ class MyTeacherCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = Teacher
         fields = ['username', 'email']
+
+class EditUserForm(forms.ModelForm):
+    last_name = forms.CharField(max_length=50)
+    email = forms.EmailField(required=False)
+    class Meta(UserChangeForm.Meta):
+        model = MyUser
+        fields = ['last_name', 'email']   

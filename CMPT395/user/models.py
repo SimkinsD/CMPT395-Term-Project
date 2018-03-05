@@ -15,7 +15,7 @@ class Teacher(MyUser):
         verbose_name_plural = 'Teachers'
 
 class Person(models.Model):
-    user = models.ForeignKey(MyUser, on_delete=models.CASCADE,)
+    user = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='person')
     name = models.CharField(max_length=32)
     hours = models.FloatField(default=5.0)
     
@@ -25,4 +25,3 @@ class Person(models.Model):
 class Children(models.Model):
     name = models.CharField(max_length=30)
     class_room = models.CharField(max_length=30)
-    

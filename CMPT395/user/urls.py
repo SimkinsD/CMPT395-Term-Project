@@ -14,7 +14,7 @@ urlpatterns = [
     path('registor_teacher/', views.RegistorTeacher.as_view(), name='registor_teacher'),
     path('person/', views.AddPerson.as_view() , name='person'),
     path('view_family/', views.ViewFamily.as_view() , name='view_family'),
-    path('edit_user/', views.UpdateUser.as_view(), name='update_user'),
+    path('edit_user/', views.EditUser.as_view(), name='edit_user'),
 
     path('password_change', password_change, name='password_change'),
     path('password_change/done/', password_change_done, name='password_change_done'),

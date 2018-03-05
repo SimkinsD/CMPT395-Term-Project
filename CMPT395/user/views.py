@@ -3,7 +3,7 @@ from django.views import generic
 from django.views.generic.edit import CreateView
 from django.shortcuts import render
 
-from .forms import MyUserCreationForm, MyTeacherCreationForm
+from .forms import MyUserCreationForm, MyTeacherCreationForm, EditUserForm
 from django.db import models
 from . models import Person
 from . models import MyUser
@@ -31,7 +31,10 @@ class ViewFamily(generic.ListView):
 class PasswordChange(generic.CreateView):
     template_name = 'password_change.html'
 
-class UpdateUser(generic.CreateView):
+class EditUser(generic.UpdateView):
     model = MyUser
-    template_name = 'edit_user.html'
-    fields = ['first_name', 'last_name', 'email']
+    form_class = EditUserForm
+    template_name = "edit_user.html"
+    success_url = reverse_lazy('home')    
+    def get_object(self, queryset=None):
+        return self.request.user
