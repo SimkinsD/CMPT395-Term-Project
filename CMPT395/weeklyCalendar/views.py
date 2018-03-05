@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from .forms import SignUpForm
 
 import calendar
 import datetime
@@ -10,6 +11,7 @@ class WeeklyCalendarView(TemplateView):
   WEEK_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday"
                , "Thursday", "Friday", "Saturday"]
   TIME_SLOTS = [("Morning", "8:45 - 11:00"), ("Noon", "11:00 - 12:00"), ("Afternoon", "12:00 - 3:00")]
+
 
   def __init__(self):
     self.date_and_name = self.pair_date_name(self.WEEK_DAYS, self.get_week())
@@ -48,3 +50,9 @@ class WeeklyCalendarView(TemplateView):
     for i in range(len(dates)):
       day_name.append((week_days[i], dates[i]))
     return day_name
+  
+
+  # def get(self, request):
+  #   sign_up_form = SignUpForm()
+  #   return render(request, self.template_name, {'sign_up_form':sign_up_form})
+
