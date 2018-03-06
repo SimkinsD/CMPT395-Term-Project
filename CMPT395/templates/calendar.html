@@ -23,11 +23,9 @@
 
         <form method="post">
           {% csrf_token %}
-          {{ view.signup_form.as_p }}
           <fieldset>
             <legend>Sign-up Information: </legend>
-            <label for="From">From: </label>
-            <input id="From" type="text" name="From">
+            {{ view.signup_form.as_p }}
             <input type="submit" value="Submit">
             <input type="submit" value="Cancel">
           </fieldset>
