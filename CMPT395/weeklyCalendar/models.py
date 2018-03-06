@@ -1,6 +1,6 @@
 from django.db import models
 
-class signUp(models.Model):
+class SignUp(models.Model):
     classroom = models.name = models.CharField(max_length=15)
     startTime = models.TimeField(blank = True, null = True)
     endTime = models.TimeField(blank = True, null = True)
