@@ -1,13 +1,19 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from .forms import SignUpForm
+from .models import SignUp
 
 import calendar
 import datetime
 
 # Create your views here.
 class WeeklyCalendarView(TemplateView):
+  # Djagno variables
   template_name = "calendar.html"
+  signup_form = SignUpForm
+  signup_model = SignUp
+  
+  # Constants
   WEEK_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday"
                , "Thursday", "Friday", "Saturday"]
   TIME_SLOTS = [("Morning", "8:45 - 11:00"), ("Noon", "11:00 - 12:00"), ("Afternoon", "12:00 - 3:00")]

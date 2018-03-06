@@ -23,6 +23,7 @@
 
         <form method="post">
           {% csrf_token %}
+          {{ view.signup_form.as_p }}
           <fieldset>
             <legend>Sign-up Information: </legend>
             <label for="From">From: </label>
