@@ -7,6 +7,7 @@ class MyUserManager(UserManager):
 
 class MyUser(AbstractUser):
     objects = MyUserManager()
+    current_person = None
 
 class Teacher(MyUser):
     objects = MyUserManager()
@@ -25,3 +26,11 @@ class Person(models.Model):
 class Children(models.Model):
     name = models.CharField(max_length=30)
     class_room = models.CharField(max_length=30)
+
+
+class ChooseFacilitator(models.Model):
+    name = models.CharField(max_length=30)
+    hours = models.FloatField(default=0)
+
+    def __str__(self):
+        return 'Current Person'
