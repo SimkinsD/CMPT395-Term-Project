@@ -2,9 +2,8 @@
 
 {% block content %}
   {% for post in object_list %}
-    <div class="post-entry">
-      <h1>{{ post.user }}</h1>
-      <h1>{{ post.account_name }}</h1>
-    </div>
+<div class="post-entry">
+    <h1>{{ post }}</h1>
+</div>
   {% endfor %}
 {% endblock content %}

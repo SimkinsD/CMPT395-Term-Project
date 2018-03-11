@@ -75,6 +75,7 @@ WSGI_APPLICATION = 'CMPT395.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+# For use with MySQL. Uncomment this section and comment section below.
 DATABASES = {
     'default': {
         'ENGINE': 'mysql.connector.django',
@@ -85,6 +86,14 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+
+# For use with SQLite. Uncomment this section and comment section above
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
 
 
 # Password validation

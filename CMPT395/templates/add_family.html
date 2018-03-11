@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title %}Add Person{% endblock %}
+{% block title %}Add Family{% endblock %}
 
 {% block content %}
 {% if request.user.is_superuser %}
-<h2>Add Person</h2>
+<h2>Add Family</h2>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Add Person</button>
+    <button type="submit">Add Family</button>
   </form>
 {% else %}
   <h1>Nothing to see here</h1>

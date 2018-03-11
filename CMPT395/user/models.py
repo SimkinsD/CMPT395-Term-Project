@@ -9,23 +9,23 @@ class MyUserManager(UserManager):
 class MyUser(AbstractUser):
     objects = MyUserManager()
 
-class Teacher(MyUser):
-    objects = MyUserManager()
-    class Meta:
-        verbose_name = 'Teacher'
-        verbose_name_plural = 'Teachers'
+#class Teacher(MyUser):
+#    objects = MyUserManager()
+#    class Meta:
+#        verbose_name = 'Teacher'
+#        verbose_name_plural = 'Teachers'
 
-class Person(models.Model):
-    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
-    name = models.CharField(max_length=32)
-    hours = models.FloatField(default=5.0)
+#class Person(models.Model):
+#    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
+#    name = models.CharField(max_length=32)
+#    hours = models.FloatField(default=5.0)
     
-    def __str__(self):
-        return self.name
+#    def __str__(self):
+#        return self.name
 
-class Children(models.Model):
-    name = models.CharField(max_length=30)
-    class_room = models.CharField(max_length=30)
+#class Children(models.Model):
+#    name = models.CharField(max_length=30)
+#    class_room = models.CharField(max_length=30)
 
 ''' 
 This class extends Django's existing User info using MyUser

@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title %}Sign Up{% endblock %}
+{% block title %}Add Account{% endblock %}
 
 {% block content %}
 {% if request.user.is_superuser %}
-<h2>Sign Up</h2>
+<h2>Add Account</h2>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Sign Up</button>
+    <button type="submit">Add Account</button>
   </form>
 {% else %}
   <h1>Nothing to see here</h1>

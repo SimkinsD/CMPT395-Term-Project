@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% for post in object_list %}
+<div class="post-entry">
+    <h1>{{ post.Family }}</h1>
+    <h1>{{ post.first_name }}</h1>
+    <h1>{{ post.classroom }}</h1>
+</div>
+  {% endfor %}
+{% endblock content %}
