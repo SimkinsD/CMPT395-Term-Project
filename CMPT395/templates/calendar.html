@@ -29,15 +29,9 @@
         <form id="signup_form" method="post">
           {% csrf_token %}
           <fieldset>
-            <legend>Sign-up Information: </legend>
-            <label for="Start">Start Time: </label>
-            <input id="signup_start" type="text" name="Start">
-            
-            <label for=End">End Time: </label>
-            <input id="signup_end" type="text" name="End">
-            
-            <input type="submit" value="Submit">
-            <input type="submit" value="Cancel">
+            <legend>Sign-up Information:</legend>
+            {{ view.signup_form.as_p }}
+            <button type="submit">Submit</button>
           </fieldset>
         </form>
       </div> <!-- End sign-up-form -->

@@ -1,19 +1,34 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from .forms import SignUpForm
+from .models import SignUp
 
 import calendar
 import datetime
 
 # Create your views here.
 class WeeklyCalendarView(TemplateView):
+  # Djagno variables
   template_name = "calendar.html"
+  signup_form = SignUpForm
+  signup_model = SignUp
+  signup_objects = signup_model.objects.all()
+  
+  # Constants
   WEEK_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday"
                , "Thursday", "Friday", "Saturday"]
   TIME_SLOTS = [("Morning", "8:45 - 11:00"), ("Noon", "11:00 - 12:00"), ("Afternoon", "12:00 - 3:00")]
 
+
   def __init__(self):
     self.date_and_name = self.pair_date_name(self.WEEK_DAYS, self.get_week())
     self.date_and_name = self.date_and_name[1:-1] # Trim week to Monday-Friday
+
+  def post(self, request, *args, **kwargs):
+    form = self.signup_form(request.POST)
+    if form.is_valid():
+      form.save()
+    return render(request, self.template_name, {'view' : self})
 
   def get_week(self):
     """ Returns the current week represented by datetime objects
@@ -48,3 +63,8 @@ class WeeklyCalendarView(TemplateView):
     for i in range(len(dates)):
       day_name.append((week_days[i], dates[i]))
     return day_name
+
+class SignupView(TemplateView):
+  template_name = "signups.html"
+  signup_model = SignUp
+  signup_objects = SignUp.objects.all()
