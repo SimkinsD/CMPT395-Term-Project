@@ -22,4 +22,5 @@ urlpatterns = [
     path('templateTest/', include('templateTest.urls')),
     path('user/', include('user.urls')),
     path('user/', include('django.contrib.auth.urls')),
+    path('', include('weeklyCalendar.urls')),
 ]
