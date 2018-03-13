@@ -20,11 +20,16 @@
           <i class="fa fa-times-circle" onclick="toggle_popup('sign-up-overlay')"></i>
           <div class="clear"></div>
         </div>
-
-        <form method="post">
+        
+        <section id="signup_headers">
+          <h5 id="signup_date">Hi</h5>
+          <h5 id="signup_day">Hi</h5>
+        </section>
+        
+        <form id="signup_form" method="post">
           {% csrf_token %}
           <fieldset>
-            <legend>Sign-up Information: </legend>
+            <legend>Sign-up Information:</legend>
             {{ view.signup_form.as_p }}
             <button type="submit">Submit</button>
           </fieldset>
@@ -47,7 +52,7 @@
               <h4 class="time-slot-title">{{slot.0}} [{{slot.1}}]</h4>
 
               <div class="time-slot-add">
-                <i class="fa fa-plus-circle"></i>
+                <i class="fa fa-plus-circle" onclick="toggle_signup('{{ day.0 }}', '{{ day.1 }}', '{{ slot.1 }}')"></i>
               </div> <!-- End time slot add -->
 
               <div class="clear"></div> <!-- Expand height to fit content -->
