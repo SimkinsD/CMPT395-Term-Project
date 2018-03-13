@@ -30,15 +30,22 @@ function toggle_popup(elemId) {
 
 function toggle_signup(day, date, times) {
   // Populate form fields
-  var signup_headers = document.getElementById("signup_headers");
-  var header_children = signup_headers.children;
-  header_children[0].innerHTML = day;
-  header_children[1].innerHTML = date;
- 
-  var signup_start = document.getElementById("signup_start");
-  var signup_end = document.getElementById("signup_end");
+  var signup_date = document.getElementById("js-signup-date");
+  var signup_day = document.getElementById("js-signup-day");
+  signup_date.innerHTML = date;
+  signup_day.innerHTML = day;
+  
+  var signup_class = document.getElementById("id_classroom");
+  var signup_start = document.getElementById("id_startTime");
+  var signup_end = document.getElementById("id_endTime");
+  
   signup_start.value = times;
   signup_end.value = times;
+  
+/*  var signup_start = document.getElementById("signup_start");
+  var signup_end = document.getElementById("signup_end");
+  signup_start.value = times;
+  signup_end.value = times;*/
   
   
   // Toggle visibility
