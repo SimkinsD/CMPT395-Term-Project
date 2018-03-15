@@ -49,10 +49,10 @@
           <div class="time-slot">
             <div class="time-slot-header">
               <!-- e.g. Morning [8:45 - 11:00] -->
-              <h4 class="time-slot-title">{{slot.0}} [{{slot.1}}]</h4>
+              <h4 class="time-slot-title">{{slot.title}} [{{slot.start}} - {{slot.end}}]</h4>
 
               <div class="time-slot-add">
-                <i class="fa fa-plus-circle" onclick="toggle_signup('{{ day.0 }}', '{{ day.1 }}', '{{ slot.1 }}')"></i>
+                <i class="fa fa-plus-circle" onclick="toggle_signup('{{ day.0 }}', '{{ day.1 }}', '{{ slot.start }}', '{{ slot.end }}')"></i>
               </div> <!-- End time slot add -->
 
               <div class="clear"></div> <!-- Expand height to fit content -->
