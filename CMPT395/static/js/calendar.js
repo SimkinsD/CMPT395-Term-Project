@@ -1,14 +1,3 @@
-
-/*
-window.onload = function() {
-    var all_divs = document.getElementsByClassName("time-slot-add");
-    for (var i = 0; i < all_divs.length; i++) {
-        var currentDiv = all_divs[i];
-        currentDiv.onclick = function() { toggle_popup('sign-up-overlay'); }
-    }
-}
-*/
-
 function toggle_popup(elemId) {
     /*
       Toggles visibility of an html element
@@ -42,12 +31,8 @@ function toggle_signup(day, date, start, end) {
   signup_start.value = start;
   signup_end.value = end;
   
-/*  var signup_start = document.getElementById("signup_start");
-  var signup_end = document.getElementById("signup_end");
-  signup_start.value = times;
-  signup_end.value = times;*/
-  
-  
+  var hidden_date = document.getElementById("js-signup-hidden-date");
+  hidden_date.value = signup_date.innerHTML;
   // Toggle visibility
   toggle_popup("sign-up-overlay");
 }
