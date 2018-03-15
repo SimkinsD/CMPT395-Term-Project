@@ -17,8 +17,8 @@ class WeeklyCalendarView(TemplateView):
   class TimeSlot:
     def __init__(self, init_title, init_start, init_end):
       self.title = init_title
-      self.start = init_start.__format__("%H:%M")
-      self.end = init_end.__format__("%H:%M")
+      self.start = init_start
+      self.end = init_end
     # End init
   # End TimeSlot  
   
@@ -37,7 +37,10 @@ class WeeklyCalendarView(TemplateView):
   def post(self, request, *args, **kwargs):
     form = self.signup_form(request.POST)
     if form.is_valid():
-      form.save()
+      su = form.save(commit="false")
+      # Automated fields go here
+      su.day = request.POST.get("day", default="DEFAULT")
+      su.save()
     return render(request, self.template_name, {'view' : self})
 
   def get_week(self):
