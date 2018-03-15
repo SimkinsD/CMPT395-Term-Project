@@ -123,3 +123,9 @@
   End day-event Styles
   End calendar Styles
 */
+
+.signup-title {
+  padding: 5px;
+  margin: 0px;
+  text-decoration: underline;
+}
