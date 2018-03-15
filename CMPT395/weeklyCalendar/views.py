@@ -13,20 +13,19 @@ class WeeklyCalendarView(TemplateView):
   signup_form = SignUpForm
   signup_model = SignUp
   signup_objects = signup_model.objects.all()
-
-  class TimeSlot:
   
+  class TimeSlot:
     def __init__(self, init_title, init_start, init_end):
       self.title = init_title
-      self.start = init_start
-      self.end = init_end
+      self.start = init_start.__format__("%H:%M")
+      self.end = init_end.__format__("%H:%M")
     # End init
   # End TimeSlot  
   
   # Constants
   WEEK_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday"
                , "Thursday", "Friday", "Saturday"]
-  TIME_SLOTS = [TimeSlot("Morning", dt.time(8, 45), dt.time(12, 1)),
+  TIME_SLOTS = [TimeSlot("Morning", dt.time(8, 45), dt.time(12)),
                 TimeSlot("Lunch", dt.time(11, 50), dt.time(13)),
                 TimeSlot("Afternoon", dt.time(12, 50), dt.time(15, 45))]
   
@@ -79,3 +78,7 @@ class SignupView(TemplateView):
   template_name = "signups.html"
   signup_model = SignUp
   signup_objects = SignUp.objects.all()
+  
+  def get(self, request, *args, **kwargs):
+    signup_objects = SignUp.objects.all()
+    return render(request, self.template_name, {'view' : self})
