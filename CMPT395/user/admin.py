@@ -1,30 +1,40 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from . forms import MyUserCreationForm, MyTeacherCreationForm
-from . models import MyUser, Person, Teacher, ChooseFacilitator
+from . forms import MyUserCreationForm
+from . models import MyUser, Family, Child, Volunteer, Signup
 
-class PersonInline(admin.TabularInline):
-    model = Person
+class FamilyInline(admin.TabularInline):
+    model = Family
+
+class VolunteerInline(admin.TabularInline):
+    model = Volunteer
+
+class ChildInline(admin.TabularInline):
+    model = Child
 
 class MyUserAdmin(UserAdmin):
     model = MyUser
     add_form = MyUserCreationForm
     inlines = [
-        PersonInline,
+        FamilyInline,
     ]
-
-class TeacherAdmin(UserAdmin):
-    model = Teacher
-    add_form = MyTeacherCreationForm
-
-class PersonAdmin(admin.ModelAdmin):
-  list_display = ('user', 'name', 'hours')
-
-class ChooseFacilitatorAdmin(admin.ModelAdmin):
-  list_display = ('name', 'hours')
     
-admin.site.register(Person, PersonAdmin)
+class FamilyAdmin(admin.ModelAdmin):
+  list_display = ('user', 'FamilyID', 'account_name')
+  inlines = [
+      VolunteerInline,
+      ChildInline,
+  ]
+
+class VolunteerAdmin(admin.ModelAdmin):
+    list_display = ("VolunteerID", "Family", "first_name")
+
+class ChildAdmin(admin.ModelAdmin):
+    list_display = ("ChildID", "Family", "first_name")
+
+    
 admin.site.register(MyUser, MyUserAdmin)
-admin.site.register(Teacher, TeacherAdmin)
-admin.site.register(ChooseFacilitator, ChooseFacilitatorAdmin)
+admin.site.register(Family, FamilyAdmin)
+admin.site.register(Volunteer, VolunteerAdmin)
+admin.site.register(Child, ChildAdmin)
