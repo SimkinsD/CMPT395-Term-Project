@@ -33,14 +33,14 @@ This class extends Django's existing User info using MyUser
 '''
 class Family(models.Model):
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
-    familyID = models.AutoField(primary_key=True)
-    volunteerID = models.ManyToManyField(Volunteer)
-    account_name = models.CharField(max_length=50)
+    family = models.AutoField(primary_key=True)
+    family_name = models.CharField(max_length=50)
     phone = models.IntegerField(blank=True, null=True)
     email = models.CharField(max_length=40, blank=True)
+    current_volunteer = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
-        return self.account_name
+        return self.family_name
 
 
 
@@ -57,6 +57,7 @@ class Child(models.Model):
 
 class Volunteer(models.Model):
     volunteerID = models.AutoField(primary_key=True)
+    family = models.ManyToManyField(Family)
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25)
     phone = models.IntegerField(blank=True, null=True)
@@ -76,5 +77,5 @@ class Signup(models.Model):
     volunteer = models.ForeignKey(Volunteer, on_delete= models.CASCADE)
 
     def __str__(self):
-        return self.sID
+        return (self.date + " " + self.start_time + " ID: " + self.signupID)
 
