@@ -47,14 +47,14 @@ class AddFamily(CreateView):
     model = Family
     success_url = reverse_lazy('family')
     template_name = 'add_family.html'
-    fields = ('user', 'account_name', 'phone', 'email')
+    fields = ('user', 'family_name', 'phone', 'email')
 
 
 class AddVolunteer(CreateView):
     model = Volunteer
     success_url = reverse_lazy('volunteer')
     template_name = 'add_volunteer.html'
-    fields = ('Family', 'first_name', 'last_name', 'phone', 'email')
+    fields = ('family', 'first_name', 'last_name', 'phone', 'email')
 
 
 class AddChild(CreateView):
@@ -75,3 +75,9 @@ class ViewVolunteer(generic.ListView):
 class ViewChild(generic.ListView):
     model = Child
     template_name = 'child.html'
+
+class AddSignup(CreateView):
+    model = Signup
+    success_url = reverse_lazy('child')
+    template_name = 'add_child.html'
+    fields = ('date', 'start_time', 'end_time', 'classroom', 'volunteer')
