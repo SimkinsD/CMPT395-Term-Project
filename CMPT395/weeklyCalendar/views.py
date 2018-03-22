@@ -1,19 +1,44 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from .forms import SignUpForm
+from .models import SignUp
 
 import calendar
-import datetime
+import datetime as dt
 
 # Create your views here.
 class WeeklyCalendarView(TemplateView):
+  # Djagno variables
   template_name = "calendar.html"
+  signup_form = SignUpForm
+  signup_model = SignUp
+  signup_objects = signup_model.objects.all()
+  
+  class TimeSlot:
+    def __init__(self, init_title, init_start, init_end):
+      self.title = init_title
+      self.start = init_start.__format__("%H:%M")
+      self.end = init_end.__format__("%H:%M")
+    # End init
+  # End TimeSlot  
+  
+  # Constants
   WEEK_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday"
                , "Thursday", "Friday", "Saturday"]
-  TIME_SLOTS = [("Morning", "8:45 - 11:00"), ("Noon", "11:00 - 12:00"), ("Afternoon", "12:00 - 3:00")]
-
+  TIME_SLOTS = [TimeSlot("Morning", dt.time(8, 45), dt.time(12)),
+                TimeSlot("Lunch", dt.time(11, 50), dt.time(13)),
+                TimeSlot("Afternoon", dt.time(12, 50), dt.time(15, 45))]
+  
+  
   def __init__(self):
     self.date_and_name = self.pair_date_name(self.WEEK_DAYS, self.get_week())
     self.date_and_name = self.date_and_name[1:-1] # Trim week to Monday-Friday
+
+  def post(self, request, *args, **kwargs):
+    form = self.signup_form(request.POST)
+    if form.is_valid():
+      form.save()
+    return render(request, self.template_name, {'view' : self})
 
   def get_week(self):
     """ Returns the current week represented by datetime objects
@@ -22,7 +47,7 @@ class WeeklyCalendarView(TemplateView):
         Parameters: None
         Return: List of 7 datetime objects representing the current week
     """
-    date = datetime.datetime.now()
+    date = dt.datetime.now()
     # Get this month's calendar with the first day of the week as Sunday
     #   hence calendar.Calendar(6)
     month = calendar.Calendar(6).monthdatescalendar(date.year, date.month)
@@ -48,3 +73,12 @@ class WeeklyCalendarView(TemplateView):
     for i in range(len(dates)):
       day_name.append((week_days[i], dates[i]))
     return day_name
+
+class SignupView(TemplateView):
+  template_name = "signups.html"
+  signup_model = SignUp
+  signup_objects = SignUp.objects.all()
+  
+  def get(self, request, *args, **kwargs):
+    signup_objects = SignUp.objects.all()
+    return render(request, self.template_name, {'view' : self})

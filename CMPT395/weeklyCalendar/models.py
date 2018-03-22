@@ -1,3 +1,10 @@
 from django.db import models
 
-# Create your models here.
+class SignUp(models.Model):
+    classroom = models.name = models.CharField(max_length=15)
+    startTime = models.TimeField(blank = True, null = True)
+    endTime = models.TimeField(blank = True, null = True)
+    emailReminder = models.BooleanField(default = True)
+
+    def __str__(self):
+        return "Classroom:" + self.classroom + " \nStart time:" + self.startTime.__str__() + " \nEnd Time:" + self.endTime.__str__()
