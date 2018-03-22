@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Signup Test</title>{% endblock title %}
+
+{% block content %}
+  <section>
+    {% for signup in sign_up_objects %}
+      <p> {{ signup }} </p>
+    {% endfor %}
+  </section>
+{% endblock content %}

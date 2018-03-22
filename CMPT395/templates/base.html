@@ -10,10 +10,13 @@
   <!-- Additional CSS to be loaded from /static -->
   {% load static %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
+  {% block add_css %}{% endblock add_css %}
 </head>
 
 
 <body>
+  {% block sign_up_form %}
+  {% endblock %}
   <div id="pagewrap">
     <div id="header">
       <img id="school-logo" src="http://carawayschool.ca/files/2017/02/Caraway-logo-noSeeds-960x777.png" alt="Caraway School Logo">
@@ -36,10 +39,16 @@
         <div id="sidebar-menu">
           <ul>
             <li>
-              <a href=""><i class="fa fa-calendar"></i></a>
+              <a href="{% url 'weeklyCalendar' %}"><i class="fa fa-calendar"></i></a>
             </li>
             <li>
               <a href=""><i class="fa fa-line-chart"></i></a>
+            </li>
+            <li>
+              <a href="{% url 'home' %}"><i class="fa fa-home"></i></a>
+            </li>
+            <li>
+              <a href="{% url 'signupTest' %}"><i class="fa fa-stethoscope"></i></a>
             </li>
           </ul>
         </div> <!-- End sidebar-menu -->
@@ -53,6 +62,7 @@
       </div> <!-- End content-body -->
       <div class="clear"></div> <!-- Expand height to fit content -->
     </div> <!-- End main-body -->
+    <div class="clear"></div>
   </div> <!-- End pagewrap -->
 </body>
 
