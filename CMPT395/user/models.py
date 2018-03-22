@@ -76,6 +76,6 @@ class Signup(models.Model):
     volunteer = models.ForeignKey(Volunteer, on_delete= models.CASCADE)
 
     def __str__(self):
-return (self.date + " " + self.start_time + " ID: " + self.signupID)
+        return (self.date + " " + self.start_time + " ID: " + self.signupID)
 
     
