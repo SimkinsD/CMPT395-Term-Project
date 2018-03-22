@@ -20,19 +20,19 @@ class AddVolunteerView(CreateView):
     model = Volunteer
     success_url = reverse_lazy('volunteer')
     template_name = 'add_volunteer.html'
-    fields = ['VolunteerID', 'Family', 'first_name', 'last_name']
+    fields = ['volunteerID', 'family', 'first_name', 'last_name']
 
 class AddFamilyView(CreateView):
     model = Family
     success_url = reverse_lazy('family')
     template_name = 'add_family.html'
-    fields = ['user', 'FamilyID', 'account_name', 'email', 'phone']
+    fields = ['user', 'familyID', 'family', 'email', 'phone']
 
 class AddChildView(CreateView):
     model = Child
     success_url = reverse_lazy('child')
     template_name = 'add_child.html'
-    fields = ['ChildID', 'Family', 'first_name', 'last_name']
+    fields = ['childID', 'family', 'first_name', 'last_name']
 
 
 class ChooseVolunteerView(generic.ListView):
@@ -40,8 +40,8 @@ class ChooseVolunteerView(generic.ListView):
     template_name = 'select_volunteer.html'
 
     def get_queryset(self):
-        familyID = Family.objects.filter(user=self.request.user).values_list('FamilyID', flat=True)[0]
-        volunteer = Volunteer.objects.filter(Family__FamilyID=familyID)
+        familyID = Family.objects.filter(user=self.request.user).values_list('familyID', flat=True)[0]
+        volunteer = Volunteer.objects.filter(Family__familyID=familyID)
         return volunteer
 
     def get_context_data(self, **kwargs):
@@ -50,7 +50,7 @@ class ChooseVolunteerView(generic.ListView):
         for name in data['volunteer_list']:
             n = list()
             n.append(name.first_name)
-            n.append(name.VolunteerID)
+            n.append(name.volunteerID)
             names[name.first_name] = n
         data['name_list'] = names
         return data
@@ -59,7 +59,7 @@ class ChooseVolunteerView(generic.ListView):
         if 'volunteer' in request.POST:
             volunteer_id = request.POST['volunteer']
             volunteer = Volunteer.objects.get(pk=volunteer_id)
-            family_id = volunteer.Family.FamilyID
+            family_id = volunteer.Family.familyID
             #family = Family.objects.get(pk=family_id)
             Family.objects.filter(pk=family_id).update(current_volunteer=volunteer_id)
         return HttpResponseRedirect(self.request.path_info)
