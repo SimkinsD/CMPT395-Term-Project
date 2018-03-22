@@ -16,9 +16,9 @@ urlpatterns = [
     path('family/', views.AddFamilyView.as_view() , name='family'),
     path('child/', views.AddChildView.as_view() , name='child'),
     path('', views.Home.as_view(), name = 'home'),
-    path('registor_teacher/', views.RegistorTeacher.as_view(), name='registor_teacher'),
-    path('person/', views.AddPerson.as_view() , name='person'),
-    path('pick_facilitator/', views.ChooseFacilitatorView.as_view() , name='view_family'),
+    #path('registor_teacher/', views.RegistorTeacher.as_view(), name='registor_teacher'),
+    #path('person/', views.AddPerson.as_view() , name='person'),
+    #path('pick_facilitator/', views.ChooseFacilitatorView.as_view() , name='view_family'),
     path('edit_user/', views.EditUser.as_view(), name='edit_user'),
      path('select_volunteer/', views.ChooseVolunteerView.as_view() , name='select_volunteer'),
 
