@@ -7,8 +7,8 @@ from . models import MyUser, Family, Child, Volunteer, Signup
 class FamilyInline(admin.TabularInline):
     model = Family
 
-class VolunteerInline(admin.TabularInline):
-    model = Volunteer
+#class VolunteerInline(admin.TabularInline):
+#    model = Volunteer
 
 class ChildInline(admin.TabularInline):
     model = Child
@@ -21,17 +21,17 @@ class MyUserAdmin(UserAdmin):
     ]
     
 class FamilyAdmin(admin.ModelAdmin):
-  list_display = ('user', 'FamilyID', 'account_name')
+  list_display = ('user', 'family', 'family_name')
   inlines = [
-      VolunteerInline,
+      #VolunteerInline,
       ChildInline,
   ]
 
 class VolunteerAdmin(admin.ModelAdmin):
-    list_display = ("VolunteerID", "Family", "first_name")
+    list_display = ("volunteerID", "first_name")
 
 class ChildAdmin(admin.ModelAdmin):
-    list_display = ("ChildID", "Family", "first_name")
+    list_display = ("childID", "family", "first_name")
 
     
 admin.site.register(MyUser, MyUserAdmin)
