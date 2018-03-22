@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from .forms import SignUpForm
-from .models import SignUp
+from user.models import Signup as SignUp
 
 import calendar
 import datetime as dt

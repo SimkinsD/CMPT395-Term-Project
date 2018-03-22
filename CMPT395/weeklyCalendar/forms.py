@@ -1,9 +1,9 @@
 from django import forms
-from .models import SignUp
+from user.models import Signup as SignUp
 
 class SignUpForm(forms.ModelForm):
 
     class Meta:
         model = SignUp
-        fields = ("classroom","startTime", "endTime","emailReminder",)
+        fields = ("classroom","start_time", "end_time",)
     
