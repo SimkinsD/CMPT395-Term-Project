@@ -32,20 +32,20 @@ This class extends Django's existing User info using MyUser
 '''
 class Family(models.Model):
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
-    FamilyID = models.AutoField(primary_key=True)
-    account_name = models.CharField(max_length=50)
+    family = models.AutoField(primary_key=True)
+    family_name = models.CharField(max_length=50)
     phone = models.IntegerField(blank=True, null=True)
     email = models.CharField(max_length=40, blank=True)
     current_volunteer = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
-        return self.account_name
+        return self.family_name
 
 
 
 class Child(models.Model):
-    ChildID = models.AutoField(primary_key=True)
-    Family = models.ForeignKey(Family, on_delete=models.CASCADE)
+    childID = models.AutoField(primary_key=True)
+    family = models.ForeignKey(Family, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25)
     classroom = models.CharField(max_length=15)
@@ -55,8 +55,8 @@ class Child(models.Model):
 
 
 class Volunteer(models.Model):
-    VolunteerID = models.AutoField(primary_key=True)
-    Family = models.ForeignKey(Family, on_delete=models.CASCADE, related_name='family')
+    volunteerID = models.AutoField(primary_key=True)
+    family = models.ManyToManyField(Family)
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25)
     phone = models.IntegerField(blank=True, null=True)
@@ -68,10 +68,14 @@ class Volunteer(models.Model):
 
 
 class Signup(models.Model):
-    SignupID = models.AutoField(primary_key=True)
+    signupID = models.AutoField(primary_key=True)
     date = models.DateField()
     start_time = models.TimeField()
+    end_time = models.TimeField()
     classroom = models.CharField(max_length=15)
-    Volunteer = models.ForeignKey(Volunteer, on_delete= models.CASCADE)
+    volunteer = models.ForeignKey(Volunteer, on_delete= models.CASCADE)
+
+    def __str__(self):
+return (self.date + " " + self.start_time + " ID: " + self.signupID)
 
     
