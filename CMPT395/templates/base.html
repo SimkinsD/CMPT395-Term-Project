@@ -39,10 +39,16 @@
         <div id="sidebar-menu">
           <ul>
             <li>
-              <a href=""><i class="fa fa-calendar"></i></a>
+              <a href="{% url 'weeklyCalendar' %}"><i class="fa fa-calendar"></i></a>
             </li>
             <li>
               <a href=""><i class="fa fa-line-chart"></i></a>
+            </li>
+            <li>
+              <a href="{% url 'home' %}"><i class="fa fa-home"></i></a>
+            </li>
+            <li>
+              <a href="{% url 'signupTest' %}"><i class="fa fa-stethoscope"></i></a>
             </li>
           </ul>
         </div> <!-- End sidebar-menu -->

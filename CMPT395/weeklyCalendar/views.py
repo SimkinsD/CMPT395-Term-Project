@@ -84,4 +84,4 @@ class SignupView(TemplateView):
   
   def get(self, request, *args, **kwargs):
     signup_objects = SignUp.objects.all()
-    return render(request, self.template_name, {'view' : self})
+    return render(request, self.template_name, {'view' : self, 'sign_up_objects': signup_objects})
