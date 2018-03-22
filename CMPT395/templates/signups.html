@@ -4,8 +4,10 @@
 
 {% block content %}
   <section>
-    {% for signup in sign_up_objects %}
-      <p> {{ signup }} </p>
+    {% for signup in view.signup_objects %}
+      <p> {{ signup.classroom }} </p>
+      <p> {{ signup.startTime }} - {{ signup.endTime }} </p>
+      <p> -------------------------------- </p>
     {% endfor %}
   </section>
 {% endblock content %}

@@ -5,6 +5,9 @@ class SignUp(models.Model):
     startTime = models.TimeField(blank = True, null = True)
     endTime = models.TimeField(blank = True, null = True)
     emailReminder = models.BooleanField(default = True)
+    
+    day = models.CharField(max_length=35)
+    
 
     def __str__(self):
-        return "Classroom:" + self.classroom + " \nStart time:" + self.startTime.__str__() + " \nEnd Time:" + self.endTime.__str__()
+        return "Classroom: " + self.classroom + "Start time: " + self.startTime.__str__() + "\nEnd Time:" + self.endTime.__str__()

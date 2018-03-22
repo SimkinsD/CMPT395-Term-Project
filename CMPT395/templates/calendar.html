@@ -31,12 +31,16 @@
           <fieldset>
             <legend>Sign-up Information:</legend>
             {{ view.signup_form.as_p }}
+            <input id="js-signup-hidden-date" type="hidden" name="day" value="Default"/>
             <button type="submit">Submit</button>
           </fieldset>
         </form>
       </div> <!-- End sign-up-form -->
     </div> <!-- End sign-up-overlay -->
 
+
+
+    {% load calendar_tags %}
     {% for day in view.date_and_name %}
       <section class="day">
         <section class="day-title">
@@ -49,24 +53,25 @@
           <div class="time-slot">
             <div class="time-slot-header">
               <!-- e.g. Morning [8:45 - 11:00] -->
-              <h4 class="time-slot-title">{{slot.title}} [{{slot.start}} - {{slot.end}}]</h4>
+              <h4 class="time-slot-title">{{slot.title}} [{% format_time slot.start %} - {% format_time slot.end %}]</h4>
 
               <div class="time-slot-add">
-                <i class="fa fa-plus-circle" onclick="toggle_signup('{{ day.0 }}', '{{ day.1 }}', '{{ slot.start }}', '{{ slot.end }}')"></i>
+                <i class="fa fa-plus-circle" onclick="toggle_signup('{{ day.0 }}', '{{ day.1 }}', '{% format_time slot.start %}', '{% format_time slot.end %}')"></i>
               </div> <!-- End time slot add -->
 
               <div class="clear"></div> <!-- Expand height to fit content -->
             </div> <!-- End time slot header -->
 
             <!-- Example sign-ups -->
-            <div class="day-event">
-              <p>9:00 - 10:30</p>
-              <p>Facilitator Name 1</p>
-            </div>
-            <div class="day-event">
-              <p>9:15 - 10:30</p>
-              <p>Facilitator Name 2</p>
-            </div>
+            {% for signup in view.signup_objects %}
+              {% format_date day.1 as formatted_day %}
+              {% if signup.day == formatted_day and signup.startTime >= slot.start and signup.endTime <= slot.end %}
+                <div class="day-event">
+                  <p class="signup-info">{{ signup.classroom }}</p>
+                  <p class="signup-info">{% format_time signup.startTime %} - {% format_time signup.endTime %}</p>
+                </div>
+              {% endif %}
+            {% endfor %}
             <!-- End Example sign-ups -->
           </div> <!-- End Morning Time Slot -->
           {% endfor %}
