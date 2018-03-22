@@ -1,25 +1,32 @@
 {% extends 'base.html' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}<title>Home</title>{% endblock %}
+
+{% load static %}
+{% block add_css %}<link rel="stylesheet" type="text/css" href="{% static 'css/user_home.css' %}" />{% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
-  <p><a href="{% url 'logout' %}">logout</a></p>
-  <hr>
-  <a href="{% url 'view_family' %}">view family</a> 
-  <br>
-  <a href="{% url 'password_change' %}">
-    Change password
-  </a>
-{% else %}
-  <a href="{% url 'login' %}">login</a>
-{% endif %}
-{% if request.user.is_superuser %}
+<div id="home_div">
+  {% if user.is_authenticated %}
+    <p><a href="{% url 'logout' %}">Logout</a></p>
     <hr>
-    <a href="{% url 'registor' %}">registor a new account</a>
+    <a href="{% url 'view_family' %}">Change Volunteer</a> 
     <hr>
-    <a href="{% url 'person' %}">add a new person</a>
-{% else %}
-{% endif %}
+    <a href="{% url 'password_change' %}">
+      Change password
+    </a>
+    <hr>
+    <a href="{% url 'weeklyCalendar' %}">Calendar</a>
+  {% else %}
+    <a href="{% url 'login' %}">Log in</a>
+  {% endif %}
+  {% if request.user.is_superuser %}
+      <hr>
+      <a href="{% url 'registor' %}">Register New Account</a>
+      <hr>
+      <a href="{% url 'person' %}">Add New Person</a>
+  {% else %}
+  {% endif %}
+</div>
 {% endblock %}
 
