@@ -41,7 +41,7 @@ class WeeklyCalendarView(TemplateView):
       # Automated fields go here
       su.date = request.POST.get("day", default="DEFAULT")
       su.save()
-    return render(request, self.template_name, {'view' : self})
+    return render(request, self.template_name, {'signup_objects' : self.signup_objects, 'view' : self})
 
   def get_week(self):
     """ Returns the current week represented by datetime objects
@@ -56,7 +56,7 @@ class WeeklyCalendarView(TemplateView):
     month = calendar.Calendar(6).monthdatescalendar(date.year, date.month)
     for week in month:
       for day in week:
-        if date.day == day.day:
+        if date.day == day.day and date.month == day.month:
           return week
 
   def pair_date_name(self, week_days, dates):
