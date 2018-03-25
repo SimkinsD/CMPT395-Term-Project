@@ -56,11 +56,15 @@ class Child(models.Model):
 
 class Volunteer(models.Model):
     volunteerID = models.AutoField(primary_key=True)
-    family = models.ManyToManyField(Family)
-    first_name = models.CharField(max_length=25)
+    family = models.ForeignKey(Family, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=26)
     last_name = models.CharField(max_length=25)
     phone = models.IntegerField(blank=True, null=True)
     email = models.CharField(max_length=40, blank=True)
+    
+    def getCurrent(view):
+        family = Family.objects.get(user=view.request.user)
+        return Volunteer.objects.get(volunteerID=family.current_volunteer)
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
