@@ -40,8 +40,6 @@ class ChooseVolunteerView(generic.ListView):
     template_name = 'select_volunteer.html'
 
     def get_queryset(self):
-        familyID = Family.objects.filter(user=self.request.user)
-        print(familyID)
         familyID = Family.objects.filter(user=self.request.user).values_list('familyID', flat=True)[0]
         volunteer = Volunteer.objects.filter(family__familyID=familyID)
         return volunteer
