@@ -57,7 +57,7 @@ class Child(models.Model):
 class Volunteer(models.Model):
     volunteerID = models.AutoField(primary_key=True)
     family = models.ForeignKey(Family, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=26)
+    first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25)
     phone = models.IntegerField(blank=True, null=True)
     email = models.CharField(max_length=40, blank=True)
