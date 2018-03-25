@@ -59,7 +59,7 @@ class ChooseVolunteerView(generic.ListView):
         if 'volunteer' in request.POST:
             volunteer_id = request.POST['volunteer']
             volunteer = Volunteer.objects.get(pk=volunteer_id)
-            family_id = volunteer.Family.familyID
+            family_id = volunteer.family.familyID
             #family = Family.objects.get(pk=family_id)
             Family.objects.filter(pk=family_id).update(current_volunteer=volunteer_id)
         return HttpResponseRedirect(self.request.path_info)
