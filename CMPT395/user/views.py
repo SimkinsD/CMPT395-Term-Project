@@ -40,6 +40,8 @@ class ChooseVolunteerView(generic.ListView):
     template_name = 'select_volunteer.html'
 
     def get_queryset(self):
+        familyID = Family.objects.filter(user=self.request.user)
+        print(familyID)
         familyID = Family.objects.filter(user=self.request.user).values_list('familyID', flat=True)[0]
         volunteer = Volunteer.objects.filter(family__familyID=familyID)
         return volunteer
@@ -59,7 +61,7 @@ class ChooseVolunteerView(generic.ListView):
         if 'volunteer' in request.POST:
             volunteer_id = request.POST['volunteer']
             volunteer = Volunteer.objects.get(pk=volunteer_id)
-            family_id = volunteer.Family.familyID
+            family_id = volunteer.family.familyID
             #family = Family.objects.get(pk=family_id)
             Family.objects.filter(pk=family_id).update(current_volunteer=volunteer_id)
         return HttpResponseRedirect(self.request.path_info)
