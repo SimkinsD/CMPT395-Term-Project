@@ -26,7 +26,7 @@ class AddFamilyView(CreateView):
     model = Family
     success_url = reverse_lazy('family')
     template_name = 'add_family.html'
-    fields = ['user', 'familyID', 'family', 'email', 'phone']
+    fields = ['user', 'familyID', 'family_name', 'email', 'phone']
 
 class AddChildView(CreateView):
     model = Child
