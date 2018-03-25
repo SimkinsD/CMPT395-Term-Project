@@ -13,6 +13,11 @@
 
 
 {% block content %}
+  <section id="class-list">
+    {% for class in view.class_names %}
+      <div class="class-box">{{ class }}</div>
+    {% endfor %}
+  </section>
   <section id="calendar">
     <div id="sign-up-overlay">
       <div id="sign-up-popup">
@@ -64,11 +69,10 @@
 
             <!-- Example sign-ups -->
             {% for signup in view.signup_objects %}
-              {% format_date day.1 as formatted_day %}
-              {% if signup.day == formatted_day and signup.startTime >= slot.start and signup.endTime <= slot.end %}
+              {% if signup.date == day.1 and signup.start_time >= slot.start and signup.end_time <= slot.end %}
                 <div class="day-event">
                   <p class="signup-info">{{ signup.classroom }}</p>
-                  <p class="signup-info">{% format_time signup.startTime %} - {% format_time signup.endTime %}</p>
+                  <p class="signup-info">{% format_time signup.start_time %} - {% format_time signup.end_time %}</p>
                 </div>
               {% endif %}
             {% endfor %}
@@ -76,7 +80,7 @@
           </div> <!-- End Morning Time Slot -->
           {% endfor %}
         </section> <!-- End day-schedule -->
-      </section> <!-- End day -->
+      </section> <!-- End da[Ma<[M`<[M`<y -->
 
     {% empty %}
       <h3>List Empty</h3>
