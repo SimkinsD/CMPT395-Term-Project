@@ -56,7 +56,7 @@
               <h4 class="time-slot-title">{{slot.title}} [{% format_time slot.start %} - {% format_time slot.end %}]</h4>
 
               <div class="time-slot-add">
-                <i class="fa fa-plus-circle" onclick="toggle_signup('{{ day.0 }}', '{{ day.1 }}', '{% format_time slot.start %}', '{% format_time slot.end %}')"></i>
+                <i class="fa fa-plus-circle" onclick="toggle_signup('{{ day.0 }}', '{{ day.1 }}', '{% format_time slot.start %}', '{% format_time slot.end %}', '{% format_date day.1 %}')"></i>
               </div> <!-- End time slot add -->
 
               <div class="clear"></div> <!-- Expand height to fit content -->

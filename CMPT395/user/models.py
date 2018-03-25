@@ -69,11 +69,11 @@ class Volunteer(models.Model):
 
 class Signup(models.Model):
     signupID = models.AutoField(primary_key=True)
-    date = models.DateField()
+    date = models.DateField(["%Y-%m-%d"], blank=True, null=True)
     start_time = models.TimeField()
     end_time = models.TimeField()
     classroom = models.CharField(max_length=15)
-    volunteer = models.ForeignKey(Volunteer, on_delete= models.CASCADE)
+    volunteer = models.ForeignKey(Volunteer, blank=True, null=True, on_delete= models.CASCADE)
 
     def __str__(self):
         return (self.date + " " + self.start_time + " ID: " + self.signupID)

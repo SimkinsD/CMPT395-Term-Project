@@ -8,7 +8,7 @@ def format_time(time):
 
 @register.simple_tag
 def format_date(date):
-  return date.__format__("%B %d, %Y")
+  return date.__format__("%Y-%m-%d")
 
 @register.simple_tag
 def comp(str1, str2):

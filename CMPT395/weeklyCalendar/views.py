@@ -39,7 +39,7 @@ class WeeklyCalendarView(TemplateView):
     if form.is_valid():
       su = form.save(commit="false")
       # Automated fields go here
-      su.day = request.POST.get("day", default="DEFAULT")
+      su.date = request.POST.get("day", default="DEFAULT")
       su.save()
     return render(request, self.template_name, {'view' : self})
 

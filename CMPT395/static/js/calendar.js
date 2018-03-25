@@ -17,7 +17,7 @@ function toggle_popup(elemId) {
     }
 }
 
-function toggle_signup(day, date, start, end) {
+function toggle_signup(day, date, start, end, formatted_date) {
   // Populate form fields
   var signup_date = document.getElementById("js-signup-date");
   var signup_day = document.getElementById("js-signup-day");
@@ -25,14 +25,14 @@ function toggle_signup(day, date, start, end) {
   signup_day.innerHTML = day;
   
   var signup_class = document.getElementById("id_classroom");
-  var signup_start = document.getElementById("id_startTime");
-  var signup_end = document.getElementById("id_endTime");
+  var signup_start = document.getElementById("id_start_time");
+  var signup_end = document.getElementById("id_end_time");
   
   signup_start.value = start;
   signup_end.value = end;
   
   var hidden_date = document.getElementById("js-signup-hidden-date");
-  hidden_date.value = signup_date.innerHTML;
+  hidden_date.value = formatted_date;
   // Toggle visibility
   toggle_popup("sign-up-overlay");
 }
