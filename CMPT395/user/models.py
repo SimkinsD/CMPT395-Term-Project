@@ -32,7 +32,7 @@ This class extends Django's existing User info using MyUser
 '''
 class Family(models.Model):
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
-    family = models.AutoField(primary_key=True)
+    familyID = models.AutoField(primary_key=True)
     family_name = models.CharField(max_length=50)
     phone = models.IntegerField(blank=True, null=True)
     email = models.CharField(max_length=40, blank=True)
