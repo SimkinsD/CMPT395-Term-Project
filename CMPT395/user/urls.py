@@ -20,7 +20,7 @@ urlpatterns = [
     path('person/', views.AddVolunteerView.as_view() , name='person'),
     path('pick_facilitator/', views.ChooseVolunteerView.as_view() , name='view_family'),
     path('edit_user/', views.EditUser.as_view(), name='edit_user'),
-    #path('select_volunteer/', views.ChooseVolunteerView.as_view() , name='select_volunteer'),
+    path('select_volunteer/', views.ChooseVolunteerView.as_view() , name='select_volunteer'),
 
     path('password_change', password_change, name='password_change'),
     path('password_change/done/', password_change_done, name='password_change_done'),

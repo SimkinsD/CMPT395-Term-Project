@@ -21,7 +21,7 @@ class MyUserAdmin(UserAdmin):
     ]
     
 class FamilyAdmin(admin.ModelAdmin):
-  list_display = ('user', 'family', 'family_name')
+  list_display = ('user', 'familyID', 'family_name')
   inlines = [
       #VolunteerInline,
       ChildInline,
