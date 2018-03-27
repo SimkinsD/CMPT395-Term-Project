@@ -6,17 +6,19 @@ from django.contrib.auth.views import (
     password_reset_confirm, 
     password_reset_complete,
 )
+from django.contrib.auth import views as auth_views
 from django.urls import path
 from . import views
 
 urlpatterns = [
 
+    path('', auth_views.login, name='login'),
     path('registor/', views.RegistorView.as_view(), name='registor'),
     path('volunteer/', views.AddVolunteerView.as_view() , name='volunteer'),
     path('family/', views.AddFamilyView.as_view() , name='family'),
     path('child/', views.AddChildView.as_view() , name='child'),
-    path('', views.Home.as_view(), name = 'home'),
-    #path('registor_teacher/', views.RegistorTeacher.as_view(), name='registor_teacher'),
+    path('user_home/', views.Home.as_view(), name = 'home'),
+        #path('registor_teacher/', views.RegistorTeacher.as_view(), name='registor_teacher'),
     path('person/', views.AddVolunteerView.as_view() , name='person'),
     path('pick_facilitator/', views.ChooseVolunteerView.as_view() , name='view_family'),
     path('edit_user/', views.EditUser.as_view(), name='edit_user'),
