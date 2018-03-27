@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from .forms import SignUpForm
 from user.models import Signup as SignUp
+from user.models import Family, Volunteer
 
 import calendar
 import datetime as dt
@@ -11,8 +12,7 @@ class WeeklyCalendarView(TemplateView):
   # Djagno variables
   template_name = "calendar.html"
   signup_form = SignUpForm
-  signup_model = SignUp
-  signup_objects = signup_model.objects.all()
+  signup_objects = SignUp.objects.all()
   
   class TimeSlot:
     def __init__(self, init_title, init_start, init_end):
@@ -33,6 +33,7 @@ class WeeklyCalendarView(TemplateView):
   def __init__(self):
     self.date_and_name = self.pair_date_name(self.WEEK_DAYS, self.get_week())
     self.date_and_name = self.date_and_name[1:-1] # Trim week to Monday-Friday
+    self.signup_objects = SignUp.objects.all()
 
   def post(self, request, *args, **kwargs):
     form = self.signup_form(request.POST)
@@ -40,8 +41,10 @@ class WeeklyCalendarView(TemplateView):
       su = form.save(commit="false")
       # Automated fields go here
       su.date = request.POST.get("day", default="DEFAULT")
+      su.volunteer = Volunteer.getCurrent(self)
       su.save()
-    return render(request, self.template_name, {'signup_objects' : self.signup_objects, 'view' : self})
+    self.signup_objects = SignUp.objects.all()
+    return render(request, self.template_name, {'view' : self})
 
   def get_week(self):
     """ Returns the current week represented by datetime objects
