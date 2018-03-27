@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include('user.urls')),
     path('', include('django.contrib.auth.urls')),
     path('calendar/', include('weeklyCalendar.urls')),
+    path('stats/', include('stats.urls')),
 ]
