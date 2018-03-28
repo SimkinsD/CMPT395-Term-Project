@@ -179,7 +179,8 @@ class AdminStats(generic.ListView):
             family_stats['volunteer1'] = volunteer_query[0].first_name
             family_stats['volunteer2'] = ""
         elif(not volunteer_query.exists()):
-            pass #Error handling stuff
+            family_stats['volunteer1'] = ""
+            family_stats['volunteer2'] = ""
         else:
             family_stats['volunteer1'] = volunteer_query[0].first_name
             family_stats['volunteer2'] = volunteer_query[1].first_name
