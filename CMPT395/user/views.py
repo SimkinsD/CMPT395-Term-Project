@@ -7,9 +7,25 @@ from .forms import MyUserCreationForm, EditUserForm
 
 from django.http import HttpResponseRedirect
 
+from django.db.models import Q
+
 from django.db import models
 from . models import MyUser, Family, Volunteer, Child
 
+
+class SearchUserView(generic.ListView):
+    template_name = "search_user.html"
+
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        family_list = Family.objects.all()
+        if(query):
+            family_list = family_list.filter(
+                Q(family_name__icontains=query) |
+                Q(phone__icontains=query) |
+                Q(email__icontains=query)
+                )
+        return family_list
 
 class RegistorView(generic.CreateView):
     form_class = MyUserCreationForm
