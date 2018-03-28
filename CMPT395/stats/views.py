@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import generic
 from user.models import *
-import datetime
+import datetime, pprint
 
 
 class FamilyStats(generic.ListView):
@@ -13,12 +13,13 @@ class FamilyStats(generic.ListView):
         self.week_total = self.week_hours(datetime.date.today(), Family.objects.get(user=5))#self.request.user))
         self.month_total = self.month_hours(datetime.date.today(), Family.objects.get(user=5))#self.request.user))
         self.required_hours = self.required_hours(Family.objects.get(user=5))#self.request.user))
+        self.current_signups = self.current_signups(Family.objects.get(user=5))
 
 
 
     """ Using the current date it gets the entire weeks hours for selected family.
         Return:
-            It returns a timedelta object of the current hours and minutes volunteered that week.
+            total: a timedelta object of the current hours and minutes volunteered that week.
         Parameters: 
             requested_week: is the week you would like the volunteer hours for.
                 It must be a datetme.date object of a single day in the requested week.
@@ -47,9 +48,10 @@ class FamilyStats(generic.ListView):
 
 
 
+
     """ Using the requested date it gets the entire month hours for selected family.
         Return:
-            It returns a timedelta object of the current hours and minutes volunteered that month.
+            total: a timedelta object of the current hours and minutes volunteered that month.
         Parameters: 
             requested_month: is the month you would like the volunteer hours for.
                 It must be a datetme.date object of a single day in the requested month.
@@ -72,9 +74,11 @@ class FamilyStats(generic.ListView):
         #return total_hours(signups)
 
 
+
+
     """ This functions return the required hours a family must complete depending on how many children they have. 
         Return:
-            It returns an int/float of the amount of hours the family must complete
+            hours: an int/float of the amount of hours the family must complete
         Parameters:
             requested_family: is the family that you want the number of children for.
                 It must be a single Family object (from user.models)
@@ -91,6 +95,20 @@ class FamilyStats(generic.ListView):
         return hours
 
 
+    '''  This shows all future signups for a specific family
+        Return:
+            signups: A query set of Signup objects that will occur in the future
+        Parameters:
+            requested_family: is the family that you want the number of children for.
+                It must be a single Family object (from user.models)
+    '''
+    def current_signups(self, requested_family):
+        day = datetime.date.today()
+        signups = Signup.objects.filter(volunteer__family__familyID = requested_family.familyID, 
+            date__gte=day).order_by('date')
+        return signups
+
+
 
 class AdminStats(generic.ListView):
     template_name = "admin_stats.html"
@@ -98,13 +116,13 @@ class AdminStats(generic.ListView):
 
 
     def __init__(self):
-        self.admin_stats = self.single_family_stats(datetime.date.today(), Family.objects.get(user=5))
+        self.admin_stats = self.all_family_stats(datetime.date.today())
 
 
 
     ''' Using a queryset of signups determine the total time spent volunteering
         Return:
-            Returns a timedelta object with the hours and minutes spent volunteering
+            total: a timedelta object with the hours and minutes spent volunteering
         Parameters:
             signup_query: a queryset of Signup objects (from user.Models) that you want to count the time for
     '''
@@ -120,7 +138,7 @@ class AdminStats(generic.ListView):
 
     """ This functions return the required hours a family must complete depending on how many children they have. 
         Return:
-            It returns an int/float of the amount of hours the family must complete
+            hours: an int/float of the amount of hours the family must complete
         Parameters:
             requested_family: is the family that you want the number of children for.
                 It must be a single Family object (from user.models)
@@ -141,9 +159,11 @@ class AdminStats(generic.ListView):
 
     """ Using the requested date it gets the all stats admins need for selected family.
         Return:
-            A dictionary with specific info on each family
-            family_stats{ fam_name, volunteer1, volunteer2, wk1, wk2, wk3, wk4, 
-                          month_hours, month_total, year_total }
+            family_stats: A dictionary with specific info on each family
+            ex. family_stats{ fam_name : string, volunteer1 : string, volunteer2 : string, 
+                wk1 : datetime.timedelta, wk2 : datetime.timedelta, wk3 : datetime.timedelta, 
+                wk4 : datetime.timedelta, month_hours : datetime.timedelta, 
+                month_total : datetime.timedelta, year_total : datetime.timedelta }
         Parameters: 
             requested_month: is the month you would like the volunteer hours for.
                 It must be a datetme.date object of a single day in the requested month.
@@ -156,6 +176,7 @@ class AdminStats(generic.ListView):
 
         # This block adds the first (and possibly second) volunteer in the family as the main facilitators for the family (aka parents)
         if (volunteer_query.count() == 1):
+            family_stats['volunteer1'] = volunteer_query[0].first_name
             family_stats['volunteer2'] = ""
         elif(not volunteer_query.exists()):
             pass #Error handling stuff
@@ -194,16 +215,33 @@ class AdminStats(generic.ListView):
 
         # Adds month total (above or below required) to the dictionary)
         required = self.required_hours(requested_family) * 4
-        family_stats['month_total'] = required#(family_stats['month_hours'] - required)
+        family_stats['month_total'] = (family_stats['month_hours'] - datetime.timedelta(hours=required))
 
         # Adds the yearly total of hours
         signup_query = Signup.objects.filter(volunteer__family__familyID = requested_family.familyID, 
                                         date__year=requested_month.year)
         hours = self.total_hours(signup_query)
         required = (self.required_hours(requested_family) * 48)
-        family_stats['year_total'] = required#(self.total_hours(signup_query) - required)
+        family_stats['year_total'] = (self.total_hours(signup_query) - datetime.timedelta(hours=required))
 
-        print(family_stats)
+        return family_stats
+
+
+
+
+    ''' Goes through all family accounts and gets all the stats for them
+        Return:
+            all_family_stats: a list of dictionaries were each dictionary is a single family's stats
+        Parameters:
+            requested_month: the month you want all the stats for. 
+            It must be a datetime object of a single day in the month.
+    '''
+    def all_family_stats(self, requested_month):
+        all_stats = []
+        families = Family.objects.all()
+        for fam in families:
+            all_stats.append(self.single_family_stats(requested_month, fam))
+        return all_stats
 
 
 
