@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views import generic
+from django.http import HttpResponse
 from user.models import *
-import datetime, pprint
+import datetime, pprint, csv
 
 
 class FamilyStats(generic.ListView):
@@ -43,8 +44,7 @@ class FamilyStats(generic.ListView):
             start = datetime.timedelta(hours=day.start_time.hour,minutes=day.start_time.minute)
             total = total + (end - start)
         return total
-        #total_hours = getattr(AdminStats(), 'total_hours')
-        #return total_hours(signups)
+
 
 
 
@@ -70,8 +70,7 @@ class FamilyStats(generic.ListView):
             start = datetime.timedelta(hours=day.start_time.hour,minutes=day.start_time.minute)
             total = total + (end - start)
         return total
-        #total_hours = getattr(AdminStats(), 'total_hours')
-        #return total_hours(signups)
+
 
 
 
@@ -243,6 +242,54 @@ class AdminStats(generic.ListView):
         for fam in families:
             all_stats.append(self.single_family_stats(requested_month, fam))
         return all_stats
+
+
+
+
+''' This function allows for the download of all the family stats as a csv file for use in excel
+    Return:
+        response: an HttpResponse containing the csv file with data
+'''
+def export_csv(request):
+    func = AdminStats()
+    requested_month = datetime.date.today()
+    all_stats = []
+    families = Family.objects.all()
+    for fam in families:
+        all_stats.append(func.single_family_stats(requested_month, fam))
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="{:%B %Y stats}"'.format(requested_month)
+
+    w = csv.writer(response)
+    w.writerow(['Family Name', 'Volunteer 1', 'Volunteer 2', 'Week 1', 'Week 2',
+                'Week 3', 'Week 4', 'Month Hours', 'Month Total', 'Year Total'])
+    for fam in all_stats:
+        w.writerow(csv_format(fam))
+    return response
+
+
+
+''' Takes a dictionary and sets each entry to the correct location in a list
+    Return: 
+        out_list: a list with all entries from the dictionary, but ordered
+    Parameters:
+        entry: a dictionary object containing the stats for a single family.
+'''
+def csv_format(entry):
+    out_list = []
+    out_list.append(entry['fam_name'])
+    out_list.append(entry['volunteer1'])
+    out_list.append(entry['volunteer2'])
+    out_list.append((entry['wk1']).total_seconds() / 3600)
+    out_list.append((entry['wk2']).total_seconds() / 3600)
+    out_list.append((entry['wk3']).total_seconds() / 3600)
+    out_list.append((entry['wk4']).total_seconds() / 3600)
+    out_list.append((entry['month_hours']).total_seconds() / 3600)
+    out_list.append((entry['month_total']).total_seconds() / 3600)
+    out_list.append((entry['year_total']).total_seconds() / 3600)
+    return out_list
+
+
 
 
 
