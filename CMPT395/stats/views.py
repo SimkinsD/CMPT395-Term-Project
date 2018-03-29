@@ -264,7 +264,7 @@ def export_csv(request):
     w.writerow(['Family Name', 'Volunteer 1', 'Volunteer 2', 'Week 1', 'Week 2',
                 'Week 3', 'Week 4', 'Month Hours', 'Month Total', 'Year Total'])
     for fam in all_stats:
-        w.writerow(csv_format(fam))
+        w.writerow(readable_format(fam))
     return response
 
 
@@ -275,7 +275,7 @@ def export_csv(request):
     Parameters:
         entry: a dictionary object containing the stats for a single family.
 '''
-def csv_format(entry):
+def readable_format(entry):
     out_list = []
     out_list.append(entry['fam_name'])
     out_list.append(entry['volunteer1'])
