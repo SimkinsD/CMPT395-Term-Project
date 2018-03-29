@@ -258,7 +258,7 @@ def export_csv(request):
     for fam in families:
         all_stats.append(func.single_family_stats(requested_month, fam))
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="{:%B %Y stats}"'.format(requested_month)
+    response['Content-Disposition'] = 'attachment; filename="{:%B %Y stats.csv}"'.format(requested_month)
 
     w = csv.writer(response)
     w.writerow(['Family Name', 'Volunteer 1', 'Volunteer 2', 'Week 1', 'Week 2',
