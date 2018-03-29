@@ -13,11 +13,6 @@
 
 
 {% block content %}
-  <section id="class-list">
-    {% for class in view.class_names %}
-      <div class="class-box">{{ class }}</div>
-    {% endfor %}
-  </section>
   <section id="calendar">
     <div id="sign-up-overlay">
       <div id="sign-up-popup">
@@ -43,9 +38,22 @@
       </div> <!-- End sign-up-form -->
     </div> <!-- End sign-up-overlay -->
 
-
-
+    <!-- Classroom list -->
+    <section id="class-list">
+      {% for class_name in view.CLASSROOMS %}
+        <!--
+          Resulting css class will be class-name-nameofclassroom;
+          i.e. class-name-Red
+        -->
+        <section id="class-name-{{ class_name }}" class="class-selector">
+          {{ class_name }}
+        </section>
+      {% endfor %}  
+    </section>
+    
+    
     {% load calendar_tags %}
+    <section id="days-container">
     {% for day in view.date_and_name %}
       <section class="day">
         <section class="day-title">
@@ -80,12 +88,13 @@
           </div> <!-- End Morning Time Slot -->
           {% endfor %}
         </section> <!-- End day-schedule -->
-      </section> <!-- End da[Ma<[M`<[M`<y -->
+      </section> <!-- End day -->
 
     {% empty %}
       <h3>List Empty</h3>
 
     {% endfor %}
+    </section>
     <div class="clear"></div> <!-- Extend height to fit content -->
   </section> <!-- End calendar -->
 {% endblock content %}

@@ -23,6 +23,7 @@ class WeeklyCalendarView(TemplateView):
   # End TimeSlot  
   
   # Constants
+  CLASSROOMS = ["Red", "Blue", "Green"]
   WEEK_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday"
                , "Thursday", "Friday", "Saturday"]
   TIME_SLOTS = [TimeSlot("Morning", dt.time(8, 45), dt.time(12)),
