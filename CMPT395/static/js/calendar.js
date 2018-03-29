@@ -17,6 +17,30 @@ function toggle_popup(elemId) {
     }
 }
 
+function switch_calendar(new_calendar_color) {
+  console.log(1);
+  set_current_classroom(new_calendar_color);
+  console.log(2);
+  var new_calendar = document.getElementById("js-" + new_calendar_color + "-calendar");
+  var calendars = document.getElementsByClassName("calendar");
+  
+  for (var i = 0; i < calendars.length; i++) {
+    if (calendars[i].style.visibility == "visible") {
+      calendars[i].style.visibility = "hidden";
+    }
+  }
+  new_calendar.style.visibility = "visible";
+  console.log(new_calendar.style.visibility);
+}
+
+function set_current_classroom(classroom) {
+  var signup_class = document.getElementById("id_classroom");
+  var class_list = document.getElementById("js-class-list");
+
+  signup_class.value = classroom;
+  class_list.style.backgroundColor = classroom.toLowerCase();
+}
+
 function toggle_signup(day, date, start, end, formatted_date) {
   // Populate form fields
   var signup_date = document.getElementById("js-signup-date");

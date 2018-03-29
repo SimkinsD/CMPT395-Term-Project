@@ -13,47 +13,50 @@
 
 
 {% block content %}
-  <section id="calendar">
-    <div id="sign-up-overlay">
-      <div id="sign-up-popup">
-        <div id="sign-up-popup-close">
-          <i class="fa fa-times-circle" onclick="toggle_popup('sign-up-overlay')"></i>
-          <div class="clear"></div>
-        </div>
-        
-        <section id="signup_headers">
-          <h3 id="js-signup-day" class="signup-title">Default</h5>
-          <h5 id="js-signup-date" class="signup-title">Default</h5>
-        </section>
-        
-        <form id="signup_form" method="post">
-          {% csrf_token %}
-          <fieldset>
-            <legend>Sign-up Information:</legend>
-            {{ view.signup_form.as_p }}
-            <input id="js-signup-hidden-date" type="hidden" name="day" value="Default"/>
-            <button type="submit">Submit</button>
-          </fieldset>
-        </form>
-      </div> <!-- End sign-up-form -->
-    </div> <!-- End sign-up-overlay -->
-
-    <!-- Classroom list -->
-    <section id="class-list">
-      {% for class_name in view.CLASSROOMS %}
-        <!--
-          Resulting css class will be class-name-nameofclassroom;
-          i.e. class-name-Red
-        -->
+  <!-- Classroom list -->
+  <section id="js-class-list">
+    {% for class_name in view.CLASSROOMS %}
+      <!--
+        Resulting css class will be class-name-nameofclassroom;
+        i.e. class-name-Red
+      -->
+      <i onclick="switch_calendar('{{ class_name }}')">
         <section id="class-name-{{ class_name }}" class="class-selector">
           {{ class_name }}
         </section>
-      {% endfor %}  
-    </section>
-    
-    
-    {% load calendar_tags %}
-    <section id="days-container">
+      </i>
+    {% endfor %}  
+  </section>
+
+  <div id="sign-up-overlay">
+    <div id="sign-up-popup">
+      <div id="sign-up-popup-close">
+        <i class="fa fa-times-circle" onclick="toggle_popup('sign-up-overlay')"></i>
+        <div class="clear"></div>
+      </div>
+      
+      <section id="signup_headers">
+        <h3 id="js-signup-day" class="signup-title">Default</h5>
+        <h5 id="js-signup-date" class="signup-title">Default</h5>
+      </section>
+      
+      <form id="signup_form" method="post">
+        {% csrf_token %}
+        <fieldset>
+          <legend>Sign-up Information:</legend>
+          {{ view.signup_form.as_p }}
+          <input id="js-signup-hidden-date" type="hidden" name="day" value="Default"/>
+          <button type="submit">Submit</button>
+        </fieldset>
+      </form>
+    </div> <!-- End sign-up-form -->
+  </div> <!-- End sign-up-overlay -->
+  
+  <!-- Calendar -->
+  {% load calendar_tags %}
+  {% for class in view.CLASSROOMS %}
+  <section class="calendar" id="js-{{ class }}-calendar"> <!-- i.e. js-Red-calendar -->
+    <section class="days-container">
     {% for day in view.date_and_name %}
       <section class="day">
         <section class="day-title">
@@ -77,11 +80,13 @@
 
             <!-- Example sign-ups -->
             {% for signup in view.signup_objects %}
+              {% if signup.classroom == class %}
               {% if signup.date == day.1 and signup.start_time >= slot.start and signup.end_time <= slot.end %}
                 <div class="day-event">
-                  <p class="signup-info">{{ signup.classroom }}</p>
+                  <p class="signup-info">{{ signup.volunteer }}</p>
                   <p class="signup-info">{% format_time signup.start_time %} - {% format_time signup.end_time %}</p>
                 </div>
+              {% endif %}
               {% endif %}
             {% endfor %}
             <!-- End Example sign-ups -->
@@ -97,4 +102,5 @@
     </section>
     <div class="clear"></div> <!-- Extend height to fit content -->
   </section> <!-- End calendar -->
+  {% endfor %}
 {% endblock content %}
