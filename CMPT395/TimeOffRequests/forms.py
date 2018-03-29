@@ -7,9 +7,6 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 class RequestTimeOffForm(forms.ModelForm):
-    # def __init__(self, *args, **kwargs):
-    #     super(RequestTimeOffForm, self).__init__(*args, **kwargs)
-    #     self.initial['family'] = Volunteer.getCurrent(self).family
 
     class Meta:
         model = TimeOffRequest
