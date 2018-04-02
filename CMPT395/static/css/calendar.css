@@ -39,108 +39,6 @@
     color: red;
 }
 
-/* calendar Styles */
-.calendar {
-    position: fixed;
-    width: 98%;
-    text-align: center;
-    visibility: hidden;
-}
-
-#js-Red-calendar {
-  visibility: visible;
-}
-
-.days-container {
-  display: inline-block;
-  width: 100%;
-}
-
-/* day Styles */
-.day {
-    display: inline-grid;
-    /* For Sunday-Saturday
-    min-width: 12%;
-    max-width: 14%;*/
-    /* For Monday-Friday */
-    width: 18%;
-    border: solid black 1px;
-    border-radius: 4px;
-    box-shadow: 4px 4px 6px #222;
-    margin: 0.5%;
-    background-color: #f3f3f3;
-    color: #111;
-}
-
-/* day-title Styles */
-.day-title h3 {
-    margin: 5px;
-}
-
-.day-title h5 {
-    margin: 5px;
-}
-/*
-  End day-title Styles
-  End day Styles
-*/
-
-/* time-slot Styles */
-.time-slot {
-    border-top: solid black 2px;
-}
-
-/* time-slot-title Styles */
-.time-slot-title {
-    display: inline-block;
-    margin: 10px;
-    padding: 5px;
-}
-/*
-  End time-slot-title Styles
-*/
-
-/* time-slot-add Styles */
-.time-slot-add {
-    display: inline-block;
-    color: black;
-    font-size: 20px;
-}
-
-.time-slot-add a {
-    color: black;
-    text-decoration: none;
-}
-
-.time-slot-add:hover {
-    color: green;
-    cursor: pointer;
-}
-/*
-  End time-slot Styles
-  End time-slot-add Styles
-*/
-
-/* day-event Styles */
-.day-event {
-    border-top: dotted gray 1px;
-}
-
-.day-event p {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-/*
-  End day-event Styles
-  End calendar Styles
-*/
-
-.signup-title {
-  padding: 5px;
-  margin: 0px;
-  text-decoration: underline;
-}
-
 #js-class-list {
   width: auto;
   margin: 0px;
@@ -171,4 +69,49 @@
 
 #class-name-Green {
   background-color: green;
+}
+
+.calendar {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  text-align: center;
+}
+
+.day {
+  display: inline-grid;
+  border: solid black 1px;
+  border-radius: 4px;
+  box-shadow: 4px 4px 6px #222;
+  background-color: #f3f3f3;
+  color: #111;
+  margin: 10px;
+}
+
+.day * {
+  padding: 5px 20px;
+}
+
+.day-header {
+  border-bottom: solid black 1px;
+}
+
+.time-slot {
+  border-bottom: solid black 1px;
+}
+
+.time-slot .fa {
+  padding: 0;
+  margin-left: 2px;
+  font-size: 20px;
+}
+
+.time-slot .fa:hover {
+  color: green;
+  cursor: pointer;
+}
+
+.time-slot .event {
+  border-top: dotted black 1px;
 }

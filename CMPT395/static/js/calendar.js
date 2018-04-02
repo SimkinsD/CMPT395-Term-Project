@@ -1,3 +1,17 @@
+window.onload = function() {
+  var calendars = document.getElementsByClassName("calendar");
+  var total_height = 0;
+  var max_height = 0;
+  for (var i = 0; i < calendars.length; i++) {
+    calendars[i].style.top = (0 - total_height).toString() + "px";
+    total_height += calendars[i].clientHeight;
+    if (calendars[i].clientHeight > max_height) {
+      max_height = calendars[i].clientHeight;
+    }
+    calendars[i].style.visibility = "hidden";
+  }
+}
+
 function toggle_popup(elemId) {
     /*
       Toggles visibility of an html element
