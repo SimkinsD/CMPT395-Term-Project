@@ -10,6 +10,10 @@ window.onload = function() {
     }
     calendars[i].style.visibility = "hidden";
   }
+  var header_height = document.getElementById("main-header").clientHeight;
+  var pagewrap = document.getElementById("pagewrap");
+  var pagewrap_height = pagewrap.clientHeight;
+  pagewrap.style.height = (pagewrap_height - total_height) + (max_height + header_height)  + "px";
 }
 
 function toggle_popup(elemId) {
@@ -32,9 +36,7 @@ function toggle_popup(elemId) {
 }
 
 function switch_calendar(new_calendar_color) {
-  console.log(1);
   set_current_classroom(new_calendar_color);
-  console.log(2);
   var new_calendar = document.getElementById("js-" + new_calendar_color + "-calendar");
   var calendars = document.getElementsByClassName("calendar");
   
@@ -44,7 +46,6 @@ function switch_calendar(new_calendar_color) {
     }
   }
   new_calendar.style.visibility = "visible";
-  console.log(new_calendar.style.visibility);
 }
 
 function set_current_classroom(classroom) {
