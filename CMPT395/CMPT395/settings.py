@@ -132,4 +132,10 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
 AUTH_USER_MODEL = 'user.MyUser'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'                                           # email service
+EMAIL_HOST_USER = ''                                                    # email username
+EMAIL_HOST_PASSWORD = ''                                                # email password
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Caraway <noreply@example.com>'

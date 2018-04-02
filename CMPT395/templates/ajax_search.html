@@ -1,0 +1,11 @@
+{% if families.count > 0 %}
+{% for family in families %}
+    <ol>
+        <p style="font-size:24px; color:white">
+                {{ family.family_name }}
+        </p>
+    </ol>
+{% endfor %}
+{% else %}
+<p style="font-size:24px; color:white">None families</p>
+{% endif %}

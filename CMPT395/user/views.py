@@ -7,25 +7,35 @@ from .forms import MyUserCreationForm, EditUserForm
 
 from django.http import HttpResponseRedirect
 
-from django.db.models import Q
+#from django.db.models import Q
 
 from django.db import models
 from . models import MyUser, Family, Volunteer, Child
 
 
-class SearchUserView(generic.ListView):
-    template_name = "search_user.html"
+class SearchFamilyView(generic.ListView):
+    template_name = "search_family.html"
 
     def get_queryset(self):
-        query = self.request.GET.get('query')
-        family_list = Family.objects.all()
-        if(query):
-            family_list = family_list.filter(
-                Q(family_name__icontains=query) |
-                Q(phone__icontains=query) |
-                Q(email__icontains=query)
-                )
-        return family_list
+        return None
+
+    def post(self, request):
+        if request.method == "POST":
+            search_text = request.POST['search_text']
+        else:
+            search_text = ''
+
+        families = Family.objects.filter(family_name__icontains=search_text)
+    
+        #family_list = Family.objects.all()
+
+        #if(search_text):
+            #family_list = family_list.filter(
+                #Q(family_name__icontains=search_text) |
+                #Q(phone__icontains=search_text) |
+                #Q(email__icontains=search_text)
+                #)
+        return render(request, 'ajax_search.html', {'families': families})
 
 class RegistorView(generic.CreateView):
     form_class = MyUserCreationForm
