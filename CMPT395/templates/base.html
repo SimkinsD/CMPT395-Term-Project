@@ -1,68 +1,44 @@
-<!DOCTYPE html>
-<html lang='en'>
-
+<html>
 
 <head>
-  {% block title %}<title>Caraway Scheduler</title>{% endblock %}
-  
-  <!-- Icon Pack -->
+  {% block title %}<title>Caraway Facilitation Scheduler</title>{% endblock title %}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- Additional CSS to be loaded from /static -->
+
   {% load static %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/>
   {% block add_css %}{% endblock add_css %}
 </head>
 
 
 <body>
-  {% block sign_up_form %}
-  {% endblock %}
   <div id="pagewrap">
-    <div id="header">
-      <img id="school-logo" src="http://carawayschool.ca/files/2017/02/Caraway-logo-noSeeds-960x777.png" alt="Caraway School Logo">
+    <section id="main-header" class="header">
+      <div class="left-align header-item">
+        <img id="school-logo-thumb" src="http://carawayschool.ca/files/2017/02/Caraway-logo-noSeeds-960x777.png" alt="Caraway School Logo">
+      </div> <!-- End header item 1 -->
 
-      <div id="site-title">
-        <p>Facilitation Scheduler</p>
-      </div> <!-- End Site Title -->
+      <div class="center-align header-item">
+        <h4>Caraway Facilitation Scheduler</h4>
+      </div> <!-- End header item 2 -->
 
-      <div id="hours-tracker">
-        <ul>
-          {% block weeklyHours %}<li>This Week: 0/5 hours</li>{% endblock %}
-          {% block monthlyHours %}<li>This Month: 0/20 hours</li>{% endblock %}
-        </ul>
-      </div> <!-- End hours-tracker -->
-      <div class="clear"></div> <!-- Expand height to fit content -->
-    </div> <!-- End header -->
+      <div class="right-align header-item">
+        {% block weeklyHours %}<p>This Week: 0/5 hours</p>{% endblock %}
+        {% block monthlyHours %}<p>This Month: 0/20 hours</p>{% endblock %}
+      </div> <!-- End header item 3 -->
+    </section> <!-- End main-header -->
 
-    <div id="main-body">
-      <div id="sidebar">
-        <div id="sidebar-menu">
-          <ul>
-            <li>
-              <a href="{% url 'weeklyCalendar' %}"><i class="fa fa-calendar"></i></a>
-            </li>
-            <li>
-              <a href=""><i class="fa fa-line-chart"></i></a>
-            </li>
-            <li>
-              <a href="{% url 'home' %}"><i class="fa fa-home"></i></a>
-            </li>
-            <li>
-              <a href="{% url 'signupTest' %}"><i class="fa fa-stethoscope"></i></a>
-            </li>
-          </ul>
-        </div> <!-- End sidebar-menu -->
-      </div> <!-- End sidebar -->
+    <section id="main-body" class="body">
+      <section id="main-navbar" class="sidebar">
+        <a class="fa fa-calendar" href="{% url 'weeklyCalendar' %}"></a>
+        <a class="fa fa-home" href="{% url 'home' %}"></a>
+        <a class="fa fa-stethoscope" href="{% url 'signupTest' %}"></a>
+      </section> <!-- End main-navbar -->
 
-
-      <div id="content-body">
-        {% block content %}
-        {% endblock %} <!-- End content block -->
-        <div class="clear"></div> <!-- Expand height to fit content -->
-      </div> <!-- End content-body -->
-      <div class="clear"></div> <!-- Expand height to fit content -->
-    </div> <!-- End main-body -->
-    <div class="clear"></div>
+      <section id="content-body" class="body">
+       {% block content %}
+       {% endblock content %} 
+      </section> <!-- End content-body -->
+    </section> <!-- End main-body -->
   </div> <!-- End pagewrap -->
 </body>
 
