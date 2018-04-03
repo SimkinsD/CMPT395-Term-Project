@@ -3,6 +3,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from .forms import RequestTimeOffForm
 from django.urls import reverse
+from user.models import Volunteer
 
 # Create your views here.
 
@@ -16,6 +17,8 @@ class TimeOffRequestView(TemplateView):
     def post(self, request):
         request_time_off_form = RequestTimeOffForm(request.POST)
         if request_time_off_form.is_valid():
+            request_time_off_form.save(commit=False)
+            request_time_off_form.family = Volunteer.getCurrent(self).family
             request_time_off_form.save()
             return redirect(reverse('weeklyCalendar'))
         
