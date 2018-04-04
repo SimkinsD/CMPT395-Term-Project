@@ -1,18 +1,21 @@
 #home_div a{
-    color: blue;
+  color: blue;
+  text-decoration: none;
 }
 
-#home_div{
+/*#home_div{
     position: relative;
-    background-color:white;
     margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     width: 450px;
     clear: both;
-    border: solid black 1px;
     padding: 25px;
+}*/
+
+#home_div {
+  min-width: 20%;
 }
 
 .home-list {

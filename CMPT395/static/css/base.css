@@ -38,6 +38,7 @@ html {
 
 #content-body {
   position: relative;
+  text-align: center;
 }
 
 .header-item {

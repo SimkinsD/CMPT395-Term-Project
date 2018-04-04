@@ -1,11 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'base-user-task.html' %}
 
 {% block title %}<title>Home</title>{% endblock title %}
 
 {% load static %}
-{% block add_css %}<link rel="stylesheet" type="text/css" href="{% static 'css/user_home.css' %}" />{% endblock add_css %}
+{% block add_css %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/user_home.css' %}" />
+{% endblock add_css %}
 
-{% block content %}
+{% block task-content %}
   <section id="home_div">
     <ul class="home-list">
       {% if user.is_authenticated %}
@@ -22,5 +25,5 @@
       {% endif %}
     </ul>
   </section>
-{% endblock content %}
+{% endblock task-content %}
 
