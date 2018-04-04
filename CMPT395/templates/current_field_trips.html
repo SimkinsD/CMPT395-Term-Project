@@ -6,8 +6,17 @@
 <a href="{% url 'signup_field_trip' %}">Signup for Field Trips</a>
 <div style='width: 90px; margin: 0 auto;'>
     <form method="post">
-        <p1>Field_Trips:{{ view.trips }}</p1>
-
+        {% if trip_list %}
+        <ul>
+            {% for trip in trip_list %}
+            <li>
+                <h1> {{ trip }}</h1>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>No trips scheduled</p>
+        {% endif %}
     </form>
 </div>
 {% endblock content %}

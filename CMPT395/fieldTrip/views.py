@@ -19,13 +19,12 @@ class CreateFieldTrip(CreateView):
 
 
 class CurrentTrip(ListView):
-    model = FieldTripSignup
+    model = FieldTrip
     template_name = 'current_field_trips.html'
+    context_object_name = 'trip_list'
     current = datetime.date.today()
-    all_trips = FieldTripSignup.objects.filter(trip__date__gte=current)
+    queryset = FieldTrip.objects.filter(date__gte=current)
 
-    def __init__(self):
-        self.trips = self.all_trips
 
 
 # Needs work
