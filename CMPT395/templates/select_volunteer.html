@@ -1,23 +1,22 @@
-{% extends "base.html" %}
+{% extends 'base-user-task.html' %}
 
 {% block title %}<title>Select Volunteer</title>{% endblock title %}
 
 {% load static %}
 {% block add_css %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/select_volunteer.css' %}"/>
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/select_volunteer.css' %}"/>
 {% endblock add_css %}
 
-{% block content %}
-  <div class="center-box">
-    <h3>Registered Volunteers:</h3>
-    <em>Click to choose</h3>
-    <form method="post">
-      {% csrf_token %}
-      {% for key, value in name_list.items %}
-        <div class="vol-select-wrap">
-          <button class="vol-select" name="volunteer" type="sumbit" value={{value.1}}>{{value.0}}</button>
-        </div>
-      {% endfor %}
-    </form>
-  </div>
-{% endblock content %}
+{% block task-content %}
+  <h3>Registered Volunteers:</h3>
+  <em>Click to choose</em>
+  <form method="post">
+    {% csrf_token %}
+    {% for key, value in name_list.items %}
+      <div class="vol-select-wrap">
+        <button class="vol-select" name="volunteer" type="sumbit" value={{value.1}}>{{value.0}}</button>
+      </div>
+    {% endfor %}
+  </form>
+{% endblock task-content %}
