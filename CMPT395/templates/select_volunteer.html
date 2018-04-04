@@ -1,16 +1,23 @@
 {% extends "base.html" %}
 
+{% block title %}<title>Select Volunteer</title>{% endblock title %}
+
+{% load static %}
+{% block add_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/select_volunteer.css' %}"/>
+{% endblock add_css %}
+
 {% block content %}
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	<div style='width: 90px; margin: 0 auto;'>
-		<form method="post">
-		{% csrf_token %}
-			{% for key, value in name_list.items %}
-				<button class="w3-button w3-black" name="volunteer" type="sumbit" value={{value.1}}>{{value.0}}</button>
-				
-			{% endfor %}
-			<p1>The Current facilitator is: {{current_person.name}}, hours = {{current_person.hours}}</p1>
-		</form>
-	</div>
+  <div class="center-box">
+    <h3>Registered Volunteers:</h3>
+    <em>Click to choose</h3>
+    <form method="post">
+      {% csrf_token %}
+      {% for key, value in name_list.items %}
+        <div class="vol-select-wrap">
+          <button class="vol-select" name="volunteer" type="sumbit" value={{value.1}}>{{value.0}}</button>
+        </div>
+      {% endfor %}
+    </form>
+  </div>
 {% endblock content %}

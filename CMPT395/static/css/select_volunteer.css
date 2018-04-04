@@ -1,0 +1,21 @@
+.center-box {
+  margin: auto;
+  text-align: center;
+  width: 30%;
+}
+
+.vol-select {
+  width: 100px;
+  padding: 10px;
+  margin: 10px;
+  color: white;
+  background-color: #737373;
+}
+
+.vol-select:hover {
+  background-color: #afafaf;
+}
+
+.vol-select:active {
+  background-color: #555;
+}

@@ -9,8 +9,8 @@ html {
 }
 
 #pagewrap {
-   width: auto;
-   overflow: hidden;
+    min-height: 100%;
+    overflow: hidden;
 }
 
 .header {
@@ -33,7 +33,11 @@ html {
 
 #main-body {
   position: relative;
-  top: 50px; /* HEADER */
+  padding: 50px 0 0 50px;
+}
+
+#content-body {
+  position: relative;
 }
 
 .header-item {
@@ -105,4 +109,8 @@ html {
 
 .body {
     background-color: gray;
+}
+
+.clear {
+  clear: both;
 }

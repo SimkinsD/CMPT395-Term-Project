@@ -22,8 +22,8 @@
       </div> <!-- End header item 2 -->
 
       <div class="right-align header-item">
-        {% block weeklyHours %}<p>This Week: 0/5 hours</p>{% endblock %}
-        {% block monthlyHours %}<p>This Month: 0/20 hours</p>{% endblock %}
+        {% block weeklyHours %}<p>This Week: 0/5 hours</p>{% endblock weeklyHours %}
+        {% block monthlyHours %}<p>This Month: 0/20 hours</p>{% endblock monthlyHours %}
       </div> <!-- End header item 3 -->
     </section> <!-- End main-header -->
 
@@ -36,10 +36,14 @@
 
       <section id="content-body" class="body">
        {% block content %}
-       {% endblock content %} 
+       {% endblock content %}
+       <div class="clear"></div>
       </section> <!-- End content-body -->
+      <div class="clear"></div>
     </section> <!-- End main-body -->
+    <div class="clear"></div>
   </div> <!-- End pagewrap -->
+<div class="clear"></div>
 </body>
 
 </html>
