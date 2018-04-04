@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Signup Field Trip{% endblock %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<h2>Field Trip</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Signup for Field Trip</button>
+</form>
+{% else %}
+<h1>No thing to see here</h1>
+{% endif %}
+{% endblock %}
