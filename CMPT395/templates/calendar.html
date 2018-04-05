@@ -65,6 +65,17 @@
     </form>
   </section>
   
+  {% if success == True %}
+    <section id="signup-success" class="topbar">
+      <h5>Successfuly signed up</h5>
+    </section>
+  {% endif %}
+  {% if success == False %}
+    <section id="signup-failure" class="topbar">
+      <h5>Failed to sign up</h5>
+    </section>
+  {% endif %}
+  
   <!-- Calendars -->
   {% for class in view.CLASSROOMS %}
     <section id="js-{{ class }}-calendar" class="calendar">

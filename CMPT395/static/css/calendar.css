@@ -103,6 +103,14 @@
   padding: 0 5px;
 }
 
+#signup-success {
+  background-color: green;
+}
+
+#signup-failure {
+  background-color: red;
+}
+
 .calendar {
   position: relative;
   top: 0;
