@@ -7,6 +7,16 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 class RequestTimeOffForm(forms.ModelForm):
+    def __init__(self, family = None, **kwargs):
+        super().__init__(**kwargs)
+        self.family = family
+
+    def save(self, commit=True):
+        form_object = super(RequestTimeOffForm, self).save(commit=False)
+        form_object.family = self.family
+        if(commit):
+            form_object.save()
+        return form_object
 
     class Meta:
         model = TimeOffRequest
