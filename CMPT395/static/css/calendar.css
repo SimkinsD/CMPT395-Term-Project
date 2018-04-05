@@ -17,7 +17,7 @@
   transform: translate(-50%, -50%);
   border: 1px solid black;
   border-radius: 4px;
-  box-shadow: 4px 4px 6px #4b4b4b;
+  box-shadow: 4px 4px 6px #111;
   padding: 10px;
   text-align: center;
   background-color: rgba(255, 255, 255, 1);
@@ -39,93 +39,119 @@
     color: red;
 }
 
-/* calendar Styles */
-#calendar {
-    position: relative;
-    text-align: center;
+#sign-up-popup input {
+  margin: 5px;
 }
 
-/* day Styles */
-.day {
-    display: inline-block;
-    /* For Sunday-Saturday
-    min-width: 12%;
-    max-width: 14%;*/
-    /* For Monday-Friday */
-    width: 18%;
-    border: solid black 1px;
-    border-radius: 4px;
-    box-shadow: 4px 4px 6px #222;
-    margin: 0.5%;
-    background-color: #f3f3f3;
-    color: #111;
+#sign-up-popup button {
+  padding: 0 5px;
 }
-
-/* day-title Styles */
-.day-title h3 {
-    margin: 5px;
-}
-
-.day-title h5 {
-    margin: 5px;
-}
-/*
-  End day-title Styles
-  End day Styles
-*/
-
-/* time-slot Styles */
-.time-slot {
-    border-top: solid black 2px;
-}
-
-/* time-slot-title Styles */
-.time-slot-title {
-    display: inline-block;
-    margin: 10px;
-    padding: 5px;
-}
-/*
-  End time-slot-title Styles
-*/
-
-/* time-slot-add Styles */
-.time-slot-add {
-    display: inline-block;
-    color: black;
-    font-size: 20px;
-}
-
-.time-slot-add a {
-    color: black;
-    text-decoration: none;
-}
-
-.time-slot-add:hover {
-    color: green;
-    cursor: pointer;
-}
-/*
-  End time-slot Styles
-  End time-slot-add Styles
-*/
-
-/* day-event Styles */
-.day-event {
-    border-top: dotted gray 1px;
-}
-
-.day-event p {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-/*
-  End day-event Styles
-  End calendar Styles
-*/
-
-.signup-title {
-  padding: 5px;
+  
+.topbar {
+  width: auto;
   margin: 0px;
-  text-decoration: underline;
+  padding: 0px;
+  text-align: center;
+}
+
+.topbar h4 {
+  display: inline;
+}
+
+.topbar i:hover {
+  cursor: pointer;
+}
+
+.topbar form {
+  display: inline;
+  background-color: none;
+}
+
+#js-class-list {
+  background-color: #bbb;
+}
+
+.class-selector {
+  display: inline-block;
+  padding-right: 5px;
+  padding-left: 5px;
+  margin: 0px;
+  color: white;
+}
+
+#class-name-Red {
+  background-color: red;
+}
+
+#class-name-Blue {
+  background-color: blue;
+}
+
+#class-name-Green {
+  background-color: green;
+}
+
+#js-week-select {
+  background-color: #9f9f9f;
+}
+
+#js-week-select i {
+  margin: 0 10px;
+}
+
+#js-week-select button {
+  padding: 0 5px;
+}
+
+#signup-success {
+  background-color: green;
+}
+
+#signup-failure {
+  background-color: red;
+}
+
+.calendar {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  text-align: center;
+}
+
+.day {
+  display: inline-grid;
+  border: solid black 1px;
+  border-radius: 4px;
+  box-shadow: 4px 4px 6px #222;
+  background-color: #f3f3f3;
+  color: #111;
+  margin: 10px;
+}
+
+.day * {
+  padding: 5px 20px;
+}
+
+.day-header {
+  border-bottom: solid black 1px;
+}
+
+.time-slot {
+  border-bottom: solid black 1px;
+}
+
+.time-slot .fa {
+  padding: 0;
+  margin-left: 2px;
+  font-size: 20px;
+}
+
+.time-slot .fa:hover {
+  color: green;
+  cursor: pointer;
+}
+
+.time-slot .event {
+  border-top: dotted black 1px;
 }

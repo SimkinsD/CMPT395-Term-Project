@@ -7,7 +7,7 @@ from . models import MyUser, Family, Child, Volunteer, Signup
 class FamilyInline(admin.TabularInline):
     model = Family
 
-#class VolunteerInline(admin.TabularInline):
+# class VolunteerInline(admin.TabularInline):
 #    model = Volunteer
 
 class ChildInline(admin.TabularInline):
@@ -18,6 +18,7 @@ class MyUserAdmin(UserAdmin):
     add_form = MyUserCreationForm
     inlines = [
         FamilyInline,
+        # VolunteerInline,
     ]
     
 class FamilyAdmin(admin.ModelAdmin):

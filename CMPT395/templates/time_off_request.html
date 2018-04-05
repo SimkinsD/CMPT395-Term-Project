@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Request Time Off Volunteering</title>{% endblock title %}
+
+{% load static %}
+{% block add_css %}<link rel="stylesheet" type="text/css" href="{% static 'css/time_off_request.css' %}" />{% endblock %}
+
+{% block content %}
+
+<div id="main_time_off_div">
+    <h2><u>Request Time Off Form</u></h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ request_time_off_form.as_p }}
+        <button type="submit">Submit Request</button>
+    </form>
+</div>
+
+{% endblock %}

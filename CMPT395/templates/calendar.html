@@ -12,76 +12,101 @@
 {% endblock add_css %}
 
 
+{% load calendar_tags %}
 {% block content %}
-  <section id="calendar">
-    <div id="sign-up-overlay">
-      <div id="sign-up-popup">
-        <div id="sign-up-popup-close">
-          <i class="fa fa-times-circle" onclick="toggle_popup('sign-up-overlay')"></i>
-          <div class="clear"></div>
-        </div>
-        
-        <section id="signup_headers">
-          <h3 id="js-signup-day" class="signup-title">Default</h5>
-          <h5 id="js-signup-date" class="signup-title">Default</h5>
+  <!-- Classroom list -->
+  <section id="js-class-list" class="topbar">
+    {% for class_name in view.CLASSROOMS %}
+      <!--
+        Resulting css class will be class-name-nameofclassroom;
+        i.e. class-name-Red
+      -->
+      <i onclick="switch_calendar('{{ class_name }}')">
+        <section id="class-name-{{ class_name }}" class="class-selector">
+          {{ class_name }}
         </section>
-        
-        <form id="signup_form" method="post">
-          {% csrf_token %}
-          <fieldset>
-            <legend>Sign-up Information:</legend>
-            {{ view.signup_form.as_p }}
-            <input id="js-signup-hidden-date" type="hidden" name="day" value="Default"/>
-            <button type="submit">Submit</button>
-          </fieldset>
-        </form>
-      </div> <!-- End sign-up-form -->
-    </div> <!-- End sign-up-overlay -->
+      </i>
+    {% endfor %}  
+  </section>
 
-
-
-    {% load calendar_tags %}
+  <div id="sign-up-overlay">
+    <div id="sign-up-popup">
+      <div id="sign-up-popup-close">
+        <i class="fa fa-times-circle" onclick="toggle_popup('sign-up-overlay')"></i>
+        <div class="clear"></div>
+      </div>
+      
+      <section id="signup_headers">
+        <h3 id="js-signup-day" class="signup-title">Default</h5>
+        <h5 id="js-signup-date" class="signup-title">Default</h5>
+      </section>
+      
+      <form id="signup_form" method="post">
+        {% csrf_token %}
+        <fieldset>
+          <legend>Sign-up Information:</legend>
+          {{ view.signup_form.as_p }}
+          <input id="js-signup-hidden-date" type="hidden" name="day" value="Default"/>
+          <button type="submit">Submit</button>
+        </fieldset>
+      </form>
+    </div> <!-- End sign-up-form -->
+  </div> <!-- End sign-up-overlay -->
+  
+  <section id="js-week-select" class="topbar">
+    <form id="prev-week-form" method="post">
+      {% csrf_token %}
+      <button class="fa fa-angle-left" type="submit" name="prev-week" value="{% format_date view.date_and_name.0.1 %}"></button>
+    </form>
+    <h4>{{ view.date_and_name.0.1 }} - {{ view.date_and_name.4.1 }}</h4>
+    <form id="prev-week-form" method="post">
+      {% csrf_token %}
+      <button class="fa fa-angle-right" type="submit" name="next-week" value="{% format_date view.date_and_name.4.1 %}"></button>
+    </form>
+  </section>
+  
+  {% if success == True %}
+    <section id="signup-success" class="topbar">
+      <h5>Successfuly signed up</h5>
+    </section>
+  {% endif %}
+  {% if success == False %}
+    <section id="signup-failure" class="topbar">
+      <h5>Failed to sign up</h5>
+    </section>
+  {% endif %}
+  
+  <!-- Calendars -->
+  {% for class in view.CLASSROOMS %}
+    <section id="js-{{ class }}-calendar" class="calendar">
     {% for day in view.date_and_name %}
       <section class="day">
-        <section class="day-title">
-          <h3>{{ day.0 }}</h3> <!-- (Day: Sunday, Monday, ..., Saturday) -->
-          <h5>{{ day.1 }}</h5> <!-- (Date: e.g. Jan. 19, 2018) -->
-        </section> <!-- End day-title -->
-
-        <section class="day-schedule">
-          {% for slot in view.TIME_SLOTS %}
-          <div class="time-slot">
-            <div class="time-slot-header">
-              <!-- e.g. Morning [8:45 - 11:00] -->
-              <h4 class="time-slot-title">{{slot.title}} [{% format_time slot.start %} - {% format_time slot.end %}]</h4>
-
-              <div class="time-slot-add">
-                <i class="fa fa-plus-circle" onclick="toggle_signup('{{ day.0 }}', '{{ day.1 }}', '{% format_time slot.start %}', '{% format_time slot.end %}', '{% format_date day.1 %}')"></i>
-              </div> <!-- End time slot add -->
-
-              <div class="clear"></div> <!-- Expand height to fit content -->
-            </div> <!-- End time slot header -->
-
-            <!-- Example sign-ups -->
-            {% for signup in view.signup_objects %}
-              {% format_date day.1 as formatted_day %}
-              {% if signup.day == formatted_day and signup.startTime >= slot.start and signup.endTime <= slot.end %}
-                <div class="day-event">
-                  <p class="signup-info">{{ signup.classroom }}</p>
-                  <p class="signup-info">{% format_time signup.startTime %} - {% format_time signup.endTime %}</p>
-                </div>
-              {% endif %}
-            {% endfor %}
-            <!-- End Example sign-ups -->
-          </div> <!-- End Morning Time Slot -->
-          {% endfor %}
-        </section> <!-- End day-schedule -->
+        <section class="day-header">
+          <h3>{{ day.0 }}</h3>
+          <h3>{{ day.1 }}</h3>
+        </section>
+        {% for slot in view.TIME_SLOTS %}
+          <section class="time-slot">
+           <h3>{{ slot.title }} <span class="fa fa-plus-circle" onclick="toggle_signup('{{ day.0 }}', '{{ day.1 }}', '{% format_time slot.start %}', '{% format_time slot.end %}', '{% format_date day.1 %}')"></span></h3>
+           <h4>{{ slot.start }} - {{ slot.end }}</h4>
+             {% for signup in view.signup_objects %}
+               {% if signup.classroom == class %}
+                 {% if signup.date == day.1 %}
+                   {% if signup.start_time >= slot.start and signup.end_time <= slot.end %}
+                     <section class="event">
+                       <p class="signup-info">{{ signup.volunteer }}</p>
+                       <p class="signup-info">{% format_time signup.start_time %} - {% format_time signup.end_time %}</p>
+                     </section><!-- End event -->
+                   {% endif %}
+                 {% endif %}
+               {% endif %}
+             {% endfor %}
+          </section> <!-- End time-slot -->
+        {% endfor %}
       </section> <!-- End day -->
-
+    {% endfor %}
+    </section> <!-- End calendar -->
     {% empty %}
       <h3>List Empty</h3>
-
-    {% endfor %}
-    <div class="clear"></div> <!-- Extend height to fit content -->
-  </section> <!-- End calendar -->
+  {% endfor %}
 {% endblock content %}

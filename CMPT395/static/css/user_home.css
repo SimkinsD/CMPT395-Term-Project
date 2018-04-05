@@ -1,14 +1,28 @@
 #home_div a{
-    color: blue;
-    text-align: center;
-    
+  color: blue;
+  text-decoration: none;
 }
-#home_div{
-    background-color:white;
-    padding: 1em;
-    margin-top: 5%;
-    margin-left: 35%;
-    margin-right: 35%;
+
+/*#home_div{
+    position: relative;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
-    justify-content: center;
+    width: 450px;
+    clear: both;
+    padding: 25px;
+}*/
+
+#home_div {
+  min-width: 20%;
+}
+
+.home-list {
+  list-style: none;
+}
+
+.home-list li {
+  padding: 5px;
+  border-bottom: solid black 1px;
 }

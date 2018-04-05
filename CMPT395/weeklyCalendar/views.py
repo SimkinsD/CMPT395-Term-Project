@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from .forms import SignUpForm
 from user.models import Signup as SignUp
+from user.models import Family, Volunteer
 
 import calendar
 import datetime as dt
@@ -11,8 +12,7 @@ class WeeklyCalendarView(TemplateView):
   # Djagno variables
   template_name = "calendar.html"
   signup_form = SignUpForm
-  signup_model = SignUp
-  signup_objects = signup_model.objects.all()
+  signup_objects = SignUp.objects.all()
   
   class TimeSlot:
     def __init__(self, init_title, init_start, init_end):
@@ -23,6 +23,7 @@ class WeeklyCalendarView(TemplateView):
   # End TimeSlot  
   
   # Constants
+  CLASSROOMS = ["Red", "Blue", "Green"]
   WEEK_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday"
                , "Thursday", "Friday", "Saturday"]
   TIME_SLOTS = [TimeSlot("Morning", dt.time(8, 45), dt.time(12)),
@@ -31,32 +32,48 @@ class WeeklyCalendarView(TemplateView):
   
   
   def __init__(self):
-    self.date_and_name = self.pair_date_name(self.WEEK_DAYS, self.get_week())
-    self.date_and_name = self.date_and_name[1:-1] # Trim week to Monday-Friday
-
+    self.current_date = dt.datetime.now()
+    self.date_and_name = self.pair_date_name(self.WEEK_DAYS, self.get_week(self.current_date))
+    self.signup_objects = SignUp.objects.all()
+  
   def post(self, request, *args, **kwargs):
-    form = self.signup_form(request.POST)
-    if form.is_valid():
-      su = form.save(commit="false")
-      # Automated fields go here
-      su.date = request.POST.get("day", default="DEFAULT")
-      su.save()
+    if 'prev-week' in request.POST:
+      date_raw = request.POST.get("prev-week").split('-')
+      date = dt.date(int(date_raw[0]), int(date_raw[1]), int(date_raw[2])) - dt.timedelta(7)
+      self.date_and_name = self.pair_date_name(self.WEEK_DAYS, self.get_week(date))
+    
+    elif 'next-week' in request.POST:
+      date_raw = request.POST.get("next-week").split('-')
+      date = dt.date(int(date_raw[0]), int(date_raw[1]), int(date_raw[2])) + dt.timedelta(7)
+      self.date_and_name = self.pair_date_name(self.WEEK_DAYS, self.get_week(date))
+
+    else:
+      form = self.signup_form(request.POST)
+      if form.is_valid():
+        su = form.save(commit="false")
+        # Automated fields go here
+        su.date = request.POST.get("day", default="DEFAULT")
+        su.volunteer = Volunteer.getCurrent(self)
+        su.save()
+        self.signup_objects = SignUp.objects.all()
+        return render(request, self.template_name, {'view' : self, 'success' : True})
+      else:
+        return render(request, self.template_name, {'view' : self, 'success' : False})
     return render(request, self.template_name, {'view' : self})
 
-  def get_week(self):
-    """ Returns the current week represented by datetime objects
+  def get_week(self, date):
+    """ Returns the week of date represented by datetime objects
         Pre: None
         Post: None
         Parameters: None
         Return: List of 7 datetime objects representing the current week
     """
-    date = dt.datetime.now()
     # Get this month's calendar with the first day of the week as Sunday
     #   hence calendar.Calendar(6)
     month = calendar.Calendar(6).monthdatescalendar(date.year, date.month)
     for week in month:
       for day in week:
-        if date.day == day.day:
+        if date.day == day.day and date.month == day.month:
           return week
 
   def pair_date_name(self, week_days, dates):
@@ -75,7 +92,7 @@ class WeeklyCalendarView(TemplateView):
     day_name = []
     for i in range(len(dates)):
       day_name.append((week_days[i], dates[i]))
-    return day_name
+    return day_name[1:-1] # Work week [Monday - Friday]
 
 class SignupView(TemplateView):
   template_name = "signups.html"
