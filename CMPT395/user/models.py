@@ -62,6 +62,10 @@ class Volunteer(models.Model):
     phone = models.IntegerField(blank=True, null=True)
     email = models.CharField(max_length=40, blank=True)
 
+    def getCurrent(view):
+        family = Family.objects.get(user=view.request.user)
+        return Volunteer.objects.get(volunteerID=family.current_volunteer)
+
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
 
