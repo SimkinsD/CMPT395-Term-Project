@@ -26,7 +26,7 @@ values ('Teacher', 'email@email.com', 1),
 insert into 395db.user_volunteer (first_name, last_name, email, family_id)
 values ('Tom', 'Smith', 'email@email.com', 2),
 ('Jack', 'Jones', 'email@email.com', 3),
-('Donald', 'Smith', 'email@email.com', 4),
+('Donald', 'Trump', 'email@email.com', 4),
 ('John', 'Doe', 'email@email.com', 5),
 ('Dianna', 'Black', 'email@email.com', 5),
 ('Tina', 'Smith', 'email@email.com', 6),
