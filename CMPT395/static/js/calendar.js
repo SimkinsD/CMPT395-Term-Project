@@ -1,4 +1,5 @@
 window.onload = function() {
+  // Change calendars from being stacked to being on top of one another
   var calendars = document.getElementsByClassName("calendar");
   var total_height = 0;
   var max_height = 0;
@@ -10,10 +11,15 @@ window.onload = function() {
     }
     calendars[i].style.visibility = "hidden";
   }
+  
+  // Change height of pagewrap to accomodate for calendars no longer being
+  // stacked
   var header_height = document.getElementById("main-header").clientHeight;
   var pagewrap = document.getElementById("pagewrap");
   var pagewrap_height = pagewrap.clientHeight;
   pagewrap.style.height = (pagewrap_height - total_height) + (max_height + header_height)  + "px";
+  
+  switch_calendar("Red");
 }
 
 function toggle_popup(elemId) {
