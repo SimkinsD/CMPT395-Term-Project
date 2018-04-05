@@ -17,6 +17,8 @@ class TimeOffRequestView(TemplateView):
     def post(self, request):
         request_time_off_form = RequestTimeOffForm(data = request.POST, family = Volunteer.getCurrent(self).family)
         if request_time_off_form.is_valid():
+            # request_time_off_form.save(commit=False)
+            # request_time_off_form.family = Volunteer.getCurrent(self).family
             request_time_off_form.save()
             return redirect(reverse('weeklyCalendar'))
         
