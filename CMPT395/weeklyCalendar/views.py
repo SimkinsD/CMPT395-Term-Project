@@ -52,6 +52,7 @@ class WeeklyCalendarView(TemplateView):
       if form.is_valid():
         su = form.save(commit="false")
         # Automated fields go here
+        su.classroom = request.POST.get("classroom")
         su.date = request.POST.get("day", default="DEFAULT")
         su.volunteer = Volunteer.getCurrent(self)
         su.save()

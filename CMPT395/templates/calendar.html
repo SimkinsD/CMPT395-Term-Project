@@ -46,6 +46,7 @@
         <fieldset>
           <legend>Sign-up Information:</legend>
           {{ view.signup_form.as_p }}
+	  <input id="id_classroom" type="hidden" name="classroom"/>
           <input id="js-signup-hidden-date" type="hidden" name="day" value="Default"/>
           <button type="submit">Submit</button>
         </fieldset>
