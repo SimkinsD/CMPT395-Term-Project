@@ -55,7 +55,10 @@ class WeeklyCalendarView(TemplateView):
         su.date = request.POST.get("day", default="DEFAULT")
         su.volunteer = Volunteer.getCurrent(self)
         su.save()
-      self.signup_objects = SignUp.objects.all()
+        self.signup_objects = SignUp.objects.all()
+        return render(request, self.template_name, {'view' : self, 'success' : True})
+      else:
+        return render(request, self.template_name, {'view' : self, 'success' : False})
     return render(request, self.template_name, {'view' : self})
 
   def get_week(self, date):
