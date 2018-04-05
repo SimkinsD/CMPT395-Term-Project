@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Field Trip{% endblock %}
+
+{% block content %}
+{% if request.user.is_superuser %}
+<h2>Field Trip</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create Field Trip</button>
+</form>
+{% else %}
+<h1>Nothing to see here</h1>
+{% endif %}
+{% endblock %}

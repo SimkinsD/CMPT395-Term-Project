@@ -25,4 +25,5 @@ urlpatterns = [
     path('calendar/', include('weeklyCalendar.urls')),
     path('stats/', include('stats.urls')),
     path('request_time_off/', include('TimeOffRequests.urls')),
+    path('field_trip/', include('fieldTrip.urls'))
 ]

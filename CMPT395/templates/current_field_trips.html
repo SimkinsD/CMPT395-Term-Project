@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<a href="{% url 'signup_field_trip' %}">Signup for Field Trips</a>
+<div style='width: 90px; margin: 0 auto;'>
+    <form method="post">
+        {% if trip_list %}
+        <ul>
+            {% for trip in trip_list %}
+            <li>
+                <h1> {{ trip }}</h1>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>No trips scheduled</p>
+        {% endif %}
+    </form>
+</div>
+{% endblock content %}
