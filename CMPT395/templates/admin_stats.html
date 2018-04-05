@@ -1,13 +1,19 @@
-{% extends "base.html" %}
+{% extends 'base-user-task.html' %}
 
-{% block content %}
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<a href="{% url 'export_csv' %}">Export all families</a>
-<div style='width: 90px; margin: 0 auto;'>
-    <form method="post">
-        <p1>Admin:{{ view.admin_stats }}</p1>
+{% block title %}<title>Admin Stats</title>{% endblock %}
 
-    </form>
-</div>
-{% endblock content %}
+{% block task-content %}
+  {% if request.user.is_superuser %}
+<h2>Admin Stats</h2>
+    <a href="{% url 'export_csv' %}">Export all families</a>
+    <ul>
+        {% for stat in view.admin_stats %}
+        <li>
+            {{ stat }}
+        </li>
+        {% endfor %}
+    </ul>
+  {% else %}
+<h1>Nothing to see here</h1>
+  {% endif %}
+{% endblock task-content %}

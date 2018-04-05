@@ -11,10 +11,10 @@ class FamilyStats(generic.ListView):
 
 
     def __init__(self):
-        self.week_total = self.week_hours(datetime.date.today(), Family.objects.get(user=5))#self.request.user))
-        self.month_total = self.month_hours(datetime.date.today(), Family.objects.get(user=5))#self.request.user))
-        self.required_hours = self.required_hours(Family.objects.get(user=5))#self.request.user))
-        self.current_signups = self.current_signups(Family.objects.get(user=5))
+        self.week_total = self.week_hours(datetime.date.today(), Family.objects.get(user=1))#self.request.user))
+        self.month_total = self.month_hours(datetime.date.today(), Family.objects.get(user=1))#self.request.user))
+        self.required_hours = self.required_hours(Family.objects.get(user=1))#self.request.user))
+        self.current_signups = self.current_signups(Family.objects.get(user=1))
 
 
 

@@ -1,22 +1,15 @@
-{% extends "base.html" %}
+{% extends 'base-user-task.html' %}
 
-{% block content %}
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+{% block title %}<title>Field Trips</title>{% endblock %}
+
+{% block task-content %}
+<h2>Current Field Trips</h2>
 <a href="{% url 'signup_field_trip' %}">Signup for Field Trips</a>
-<div style='width: 90px; margin: 0 auto;'>
-    <form method="post">
-        {% if trip_list %}
-        <ul>
-            {% for trip in trip_list %}
-            <li>
-                <h1> {{ trip }}</h1>
-            </li>
-            {% endfor %}
-        </ul>
-        {% else %}
-            <p>No trips scheduled</p>
-        {% endif %}
-    </form>
-</div>
-{% endblock content %}
+<ul>
+    {% for trip in trip_list %}
+    <li>
+        {{ trip }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock task-content %}
