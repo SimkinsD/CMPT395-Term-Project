@@ -23,6 +23,7 @@ class WeeklyCalendarView(TemplateView):
   # End TimeSlot  
   
   # Constants
+  CLASSROOMS = ["Red", "Blue", "Green"]
   WEEK_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday"
                , "Thursday", "Friday", "Saturday"]
   TIME_SLOTS = [TimeSlot("Morning", dt.time(8, 45), dt.time(12)),
@@ -34,7 +35,7 @@ class WeeklyCalendarView(TemplateView):
     self.date_and_name = self.pair_date_name(self.WEEK_DAYS, self.get_week())
     self.date_and_name = self.date_and_name[1:-1] # Trim week to Monday-Friday
     self.signup_objects = SignUp.objects.all()
-
+  
   def post(self, request, *args, **kwargs):
     form = self.signup_form(request.POST)
     if form.is_valid():
