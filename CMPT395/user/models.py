@@ -9,23 +9,6 @@ class MyUserManager(UserManager):
 class MyUser(AbstractUser):
     objects = MyUserManager()
 
-#class Teacher(MyUser):
-#    objects = MyUserManager()
-#    class Meta:
-#        verbose_name = 'Teacher'
-#        verbose_name_plural = 'Teachers'
-
-#class Person(models.Model):
-#    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
-#    name = models.CharField(max_length=32)
-#    hours = models.FloatField(default=5.0)
-    
-#    def __str__(self):
-#        return self.name
-
-#class Children(models.Model):
-#    name = models.CharField(max_length=30)
-#    class_room = models.CharField(max_length=30)
 
 ''' 
 This class extends Django's existing User info using MyUser
@@ -35,11 +18,11 @@ class Family(models.Model):
     familyID = models.AutoField(primary_key=True)
     family_name = models.CharField(max_length=50)
     phone = models.IntegerField(blank=True, null=True)
-    email = models.CharField(max_length=40, blank=True)
+    email = models.CharField(max_length=40, blank=True, null=True)
     current_volunteer = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
-        return self.family_name
+        return "%s %s" % (self.user, self.family_name)
 
 
 
@@ -60,7 +43,7 @@ class Volunteer(models.Model):
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25)
     phone = models.IntegerField(blank=True, null=True)
-    email = models.CharField(max_length=40, blank=True)
+    email = models.CharField(max_length=40, blank=True, null=True)
 
 
     def getCurrent(view):
@@ -81,6 +64,6 @@ class Signup(models.Model):
     volunteer = models.ForeignKey(Volunteer, blank=True, null=True, on_delete= models.CASCADE)
 
     def __str__(self):
-        return (str(self.date) + " " + str(self.start_time) + " ID: " + str(self.signupID))
+        return ("Date: " + str(self.date) + " Start: " + str(self.start_time) + " End: " + str(self.end_time) + " Volunteer: " + str(self.volunteer))
 
     

@@ -4,14 +4,14 @@ from . models import MyUser
 from . models import Volunteer
 
 class MyUserCreationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
+    email = forms.EmailField(required=False)
     class Meta(UserCreationForm.Meta):
         model = MyUser
-        fields = ['username', 'email']
+        fields = ['username', 'is_superuser', 'email']
 
 class EditUserForm(forms.ModelForm):
     last_name = forms.CharField(max_length=50)
     email = forms.EmailField(required=False)
     class Meta(UserChangeForm.Meta):
         model = MyUser
-        fields = ['last_name', 'email']   
+        fields = ['username', 'is_superuser', 'email']   

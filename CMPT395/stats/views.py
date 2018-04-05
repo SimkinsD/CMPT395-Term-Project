@@ -10,8 +10,8 @@ class FamilyStats(generic.ListView):
     model = Signup
 
     def get(self, request, *args, **kwargs):
-        self.week_total = self.week_hours(datetime.date.today(), Family.objects.get(user=self.request.user))
-        self.month_total = self.month_hours(datetime.date.today(), Family.objects.get(user=self.request.user))
+        self.week_total = (self.week_hours(datetime.date.today(), Family.objects.get(user=self.request.user))).total_seconds() //3600
+        self.month_total = (self.month_hours(datetime.date.today(), Family.objects.get(user=self.request.user))).total_seconds() // 3600
         self.required_hours = self.required_hours(Family.objects.get(user=self.request.user))
         self.current_signups = self.current_signups(Family.objects.get(user=self.request.user))
         return render(request, self.template_name, {'view':self})
@@ -223,7 +223,7 @@ class AdminStats(generic.ListView):
         signup_query = Signup.objects.filter(volunteer__family__familyID = requested_family.familyID, 
                                         date__year=requested_month.year)
         hours = self.total_hours(signup_query)
-        required = (self.required_hours(requested_family) * 48)
+        required = (self.required_hours(requested_family) * 40)
         family_stats['year_total'] = (self.total_hours(signup_query) - datetime.timedelta(hours=required))
 
         return family_stats
