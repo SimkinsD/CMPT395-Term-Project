@@ -240,7 +240,7 @@ class AdminStats(generic.ListView):
         all_stats = []
         families = Family.objects.all()
         for fam in families:
-            all_stats.append(self.single_family_stats(requested_month, fam))
+            all_stats.append(readable_format(self.single_family_stats(requested_month, fam)))
         return all_stats
 
 
