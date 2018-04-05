@@ -39,16 +39,28 @@
     color: red;
 }
 
-#js-class-list {
+.topbar {
   width: auto;
   margin: 0px;
   padding: 0px;
-  background-color: gray;
   text-align: center;
 }
 
-#js-class-list i:hover {
+.topbar h4 {
+  display: inline;
+}
+
+.topbar i:hover {
   cursor: pointer;
+}
+
+.topbar form {
+  display: inline;
+  background-color: none;
+}
+
+#js-class-list {
+  background-color: #bbb;
 }
 
 .class-selector {
@@ -69,6 +81,18 @@
 
 #class-name-Green {
   background-color: green;
+}
+
+#js-week-select {
+  background-color: #9f9f9f;
+}
+
+#js-week-select i {
+  margin: 0 10px;
+}
+
+#js-week-select button {
+  padding: 0 5px;
 }
 
 .calendar {

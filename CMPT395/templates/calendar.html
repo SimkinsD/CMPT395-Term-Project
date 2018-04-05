@@ -12,9 +12,10 @@
 {% endblock add_css %}
 
 
+{% load calendar_tags %}
 {% block content %}
   <!-- Classroom list -->
-  <section id="js-class-list">
+  <section id="js-class-list" class="topbar">
     {% for class_name in view.CLASSROOMS %}
       <!--
         Resulting css class will be class-name-nameofclassroom;
@@ -52,8 +53,19 @@
     </div> <!-- End sign-up-form -->
   </div> <!-- End sign-up-overlay -->
   
-  <!-- Calendar -->
-  {% load calendar_tags %}
+  <section id="js-week-select" class="topbar">
+    <form id="prev-week-form" method="post">
+      {% csrf_token %}
+      <button class="fa fa-angle-left" type="submit" name="prev-week" value="{% format_date view.date_and_name.0.1 %}"></button>
+    </form>
+    <h4>{{ view.date_and_name.0.1 }} - {{ view.date_and_name.4.1 }}</h4>
+    <form id="prev-week-form" method="post">
+      {% csrf_token %}
+      <button class="fa fa-angle-right" type="submit" name="next-week" value="{% format_date view.date_and_name.4.1 %}"></button>
+    </form>
+  </section>
+  
+  <!-- Calendars -->
   {% for class in view.CLASSROOMS %}
     <section id="js-{{ class }}-calendar" class="calendar">
     {% for day in view.date_and_name %}
