@@ -10,11 +10,11 @@ class FamilyStats(generic.ListView):
     model = Signup
 
 
-    def __init__(self):
-        self.week_total = self.week_hours(datetime.date.today(), Family.objects.get(user=5))#self.request.user))
-        self.month_total = self.month_hours(datetime.date.today(), Family.objects.get(user=5))#self.request.user))
-        self.required_hours = self.required_hours(Family.objects.get(user=5))#self.request.user))
-        self.current_signups = self.current_signups(Family.objects.get(user=5))
+    # def __init__(self):
+    #     self.week_total = None#self.week_hours(datetime.date.today(), Family.objects.get(user=5))#self.request.user))
+    #     self.month_total = None#self.month_hours(datetime.date.today(), Family.objects.get(user=5))#self.request.user))
+    #     self.required_hours = None#self.required_hours(Family.objects.get(user=5))#self.request.user))
+    #     self.current_signups = None#self.current_signups(Family.objects.get(user=5))
 
 
 
@@ -27,6 +27,14 @@ class FamilyStats(generic.ListView):
             requested_family: is the family that you want the weekly hours for.
                 It must be a single Family object (from user.models) 
     """
+
+    def get(self, request, *args, **kwargs):
+        self.week_total = self.week_hours(datetime.date.today(), Family.objects.get(user=self.request.user))
+        self.month_total = self.month_hours(datetime.date.today(), Family.objects.get(user=self.request.user))
+        self.required_hours = self.required_hours(Family.objects.get(user=self.request.user))
+        self.current_signups = self.current_signups(Family.objects.get(user=self.request.user))
+        return render(request, self.template_name, {'view':self})
+
     def week_hours(self, requested_week, requested_family):
         week = requested_week
         offset = week.weekday()
