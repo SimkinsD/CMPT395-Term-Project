@@ -17,7 +17,7 @@
   transform: translate(-50%, -50%);
   border: 1px solid black;
   border-radius: 4px;
-  box-shadow: 4px 4px 6px #4b4b4b;
+  box-shadow: 4px 4px 6px #111;
   padding: 10px;
   text-align: center;
   background-color: rgba(255, 255, 255, 1);
@@ -37,6 +37,14 @@
 #sign-up-popup i:hover {
     cursor: pointer;
     color: red;
+}
+
+#sign-up-popup input {
+  margin: 5px;
+}
+
+#sign-up-popup button {
+  padding: 0 5px;
 }
 
 #js-class-list {
