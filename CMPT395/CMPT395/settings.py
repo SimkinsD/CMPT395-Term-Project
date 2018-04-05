@@ -82,13 +82,13 @@ WSGI_APPLICATION = 'CMPT395.wsgi.application'
 DATABASES = {
     'default': {
 	#Use for Sqlite database
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 	#Use for MySQL database
-	'ENGINE': 'mysql.connector.django',
-	'NAME': '395db',
-	'USER': 'root',
-	'PASSWORD': 'toor',
+	#'ENGINE': 'mysql.connector.django',
+	#'NAME': '395db',
+	#'USER': 'root',
+	#'PASSWORD': 'toor',
     }
 }
 
