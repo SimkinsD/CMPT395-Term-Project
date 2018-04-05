@@ -61,7 +61,8 @@ class Volunteer(models.Model):
     last_name = models.CharField(max_length=25)
     phone = models.IntegerField(blank=True, null=True)
     email = models.CharField(max_length=40, blank=True)
-    
+
+
     def getCurrent(view):
         family = Family.objects.get(user=view.request.user)
         return Volunteer.objects.get(volunteerID=family.current_volunteer)
@@ -80,6 +81,6 @@ class Signup(models.Model):
     volunteer = models.ForeignKey(Volunteer, blank=True, null=True, on_delete= models.CASCADE)
 
     def __str__(self):
-        return (self.date + " " + self.start_time + " ID: " + self.signupID)
+        return (str(self.date) + " " + str(self.start_time) + " ID: " + str(self.signupID))
 
     

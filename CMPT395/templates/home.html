@@ -1,36 +1,30 @@
-{% extends 'base.html' %}
+{% extends 'base-user-task.html' %}
 
-{% block title %}<title>Home</title>{% endblock %}
+{% block title %}<title>Home</title>{% endblock title %}
 
 {% load static %}
-{% block add_css %}<link rel="stylesheet" type="text/css" href="{% static 'css/user_home.css' %}" />{% endblock %}
+{% block add_css %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/user_home.css' %}" />
+{% endblock add_css %}
 
-{% block content %}
-<div id="home_div">
-  {% if user.is_authenticated %}
-    <p><a href="{% url 'logout' %}">Logout</a></p>
-    <hr>
-    <a href="{% url 'view_family' %}">Change Volunteer</a> 
-    <hr>
-    <p><a href="{% url 'create_field_trip' %}">Create Field Trip</a></p>
-    <hr>
-    <p><a href="{% url 'view_field_trip' %}">View Field Trip</a></p>
-    <hr>
-    <a href="{% url 'password_change' %}">
-      Change password
-    </a>
-    <hr>
-    <a href="{% url 'weeklyCalendar' %}">Calendar</a>
-  {% else %}
-    <a href="{% url 'login' %}">Log in</a>
-  {% endif %}
-  {% if request.user.is_superuser %}
-      <hr>
-      <a href="{% url 'registor' %}">Register New Account</a>
-      <hr>
-      <a href="{% url 'person' %}">Add New Person</a>
-  {% else %}
-  {% endif %}
-</div>
-{% endblock %}
+
+{% block task-content %}
+  <section id="home_div">
+    <ul class="home-list">
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        <li><a href="{% url 'view_family' %}">Change Volunteer</a></li>
+        <li><a href="{% url 'password_change' %}">Change password</a></li>
+        <li><a href="{% url 'weeklyCalendar' %}">Calendar</a></li>
+      {% else %}
+        <li><a href="{% url 'login' %}">Log in</a></li>
+      {% endif %}
+      {% if request.user.is_superuser %}
+        <li><a href="{% url 'registor' %}">Register New Account</a></li>
+        <li><a href="{% url 'person' %}">Add New Person</a></li>
+      {% endif %}
+    </ul>
+  </section>
+{% endblock task-content %}
 

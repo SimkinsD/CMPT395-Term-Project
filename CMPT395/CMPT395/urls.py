@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('user.urls')),
     path('', include('django.contrib.auth.urls')),
     path('calendar/', include('weeklyCalendar.urls')),
+    path('stats/', include('stats.urls')),
     path('request_time_off/', include('TimeOffRequests.urls')),
     path('field_trip/', include('fieldTrip.urls'))
 ]

@@ -1,142 +1,117 @@
-html {
-    height: 100%;
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+html {
+    background-color: gray;
 }
 
 #pagewrap {
-    height: 100%;
-}
-
-/* main-body Styles */
-#main-body {
-    height: 100%;
-    display: block;
-    background-color: #555;
-}
-
-/* sidebar Styles */
-#sidebar {
-    width: 50px;
-    height: 100%;
-    position: relative;
-    text-align: center;
-    background-color: #333;
-    color: white;
-    float: left;
-}
-
-/* sidebar-menu Styles */
-#sidebar-menu ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-#sidebar-menu li {
-    display: block;
-    text-align: center;
-}
-
-#sidebar-menu li a {
-    color: white;
-    text-decoration: none;
-    display: block;
-    height: 40px;
-    width: 40px;
-    padding: 5px;
-}
-
-#sidebar-menu li a i {
-    font-size: 35px;
-}
-
-#sidebar-menu li a:hover {
-    color: black;
-    background-color: #ddd;
-}
-/*
-  End sidebar-menu Styles
-  End sidebar Styles
-*/
-
-#school-logo {
-    width: 65px;
-    height: 50px;
-    float: left;
-    padding: 5px;
-}
-
-#site-title {
-    padding: 5px;
-    float: left;
-}
-/*
-  End content-body Styles
-  End main-body Styles
-*/
-
-
-/* header Styles */
-#header {
-    height: 60px;
-    width: 100%;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background-color: white;
+    min-height: 100%;
     overflow: hidden;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: solid black 1px;
+    height: 50px;
+    background-color: rgb(168, 167, 167);
+}
+
+#main-header {
+    display: grid;
+    background-color: white;
+    grid-template-columns: 30% auto 30%;
+    grid-template-rows: 50px;
+    z-index: 50;
+}
+
+#main-body {
+  position: relative;
+  padding: 50px 0 0 50px;
 }
 
 #content-body {
-    top: 10px;
-    margin-left: 50px;
-    overflow: hidden;
+  position: relative;
+  text-align: center;
 }
 
-#hours-tracker {
-    height: 50px;
-    text-align: center;
-    float: right;
+.header-item {
+    margin: 0 5px;
+    vertical-align: middle;
 }
 
-#hours-tracker ul {
-    list-style: none;
-    text-align: center;
-    width: auto;
-    padding: 0px;
+.header-item h4 {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-#hours-tracker li {
+#school-logo-thumb {
     display: inline-block;
-    padding: 10px;
-}
-/*
-  End hours-tracker Styles
-  End header Styles
-*/
-
-
-/* Misc Tiny Classes */
-.right {
-    float: right;
+    height: 50px;
+    width: 65px;
+    padding: 5px;
 }
 
-.inline {
-    display: inline;
+#main-navbar {
+    background-color: #333;
+    color: white;
+}
+
+#main-navbar a {
+    text-align: center;
+    font-size: 40px;
+    padding: 5px;
+    text-decoration: none;
+    display: block;
+}
+
+#main-navbar a:link {
+    color: white;
+}
+
+#main-navbar a:visited {
+    color: white;
+}
+
+#main-navbar a:hover {
+    color: rgb(0, 0, 0);
+    background-color: #ddd;
+}
+
+.left-align {
+    text-align: left;
+}
+
+.center-align {
+    text-align: center;
+}
+
+.right-align {
+    text-align: right;
+}
+
+.sidebar {
+    position: fixed;
+    top: 50px;
+    left: 0px;
+    width: 50px;
+    border-right: solid black 1px;
+    height: 100%;
+    background-color: lightgray;
+    z-index: 45;
+}
+
+.body {
+    background-color: gray;
 }
 
 .clear {
-    clear: both;
-}
-/*
-  End Misc Tiny Classes
-*/
+  clear: both;
 }

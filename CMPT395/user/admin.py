@@ -1,16 +1,14 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+
 from . forms import MyUserCreationForm
 from . models import MyUser, Family, Child, Volunteer, Signup
 
 class FamilyInline(admin.TabularInline):
     model = Family
-    fields = ("family_name", 'phone', 'email')
-    fk_name = 'user'
 
-class VolunteerInline(admin.TabularInline):
-    model = Volunteer
-
+# class VolunteerInline(admin.TabularInline):
+#    model = Volunteer
 
 class ChildInline(admin.TabularInline):
     model = Child
@@ -20,13 +18,13 @@ class MyUserAdmin(UserAdmin):
     add_form = MyUserCreationForm
     inlines = [
         FamilyInline,
-        #VolunteerInline,
+        # VolunteerInline,
     ]
     
 class FamilyAdmin(admin.ModelAdmin):
   list_display = ('user', 'familyID', 'family_name')
   inlines = [
-      VolunteerInline,
+      #VolunteerInline,
       ChildInline,
   ]
 
