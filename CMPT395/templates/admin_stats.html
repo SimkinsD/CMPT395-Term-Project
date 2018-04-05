@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<a href="{% url 'export_csv' %}">Export all families</a>
+<div style='width: 90px; margin: 0 auto;'>
+    <form method="post">
+        <p1>Admin:{{ view.admin_stats }}</p1>
+
+    </form>
+</div>
+{% endblock content %}
