@@ -11,7 +11,7 @@ values ('pbkdf2_sha256$100000$fkQ5BjtLLXBu$YuIg3NypmH5KUISO30IHMHDM6dRVU4qNHL0n7
 ('pbkdf2_sha256$100000$fkQ5BjtLLXBu$YuIg3NypmH5KUISO30IHMHDM6dRVU4qNHL0n72hEBhs=', 0, 'linden1', 'first', 'last', 'email@email.com', 0, 1, '2018-03-25 19:50:40.005625'),
 ('pbkdf2_sha256$100000$fkQ5BjtLLXBu$YuIg3NypmH5KUISO30IHMHDM6dRVU4qNHL0n72hEBhs=', 0, 'crosby1', 'first', 'last', 'email@email.com', 0, 1, '2018-03-25 19:50:40.005625');
 
-insert into 395db.user_family (familyID, family_name, email, user_id)
+insert into 395db.user_family (family_name, email, user_id)
 values ('Teacher', 'email@email.com', 1),
 ('Smith', 'email@email.com', 2),
 ('Jones', 'email@email.com', 3),
