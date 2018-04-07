@@ -55,6 +55,9 @@ class WeeklyCalendarView(TemplateView):
         su.classroom = request.POST.get("classroom")
         su.date = request.POST.get("day", default="DEFAULT")
         su.volunteer = Volunteer.getCurrent(self)
+        if (SignUp.double_booked(self, su)):
+            # Adds a line in database with null values. Needs changing.
+            return render(request, self.template_name, {'view' : self, 'double_booked' : True})
         su.save()
         self.signup_objects = SignUp.objects.all()
         return render(request, self.template_name, {'view' : self, 'success' : True})

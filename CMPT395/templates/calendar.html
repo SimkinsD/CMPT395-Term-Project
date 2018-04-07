@@ -76,6 +76,12 @@
       <h5>Failed to sign up</h5>
     </section>
   {% endif %}
+  {% if double_booked == True %}
+    <section id="signup-failure" class="topbar">
+      <h5>Overlapping time slot</h5>
+    </section>
+  {% endif %}
+
   
   <!-- Calendars -->
   {% for class in view.CLASSROOMS %}

@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser, UserManager, User
 from django.db import models
 from django.conf import settings
+import pprint
 
 
 class MyUserManager(UserManager):
@@ -65,5 +66,18 @@ class Signup(models.Model):
 
     def __str__(self):
         return ("Date: " + str(self.date) + " Start: " + str(self.start_time) + " End: " + str(self.end_time) + " Volunteer: " + str(self.volunteer))
+
+    def double_booked(view, new_signup):
+        fam = Family.objects.get(user=view.request.user)
+        vol = Volunteer.objects.get(volunteerID=fam.current_volunteer)
+        middle_signups = Signup.objects.filter(volunteer__volunteerID=vol.volunteerID, date=new_signup.date, start_time__lte=new_signup.start_time, end_time__gt=new_signup.start_time,
+                                            start_time__lt=new_signup.end_time)
+
+        before_signups = Signup.objects.filter(volunteer__volunteerID=vol.volunteerID, date=new_signup.date, start_time__gt=new_signup.start_time, start_time__lt=new_signup.end_time)
+        if middle_signups or before_signups:
+            return True
+        return False
+        
+
 
     
