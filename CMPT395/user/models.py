@@ -70,10 +70,8 @@ class Signup(models.Model):
     def double_booked(view, new_signup):
         fam = Family.objects.get(user=view.request.user)
         vol = Volunteer.objects.get(volunteerID=fam.current_volunteer)
-        middle_signups = Signup.objects.filter(volunteer__volunteerID=vol.volunteerID, date=new_signup.date, start_time__lte=new_signup.start_time, end_time__gt=new_signup.start_time,
-                                            start_time__lt=new_signup.end_time)
-
-        before_signups = Signup.objects.filter(volunteer__volunteerID=vol.volunteerID, date=new_signup.date, start_time__gt=new_signup.start_time, start_time__lt=new_signup.end_time)
+        middle_signups = Signup.objects.filter(volunteer__volunteerID=vol.volunteerID, date=new_signup.date, start_time__lte=new_signup.start_time, end_time__gte=new_signup.start_time)
+        before_signups = Signup.objects.filter(volunteer__volunteerID=vol.volunteerID, date=new_signup.date, start_time__gte=new_signup.start_time, start_time__lte=new_signup.end_time)
         if middle_signups or before_signups:
             return True
         return False
