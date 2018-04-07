@@ -1,8 +1,48 @@
-#main_time_off_div{
+.base_div{
     padding:1em;
     text-align: center;
     background-color: white;
     margin-top: 5%;
-    margin-left:40%;
-    margin-right:40%;
 }
+
+.center-wrapper{
+    text-align: center;
+}
+
+#request-time-off-form{
+    margin-right:40%;
+    margin-left:40%;
+}
+
+#show_time_off_requests{
+    display:inline-block;
+}
+
+th, tr{
+    padding-left:3em;
+    padding-right:3em;
+}
+
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+td{
+    padding-left:1em;
+    padding-right:1em;
+}
+
+#show_time_off_requests h2{
+    margin-bottom:3%;
+}
+
+#delete-button{
+    border:none;
+    border-collapse: initial;
+}
+
+table{
+    border:none;
+}
+
