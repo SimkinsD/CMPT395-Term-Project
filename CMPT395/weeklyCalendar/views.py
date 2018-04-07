@@ -46,6 +46,10 @@ class WeeklyCalendarView(TemplateView):
       date_raw = request.POST.get("next-week").split('-')
       date = dt.date(int(date_raw[0]), int(date_raw[1]), int(date_raw[2])) + dt.timedelta(7)
       self.date_and_name = self.pair_date_name(self.WEEK_DAYS, self.get_week(date))
+    
+    elif 'delete-signup' in request.POST:
+      sid = request.POST.get("delete-signup")
+      SignUp.objects.get(signupID=sid).delete()
 
     else:
       form = self.signup_form(request.POST)

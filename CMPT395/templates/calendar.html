@@ -37,7 +37,7 @@
       </div>
       
       <section id="signup_headers">
-        <h3 id="js-signup-day" class="signup-title">Default</h5>
+        <h3 id="js-signup-day" class="signup-title">Default</h3>
         <h5 id="js-signup-date" class="signup-title">Default</h5>
       </section>
       
@@ -46,7 +46,7 @@
         <fieldset>
           <legend>Sign-up Information:</legend>
           {{ view.signup_form.as_p }}
-	  <input id="id_classroom" type="hidden" name="classroom"/>
+	        <input id="id_classroom" type="hidden" name="classroom"/>
           <input id="js-signup-hidden-date" type="hidden" name="day" value="Default"/>
           <button type="submit">Submit</button>
         </fieldset>
@@ -101,8 +101,17 @@
                  {% if signup.date == day.1 %}
                    {% if signup.start_time >= slot.start and signup.end_time <= slot.end %}
                      <section class="event">
-                       <p class="signup-info">{{ signup.volunteer }}</p>
-                       <p class="signup-info">{% format_time signup.start_time %} - {% format_time signup.end_time %}</p>
+                       {% user_match signup.volunteer view as match %}
+                       {% if match %}
+                         <form method="POST">
+                           {% csrf_token %}
+                           <button name="delete-signup" class="fa fa-trash" value="{{ signup.signupID }}"></button>
+                         </form>
+                        {% endif %}
+                       <section class="signup-info">
+                         <p>{{ signup.volunteer }}</p>
+                         <p>{% format_time signup.start_time %} - {% format_time signup.end_time %}</p>
+                       </section>
                      </section><!-- End event -->
                    {% endif %}
                  {% endif %}

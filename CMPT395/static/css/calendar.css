@@ -155,3 +155,13 @@
 .time-slot .event {
   border-top: dotted black 1px;
 }
+
+.event .fa-trash:hover {
+  color: red;
+}
+
+.event .signup-info {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}

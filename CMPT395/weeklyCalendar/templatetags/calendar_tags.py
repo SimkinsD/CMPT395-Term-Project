@@ -16,3 +16,10 @@ def comp(str1, str2):
     return "true"
   else:
     return "false"
+
+@register.simple_tag
+def user_match(volunteer, view):
+  if volunteer.family.user == view.request.user:
+    return True
+  else:
+    return False
