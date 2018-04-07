@@ -30,7 +30,12 @@
                 <td>{{ time_off_request.start_date }}</td>
                 <td>{{ time_off_request.end_date }}</td>
                 <td>{{ time_off_request.status }}</td>
-                <td id="delete-button"><button>Delete</button></td>
+                <td id="delete-button">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <button name="delete-time-off-request" value="{{time_off_request.id}}">Delete</button>
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         </table>
