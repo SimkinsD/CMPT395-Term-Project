@@ -17,11 +17,6 @@ class TimeOffRequestAdmin(admin.ModelAdmin):
     list_display = ('family', 'start_date', 'end_date', 'status',)
     actions = [set_status_to_approved, set_status_to_denied, set_status_to_pending]
 
-    def get_actions(self, request):
-        actions = super().get_actions(request)
-        if 'delete_selected' in actions:
-            del actions['delete_selected']
-        return actions
 
 
 # Register your models here.

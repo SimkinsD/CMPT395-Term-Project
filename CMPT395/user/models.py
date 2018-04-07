@@ -23,7 +23,7 @@ class Family(models.Model):
     current_volunteer = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
-        return "%s %s" % (self.user, self.family_name)
+        return "%s" % (self.family_name)
 
 
 
