@@ -9,6 +9,8 @@ class FamilyStats(generic.ListView):
     template_name = 'family_stats.html'
     model = Signup
 
+
+
     def get(self, request, *args, **kwargs):
         self.week_total = (self.week_hours(datetime.date.today(), Family.objects.get(user=self.request.user))).total_seconds() //3600
         self.month_total = (self.month_hours(datetime.date.today(), Family.objects.get(user=self.request.user))).total_seconds() // 3600
@@ -27,8 +29,6 @@ class FamilyStats(generic.ListView):
             requested_family: is the family that you want the weekly hours for.
                 It must be a single Family object (from user.models) 
     """
-
-
     def week_hours(self, requested_week, requested_family):
         week = requested_week
         offset = week.weekday()
