@@ -37,7 +37,7 @@
       </div>
       
       <section id="signup_headers">
-        <h3 id="js-signup-day" class="signup-title">Default</h5>
+        <h3 id="js-signup-day" class="signup-title">Default</h3>
         <h5 id="js-signup-date" class="signup-title">Default</h5>
       </section>
       
@@ -46,7 +46,7 @@
         <fieldset>
           <legend>Sign-up Information:</legend>
           {{ view.signup_form.as_p }}
-	  <input id="id_classroom" type="hidden" name="classroom"/>
+	        <input id="id_classroom" type="hidden" name="classroom"/>
           <input id="js-signup-hidden-date" type="hidden" name="day" value="Default"/>
           <button type="submit">Submit</button>
         </fieldset>
@@ -76,6 +76,12 @@
       <h5>Failed to sign up</h5>
     </section>
   {% endif %}
+  {% if double_booked == True %}
+    <section id="signup-failure" class="topbar">
+      <h5>Overlapping time slot</h5>
+    </section>
+  {% endif %}
+
   
   <!-- Calendars -->
   {% for class in view.CLASSROOMS %}
@@ -95,8 +101,17 @@
                  {% if signup.date == day.1 %}
                    {% if signup.start_time > slot.start and signup.start_time < slot.end %}
                      <section class="event">
-                       <strong class="signup-info">{{ signup.volunteer }}</strong>
-                       <p class="signup-info">{% format_time signup.start_time %} - {% format_time signup.end_time %}</p>
+                       {% user_match signup.volunteer view as match %}
+                       {% if match %}
+                         <form method="POST">
+                           {% csrf_token %}
+                           <button name="delete-signup" class="fa fa-trash" value="{{ signup.signupID }}"></button>
+                         </form>
+                        {% endif %}
+                       <section class="signup-info">
+                         <strong>{{ signup.volunteer }}</strong>
+                         <p>{% format_time signup.start_time %} - {% format_time signup.end_time %}</p>
+                       </section>
                      </section><!-- End event -->
                    {% endif %}
                  {% endif %}

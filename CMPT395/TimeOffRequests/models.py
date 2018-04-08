@@ -16,4 +16,4 @@ class TimeOffRequest(models.Model):
 
     def __str__(self):
         return "TimeOffRequest|" + "Family:" + str(self.family) + " Start date:" + str(self.start_date) +\
-         "| End Date:" + str(self.end_date) + "\n"
+         "| End Date:" + str(self.end_date) + "| Status:" + str(self.status) + "\n"

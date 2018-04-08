@@ -46,15 +46,21 @@ class WeeklyCalendarView(TemplateView):
       date_raw = request.POST.get("next-week").split('-')
       date = dt.date(int(date_raw[0]), int(date_raw[1]), int(date_raw[2])) + dt.timedelta(7)
       self.date_and_name = self.pair_date_name(self.WEEK_DAYS, self.get_week(date))
+    
+    elif 'delete-signup' in request.POST:
+      sid = request.POST.get("delete-signup")
+      SignUp.objects.get(signupID=sid).delete()
 
     else:
       form = self.signup_form(request.POST)
       if form.is_valid():
-        su = form.save(commit="false")
+        su = form.save(commit=False)
         # Automated fields go here
         su.classroom = request.POST.get("classroom")
         su.date = request.POST.get("day", default="DEFAULT")
         su.volunteer = Volunteer.getCurrent(self)
+        if (SignUp.double_booked(self, su)):
+            return render(request, self.template_name, {'view' : self, 'double_booked' : True})
         su.save()
         self.signup_objects = SignUp.objects.all()
         return render(request, self.template_name, {'view' : self, 'success' : True})
