@@ -1,22 +1,23 @@
-{% extends 'base-user-task.html' %}
 
-{% block title %}<title>Select Volunteer</title>{% endblock title %}
+<h3>Registered Volunteers:</h3>
+<em>Click to choose</em>
+<form method="post">
+  {% csrf_token %}
+  {% for key, value in name_list.items %}
+    <div class="vol-select-wrap">
+      <button class="vol-select" name="volunteer" type="submit" value={{value.1}}>{{value.0}}</button>
+    </div>
+  {% endfor %}
+</form>
+{% if request.user.is_superuser %}
+  <div class="centering_div">
+      <div class="basic_div"><p>*** Note: If you are an Administrator and you do not see any volunteers to choose from, Please visit the admin page and create at least one for yourself. ***</p></div>
+  </div>
+{% endif %}
 
-{% load static %}
-{% block add_css %}
-  {{ block.super }}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/select_volunteer.css' %}"/>
-{% endblock add_css %}
+{% if not request.user.is_superuser %}
+  <div class="centering_div">
+    <div class="basic_div"><p>*** Note: If you do not see any volunteers to choose from, please contact an administrator and ask them to add one for you. ***</p></div>
+  </div>
+{% endif %}
 
-{% block task-content %}
-  <h3>Registered Volunteers:</h3>
-  <em>Click to choose</em>
-  <form method="post">
-    {% csrf_token %}
-    {% for key, value in name_list.items %}
-      <div class="vol-select-wrap">
-        <button class="vol-select" name="volunteer" type="submit" value={{value.1}}>{{value.0}}</button>
-      </div>
-    {% endfor %}
-  </form>
-{% endblock task-content %}

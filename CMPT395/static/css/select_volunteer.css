@@ -13,3 +13,12 @@
 .vol-select:active {
   background-color: #555;
 }
+
+.centering_div{
+  display:inline-block;
+  text-align: center;
+}
+
+.basic_div{
+  background-color: white;
+}
