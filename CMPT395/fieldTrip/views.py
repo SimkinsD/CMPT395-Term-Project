@@ -3,8 +3,8 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView
 from django.views.generic import ListView
 from django.urls import reverse_lazy
-from . models import *
-from . forms import *
+from .models import *
+from .forms import *
 from user.models import *
 import datetime
 
@@ -20,7 +20,12 @@ class CreateFieldTrip(CreateView):
 class CurrentTrip(ListView):
     model = FieldTrip
     template_name = 'current_field_trips.html'
-    context_object_name = 'trip_list'
+
+    def get(self, request):
+        field_trips = FieldTrip.objects.all()
+        field_trip_signups = FieldTripSignup.objects.all()
+
+        return render(request, self.template_name, {'field_trips':field_trips, 'field_trip_signups':field_trip_signups})
 
 
 # Needs work
