@@ -29,6 +29,10 @@
         <ul>
         {% for cr in view.classrooms %}
           <li>
+            <form method=POST>
+              {% csrf_token %}
+              <button name="del-class" class="fa fa-trash" value="{{ cr.classroomID }}"></button>
+            </form>
             <p>{{ cr.title }} a.k.a. "{{ cr.color }}"</p>
           </li>
         {% empty %}
@@ -44,6 +48,10 @@
         <ul>
         {% for ts in view.time_slots %}
           <li>
+            <form method=POST>
+              {% csrf_token %}
+              <button name="del-ts" class="fa fa-trash" value="{{ ts.timeslotID }}"></button>
+            </form>
             <strong>{{ ts.title }}</strong>
             <p>{{ ts.start }} - {{ ts.end }}</p>
           </li>
