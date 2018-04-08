@@ -89,13 +89,13 @@
         {% for slot in view.TIME_SLOTS %}
           <section class="time-slot">
            <h3>{{ slot.title }} <span class="fa fa-plus-circle" onclick="toggle_signup('{{ day.0 }}', '{{ day.1 }}', '{% format_time slot.start %}', '{% format_time slot.end %}', '{% format_date day.1 %}')"></span></h3>
-           <h4>{{ slot.start }} - {{ slot.end }}</h4>
+           <h4>{% format_time slot.start %} - {% format_time slot.end %}</h4>
              {% for signup in view.signup_objects %}
                {% if signup.classroom == class %}
                  {% if signup.date == day.1 %}
-                   {% if signup.start_time >= slot.start and signup.end_time <= slot.end %}
+                   {% if signup.start_time > slot.start and signup.start_time < slot.end %}
                      <section class="event">
-                       <p class="signup-info">{{ signup.volunteer }}</p>
+                       <strong class="signup-info">{{ signup.volunteer }}</strong>
                        <p class="signup-info">{% format_time signup.start_time %} - {% format_time signup.end_time %}</p>
                      </section><!-- End event -->
                    {% endif %}
