@@ -34,9 +34,7 @@
         <a class="fa fa-home" href="{% url 'home' %}"></a>
         <a class="fa fa-calendar" href="{% url 'weeklyCalendar' %}"></a>
         <a class="fa fa-bus" href=" {% url 'view_field_trip' %}"></a>
-        {% if not request.user.is_superuser %}
-          <a class="fa fa-plane" href="{% url 'request_time_off' %}"></a>
-        {% endif %}
+        <a class="fa fa-plane" href="{% url 'request_time_off' %}"></a>
       </section> <!-- End main-navbar -->
 
       <section id="content-body" class="body">
