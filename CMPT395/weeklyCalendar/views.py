@@ -29,8 +29,8 @@ class WeeklyCalendarView(TemplateView):
   
   
   def __init__(self):
-    self.CLASSROOMS = models.Classroom.objects.all()
-    self.TIME_SLOTS = models.TimeSlot.objects.all()
+    self.CLASSROOMS = models.Classroom.objects.all().order_by('title')
+    self.TIME_SLOTS = models.TimeSlot.objects.all().order_by('start')
     self.current_date = dt.datetime.now()
     self.date_and_name = self.pair_date_name(self.WEEK_DAYS, self.get_week(self.current_date))
     self.signup_objects = SignUp.objects.all()
