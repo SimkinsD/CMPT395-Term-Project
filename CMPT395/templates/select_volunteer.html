@@ -15,7 +15,7 @@
     {% csrf_token %}
     {% for key, value in name_list.items %}
       <div class="vol-select-wrap">
-        <button class="vol-select" name="volunteer" type="sumbit" value={{value.1}}>{{value.0}}</button>
+        <button class="vol-select" name="volunteer" type="submit" value={{value.1}}>{{value.0}}</button>
       </div>
     {% endfor %}
   </form>
