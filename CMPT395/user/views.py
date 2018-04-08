@@ -1,3 +1,6 @@
+#
+# DJANGO IMPORTS
+# 
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView
@@ -10,7 +13,14 @@ from django.http import HttpResponseRedirect
 from django.db.models import Q
 
 from django.db import models
+
+
+#
+# APP IMPORTS
+#
 from . models import MyUser, Family, Volunteer, Child
+from weeklyCalendar.models import TimeSlot, Classroom
+from weeklyCalendar.forms import TimeSlotForm, ClassroomForm
 
 
 class SearchUserView(generic.ListView):
@@ -94,3 +104,27 @@ class EditUser(generic.UpdateView):
     success_url = reverse_lazy('home')    
     def get_object(self, queryset=None):
         return self.request.user
+
+class AdminToolsView(generic.TemplateView):
+    template_name = "admin_tools.html"
+    classForm = ClassroomForm
+    tsForm = TimeSlotForm
+    classrooms = Classroom.objects.all()
+    time_slots = TimeSlot.objects.all()
+
+    def update(self):
+        self.classrooms = Classroom.objects.all()
+        self.time_slots = TimeSlot.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        if "add-ts" in request.POST:
+            ts = self.tsForm(request.POST)
+            ts.save()
+
+        elif "add-class" in request.POST:
+            classroom = self.classForm(request.POST)
+            classroom.save()
+
+        self.update()
+        return render(request, self.template_name, {"view" : self})
+

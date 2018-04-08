@@ -16,14 +16,14 @@
 {% block content %}
   <!-- Classroom list -->
   <section id="js-class-list" class="topbar">
-    {% for class_name in view.CLASSROOMS %}
+    {% for classroom in view.CLASSROOMS %}
       <!--
         Resulting css class will be class-name-nameofclassroom;
         i.e. class-name-Red
       -->
-      <i onclick="switch_calendar('{{ class_name }}')">
-        <section id="class-name-{{ class_name }}" class="class-selector">
-          {{ class_name }}
+      <i onclick="switch_calendar('{{ classroom.title }}', '{{ classroom.color }}')">
+        <section id="class-name-{{ classroom.title }}" class="class-selector" style="background-color: {% to_lower classroom.color %};">
+          <p>{{ classroom.title }}</p>
         </section>
       </i>
     {% endfor %}  
@@ -78,7 +78,7 @@
   {% endif %}
   {% if double_booked == True %}
     <section id="signup-failure" class="topbar">
-      <h5>Overlapping time slot</h5>
+      <h5>Overlapping sign ups</h5>
     </section>
   {% endif %}
 
@@ -97,9 +97,9 @@
            <h3>{{ slot.title }} <span class="fa fa-plus-circle" onclick="toggle_signup('{{ day.0 }}', '{{ day.1 }}', '{% format_time slot.start %}', '{% format_time slot.end %}', '{% format_date day.1 %}')"></span></h3>
            <h4>{% format_time slot.start %} - {% format_time slot.end %}</h4>
              {% for signup in view.signup_objects %}
-               {% if signup.classroom == class %}
+               {% if signup.classroom == class.title %}
                  {% if signup.date == day.1 %}
-                   {% if signup.start_time > slot.start and signup.start_time < slot.end %}
+                   {% if signup.start_time >= slot.start and signup.start_time <= slot.end %}
                      <section class="event">
                        {% user_match signup.volunteer view as match %}
                        {% if match %}
@@ -110,7 +110,9 @@
                         {% endif %}
                        <section class="signup-info">
                          <strong>{{ signup.volunteer }}</strong>
-                         <p>{% format_time signup.start_time %} - {% format_time signup.end_time %}</p>
+                         {% if signup.start_time != slot.start or signup.end_time != slot.end %}
+                           <p>{% format_time signup.start_time %} - {% format_time signup.end_time %}</p>
+                         {% endif %}
                        </section>
                      </section><!-- End event -->
                    {% endif %}

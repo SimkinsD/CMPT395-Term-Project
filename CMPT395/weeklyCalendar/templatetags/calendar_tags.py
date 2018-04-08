@@ -23,3 +23,7 @@ def user_match(volunteer, view):
     return True
   else:
     return False
+
+@register.simple_tag
+def to_lower(str):
+  return str.lower()
