@@ -78,7 +78,7 @@ class ChooseVolunteerView(generic.ListView):
             family_id = volunteer.family.familyID
             #family = Family.objects.get(pk=family_id)
             Family.objects.filter(pk=family_id).update(current_volunteer=volunteer_id)
-        return redirect(reverse('home')) #HttpResponseRedirect(self.request.path_info)
+        return redirect(reverse('weeklyCalendar'))
 
 class Home(generic.ListView):
     model = MyUser  

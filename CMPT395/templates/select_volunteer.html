@@ -1,23 +1,33 @@
 
-<h3>Registered Volunteers:</h3>
-<em>Click to choose</em>
-<form method="post">
-  {% csrf_token %}
-  {% for key, value in name_list.items %}
-    <div class="vol-select-wrap">
-      <button class="vol-select" name="volunteer" type="submit" value={{value.1}}>{{value.0}}</button>
-    </div>
-  {% endfor %}
-</form>
-{% if request.user.is_superuser %}
-  <div class="centering_div">
-      <div class="basic_div"><p>*** Note: If you are an Administrator and you do not see any volunteers to choose from, Please visit the admin page and create at least one for yourself. ***</p></div>
-  </div>
-{% endif %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/base-user-task.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/select_volunteer.css' %}" />
 
-{% if not request.user.is_superuser %}
-  <div class="centering_div">
-    <div class="basic_div"><p>*** Note: If you do not see any volunteers to choose from, please contact an administrator and ask them to add one for you. ***</p></div>
+<body>
+  <div class="main-background">
+    <div class="center-box" >
+      <h3>Volunteer Selection:</h3>
+      <em>Click to choose</em>
+      <form method="post">
+        {% csrf_token %}
+        {% for key, value in name_list.items %}
+          <div class="vol-select-wrap">
+            <button class="vol-select" name="volunteer" type="submit" value={{value.1}}>{{value.0}}</button>
+          </div>
+        {% endfor %}
+      </form>
+      {% if request.user.is_superuser %}
+        <div class="centering_div">
+            <div class="basic_div"><p>*** Note: If you are an Administrator and you do not see any volunteers to choose from, Please visit the admin page and create at least one for yourself. ***</p></div>
+        </div>
+      {% endif %}
+
+      {% if not request.user.is_superuser %}
+        <div class="centering_div">
+          <div class="basic_div"><p>*** Note: If you do not see any volunteers to choose from, please contact an administrator and ask them to add one for you. ***</p></div>
+        </div>
+      {% endif %}
+    </div>
   </div>
-{% endif %}
+</body>
 
