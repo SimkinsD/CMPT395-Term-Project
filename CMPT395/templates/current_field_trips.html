@@ -13,6 +13,7 @@
 <table>
     <tr>
         <th>Date Of Trip</th>
+        <th>Title</th>
         <th>Location</th>
         <th>Class/es</th>
         <th>Volunteers</th>
@@ -20,6 +21,7 @@
     {% for field_trip in field_trips %}
         <tr>
             <td>{{field_trip.date}}</td>
+            <td>{{ field_trip.title }}</td>
             <td>{{field_trip.location}}</td>
             <td>{{ field_trip.classes}}</td>
             <td>

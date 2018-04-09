@@ -308,7 +308,8 @@ class AdminStats(generic.ListView):
         all_stats = []
         families = Family.objects.all()
         for fam in families:
-            all_stats.append(readable_format(self.single_family_stats(requested_month, fam)))
+            if fam.user.is_superuser == 0:
+                all_stats.append(readable_format(self.single_family_stats(requested_month, fam)))
         return all_stats
 
 
