@@ -152,6 +152,7 @@ class AdminStats(generic.ListView):
 
     def __init__(self):
         self.admin_stats = self.all_family_stats(datetime.date.today())
+        self.date = (datetime.date.today().strftime("%B"), datetime.date.today().strftime("%Y"))
 
 
 
