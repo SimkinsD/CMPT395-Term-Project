@@ -138,8 +138,10 @@ class AdminToolsView(generic.TemplateView):
     template_name = "admin_tools.html"
     classForm = ClassroomForm
     tsForm = TimeSlotForm
-    classrooms = Classroom.objects.all().order_by("title")
-    time_slots = TimeSlot.objects.all().order_by("start")
+
+    def __init__(self):
+       self.classrooms = Classroom.objects.all().order_by("title")
+       self.time_slots = TimeSlot.objects.all().order_by("start")
 
     def update(self):
         self.classrooms = Classroom.objects.all().order_by("title")
@@ -147,7 +149,8 @@ class AdminToolsView(generic.TemplateView):
 
     def post(self, request, *args, **kwargs):
         if "add-ts" in request.POST:
-            ts = self.tsForm(request.POST)
+            add_ts = self.tsForm(request.POST)
+            ts = add_ts.save(commit=False)
             ts.save()
         
         elif "del-ts" in request.POST:
@@ -155,8 +158,9 @@ class AdminToolsView(generic.TemplateView):
             TimeSlot.objects.get(timeslotID=tsid).delete()
 
         elif "add-class" in request.POST:
-            classroom = self.classForm(request.POST)
-            classroom.save()
+            add_cr = self.classForm(request.POST)
+            cr = add_cr.save(commit=False)
+            cr.save()
 
         elif "del-class" in request.POST:
             crid = request.POST.get("del-class")
