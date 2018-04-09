@@ -282,26 +282,28 @@ class AdminStats(generic.ListView):
 
 
 
-''' This function allows for the download of all the family stats as a csv file for use in excel
-    Return:
-        response: an HttpResponse containing the csv file with data
-'''
-def export_csv(request):
-    func = AdminStats()
-    requested_month = datetime.date.today()
-    all_stats = []
-    families = Family.objects.all()
-    for fam in families:
-        all_stats.append(func.single_family_stats(requested_month, fam))
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="{:%B %Y stats.csv}"'.format(requested_month)
+    ''' This function allows for the download of all the family stats as a csv file for use in excel
+        Return:
+            response: an HttpResponse containing the csv file with data
+    '''
+    def post(self, request, *args, **kwargs):
+        if 'csv' in request.POST:
+            pprint.pprint(request.POST)
+            func = AdminStats()
+            requested_month = datetime.date(month=int(request.POST['month']), year=int(request.POST['year']), day=1)
+            all_stats = []
+            families = Family.objects.all()
+            for fam in families:
+                all_stats.append(func.single_family_stats(requested_month, fam))
+            response = HttpResponse(content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename="{:%B %Y stats.csv}"'.format(requested_month)
 
-    w = csv.writer(response)
-    w.writerow(['Family Name', 'Volunteer 1', 'Volunteer 2', 'Week 1', 'Week 2',
-                'Week 3', 'Week 4', 'Month Hours', 'Month Total', 'Year Total'])
-    for fam in all_stats:
-        w.writerow(readable_format(fam))
-    return response
+            w = csv.writer(response)
+            w.writerow(['Family Name', 'Volunteer 1', 'Volunteer 2', 'Week 1', 'Week 2',
+                        'Week 3', 'Week 4', 'Month Hours', 'Month Total', 'Year Total'])
+            for fam in all_stats:
+                w.writerow(readable_format(fam))
+            return response
 
 
 
@@ -316,13 +318,13 @@ def readable_format(entry):
     out_list.append(entry['fam_name'])
     out_list.append(entry['volunteer1'])
     out_list.append(entry['volunteer2'])
-    out_list.append((entry['wk1']).total_seconds() / 3600)
-    out_list.append((entry['wk2']).total_seconds() / 3600)
-    out_list.append((entry['wk3']).total_seconds() / 3600)
-    out_list.append((entry['wk4']).total_seconds() / 3600)
-    out_list.append((entry['month_hours']).total_seconds() / 3600)
-    out_list.append((entry['month_total']).total_seconds() / 3600)
-    out_list.append((entry['year_total']).total_seconds() / 3600)
+    out_list.append(format((entry['wk1']).total_seconds() / 3600, '.2f'))
+    out_list.append(format((entry['wk2']).total_seconds() / 3600, '.2f'))
+    out_list.append(format((entry['wk3']).total_seconds() / 3600, '.2f'))
+    out_list.append(format((entry['wk4']).total_seconds() / 3600, '.2f'))
+    out_list.append(format((entry['month_hours']).total_seconds() / 3600, '.2f'))
+    out_list.append(format((entry['month_total']).total_seconds() / 3600, '.2f'))
+    out_list.append(format((entry['year_total']).total_seconds() / 3600, '.2f'))
     return out_list
 
 

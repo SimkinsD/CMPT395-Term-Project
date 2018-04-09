@@ -18,7 +18,10 @@
       </form>
       {% if request.user.is_superuser %}
         <div class="centering_div">
-            <div class="basic_div"><p>*** Note: If you are an Administrator and you do not see any volunteers to choose from, Please visit the admin page and create at least one for yourself. ***</p></div>
+            <div class="basic_div">
+                <p>*** Note: If you are an Administrator and you do not see any volunteers to choose from, Please visit the admin page and create at least one for yourself. ***
+                <p><a href="{% url 'admin:index' %}">Admin Page</a></p></p>
+            </div>
         </div>
       {% endif %}
 
