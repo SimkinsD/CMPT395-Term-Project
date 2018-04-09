@@ -26,7 +26,7 @@ class CurrentTrip(ListView):
         field_trip_signups = FieldTripSignup.objects.all()
 
 
-        return render(request, self.template_name, {'field_trips':field_trips, 'field_trip_signups':field_trip_signups})
+        return render(request, self.template_name, {'field_trips':field_trips, 'field_trip_signups':field_trip_signups, 'view':self})
     
     def post(self, request):
         if('add_to_field_trip' in request.POST):

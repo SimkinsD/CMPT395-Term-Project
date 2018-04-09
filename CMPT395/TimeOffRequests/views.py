@@ -28,7 +28,7 @@ class TimeOffRequestView(TemplateView):
         for x in current_time_off_requests:
             x.status = self.display_status(x.status)
 
-        return render(request, self.template_name, {'request_time_off_form':request_time_off_form, "time_off_requests": current_time_off_requests})
+        return render(request, self.template_name, {'request_time_off_form':request_time_off_form, "time_off_requests": current_time_off_requests, 'view':self})
     
     def post(self, request):
         if('delete-time-off-request' in request.POST):
