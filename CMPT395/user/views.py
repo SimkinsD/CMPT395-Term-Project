@@ -149,10 +149,17 @@ class AdminToolsView(generic.TemplateView):
         self.time_slots = TimeSlot.objects.all().order_by("start")
 
     def post(self, request, *args, **kwargs):
+        error = None
         if "add-ts" in request.POST:
             add_ts = self.tsForm(request.POST)
             ts = add_ts.save(commit=False)
-            ts.save()
+
+            for slot in self.time_slots:
+                if ts.start < slot.end and ts.end > slot.start:
+                    error = "Overlapping time slots."
+            
+            if error == None:
+                ts.save()
         
         elif "del-ts" in request.POST:
             tsid = request.POST.get("del-ts")
@@ -168,5 +175,5 @@ class AdminToolsView(generic.TemplateView):
             Classroom.objects.get(classroomID=crid).delete()
 
         self.update()
-        return render(request, self.template_name, {"view" : self})
+        return render(request, self.template_name, {"view" : self, "error" : error})
 

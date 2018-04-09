@@ -8,8 +8,12 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/admin_tools.css' %}"/>
 {% endblock add_css %}
 
+
 {% block task-content %}
   {% if request.user.is_superuser %}
+    {% if error %}
+      <p class="error-message">{{ error }}</p>
+    {% endif %}
     <h3>Add Time Slot</h3>
     <form method=POST>
       {% csrf_token %}
