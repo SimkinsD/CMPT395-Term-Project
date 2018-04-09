@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from . models import MyUser
-from . models import Volunteer
+from user.models import TimeTransfer 
 
 class MyUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=False)
@@ -14,4 +14,10 @@ class EditUserForm(forms.ModelForm):
     email = forms.EmailField(required=False)
     class Meta(UserChangeForm.Meta):
         model = MyUser
-        fields = ['username', 'is_superuser', 'email']   
+        fields = ['username', 'is_superuser', 'email']
+
+class TimeTransferForm(forms.ModelForm):
+
+    class Meta:
+        model = TimeTransfer
+        fields = ('to_family', 'time')

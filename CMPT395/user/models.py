@@ -75,7 +75,14 @@ class Signup(models.Model):
         if middle_signups or before_signups:
             return True
         return False
-        
 
 
+class TimeTransfer(models.Model):
+    timetransferID = models.AutoField(primary_key=True)
+    date = models.DateField(blank=True, null=True)
+    time = models.TimeField()
+    from_family = models.ForeignKey(Family, related_name="%(class)s_from_family", on_delete=models.CASCADE)
+    to_family = models.ForeignKey(Family, related_name="%(class)s_to_family", on_delete=models.CASCADE)
     
+    def __str__(self):
+        return ("Transfered " + self.time.__str__() + " from family \"" + self.from_family.__str__() + "\" to family \"" + self.to_family.__str__() + "\".\n")

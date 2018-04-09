@@ -18,6 +18,7 @@ urlpatterns = [
     path('family/', views.AddFamilyView.as_view() , name='family'),
     path('child/', views.AddChildView.as_view() , name='child'),
     path('user_home/', views.Home.as_view(), name = 'home'),
+    path('transfer_hours/', views.TimeTransferView.as_view(), name="transfer_hours"),
         #path('registor_teacher/', views.RegistorTeacher.as_view(), name='registor_teacher'),
     path('person/', views.AddVolunteerView.as_view() , name='person'),
     path('pick_facilitator/', views.ChooseVolunteerView.as_view() , name='view_family'),

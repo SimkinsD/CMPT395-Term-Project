@@ -6,12 +6,9 @@ from django.views import generic
 from django.views.generic.edit import CreateView
 from django.shortcuts import render, redirect
 
-from .forms import MyUserCreationForm, EditUserForm
-
 from django.http import HttpResponseRedirect
 
 from django.db.models import Q
-
 from django.db import models
 
 
@@ -22,6 +19,12 @@ from . models import MyUser, Family, Volunteer, Child
 from weeklyCalendar.models import TimeSlot, Classroom
 from weeklyCalendar.forms import TimeSlotForm, ClassroomForm
 
+# PYTHON IMPORTS
+import datetime
+
+# APP IMPORTS
+from . models import MyUser, Family, Volunteer, Child, TimeTransfer
+from .forms import MyUserCreationForm, EditUserForm, TimeTransferForm
 
 class SearchUserView(generic.ListView):
     template_name = "search_user.html"
@@ -105,6 +108,32 @@ class EditUser(generic.UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
+class TimeTransferView(generic.TemplateView):
+    template_name = "time_transfer.html"
+    model = TimeTransfer
+    transfer_form = TimeTransferForm
+
+    def update(self):
+        self.sent_transfers = TimeTransfer.objects.all().filter(from_family=Family.objects.get(user=self.request.user))
+        self.received_transfers = TimeTransfer.objects.all().filter(to_family=Family.objects.get(user=self.request.user))
+
+    def get(self, request, *args, **kwargs):
+        self.update()
+        return render(request, self.template_name, {"view" : self})
+
+    def post(self, request, *args, **kwargs):
+        if "add-transfer" in request.POST:
+            tt_form = self.transfer_form(request.POST)
+            if tt_form.is_valid():
+              th = tt_form.save(commit=False)
+              th.date = datetime.date.today()
+              th.from_family = Family.objects.get(user=request.user)
+              th.save()
+        
+        self.update()
+        return render(request, self.template_name, {"view" : self})
+
+      
 class AdminToolsView(generic.TemplateView):
     template_name = "admin_tools.html"
     classForm = ClassroomForm
