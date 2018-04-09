@@ -99,7 +99,7 @@
              {% for signup in view.signup_objects %}
                {% if signup.classroom == class %}
                  {% if signup.date == day.1 %}
-                   {% if signup.start_time > slot.start and signup.start_time < slot.end %}
+                   {% if signup.start_time >= slot.start and signup.start_time < slot.end %}
                      <section class="event">
                        {% user_match signup.volunteer view as match %}
                        {% if match %}
