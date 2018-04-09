@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import FieldTripSignup, FieldTrip
+from .models import *
+
 
 # Register your models here.
-admin.site.register(FieldTripSignup)
+
 admin.site.register(FieldTrip)
+admin.site.register(FieldTripSignup)

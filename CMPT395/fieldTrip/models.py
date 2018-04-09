@@ -14,8 +14,8 @@ class FieldTrip(models.Model):
 
 
 class FieldTripSignup(models.Model):
-    trip = models.OneToOneField(FieldTrip, on_delete=models.CASCADE)
-    volunteer = models.ForeignKey(Volunteer, on_delete=models.CASCADE, null=True)
+    trip = models.ForeignKey(FieldTrip, on_delete=models.CASCADE)
+    volunteer = models.ForeignKey(Volunteer, on_delete=models.CASCADE, null=True, unique=False)
 
     def __str__(self):
         return "%s %s" % (self.trip, self.volunteer)

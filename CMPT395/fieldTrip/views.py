@@ -22,12 +22,18 @@ class CurrentTrip(ListView):
     template_name = 'current_field_trips.html'
 
     def get(self, request):
-        field_trips = FieldTrip.objects.all()
+        field_trips = FieldTrip.objects.filter(date__gte=datetime.date.today())
         field_trip_signups = FieldTripSignup.objects.all()
+        print(end="\n\n\n")
+        print("**********************************************************************************************************")
+        print(field_trips)
+        print("type:", end="")
+        print(type(field_trips))
+        print("**********************************************************************************************************")
+        print(end="\n\n\n")
 
-        current_volunteer = Volunteer.getCurrent(self)
 
-        return render(request, self.template_name, {'field_trips':field_trips, 'field_trip_signups':field_trip_signups, 'current_volunteer':current_volunteer})
+        return render(request, self.template_name, {'field_trips':field_trips, 'field_trip_signups':field_trip_signups})
     
     def post(self, request):
         if('add_to_field_trip' in request.POST):
@@ -41,22 +47,22 @@ class CurrentTrip(ListView):
                 return redirect(reverse('view_field_trip'))
         
         elif('delete_field_trip_signup' in request.POST):
-            field_trip_id = request.POST.get("delete_field_trip_signup")
-            if(FieldTripSignup.objects.filter(trip=FieldTrip.objects.get(id=field_trip_id)).exists()):
-                FieldTripSignup.objects.get(trip=FieldTrip.objects.get(id=field_trip_id), volunteer = Volunteer.objects.get(volunteerID=Volunteer.getCurrent(self).volunteerID)).delete()
+            delete_signup_field_trip_id = request.POST.get("delete_field_trip_signup")
+            if(FieldTripSignup.objects.filter(trip=FieldTrip.objects.get(id=delete_signup_field_trip_id), volunteer = Volunteer.objects.get(volunteerID=Volunteer.getCurrent(self).volunteerID)).exists()):
+                FieldTripSignup.objects.get(trip=FieldTrip.objects.get(id=delete_signup_field_trip_id), volunteer = Volunteer.objects.get(volunteerID=Volunteer.getCurrent(self).volunteerID)).delete()
                 return redirect(reverse('view_field_trip'))
             else:
                 return redirect(reverse('view_field_trip'))
         elif('delete_field_trip' in request.POST):
-            field_trip_id = request.POST.get("delete_field_trip")
-            if(FieldTripSignup.objects.filter(trip=FieldTrip.objects.get(id=field_trip_id)).exists()):
-                signup_list = FieldTripSignup.objects.filter(trip=FieldTrip.objects.get(id=field_trip_id))
+            delete_field_trip_id = request.POST.get("delete_field_trip")
+            if(FieldTripSignup.objects.filter(trip=FieldTrip.objects.get(id=delete_field_trip_id)).exists()):
+                signup_list = FieldTripSignup.objects.filter(trip=FieldTrip.objects.get(id=delete_field_trip_id))
                 for signup in signup_list:
                     signup.delete()
-                FieldTrip.objects.get(id=field_trip_id).delete()
+                FieldTrip.objects.get(id=delete_field_trip_id).delete()
                 return redirect(reverse('view_field_trip'))
             else:
-                FieldTrip.objects.get(id=field_trip_id).delete()
+                FieldTrip.objects.get(id=delete_field_trip_id).delete()
                 return redirect(reverse('view_field_trip'))
 
             
