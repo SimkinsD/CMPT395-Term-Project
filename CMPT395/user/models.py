@@ -85,4 +85,4 @@ class TimeTransfer(models.Model):
     to_family = models.ForeignKey(Family, related_name="%(class)s_to_family", on_delete=models.CASCADE)
     
     def __str__(self):
-        return ("Transfered " + self.time.__str__() + " to " + self.to_family.__str__() + " from " + self.from_family.__str__() + ".\n")
+        return ("Transfered " + self.time.__str__() + " from family \"" + self.from_family.__str__() + "\" to family \"" + self.to_family.__str__() + "\".\n")
