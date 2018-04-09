@@ -11,18 +11,19 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/calendar.css' %}" />
 {% endblock add_css %}
 
+{% block body_tag %}<body onload="startup('{{ view.CLASSROOMS.0.title }}', '{{ view.CLASSROOMS.0.color }}')">{% endblock body_tag %}
 
 {% load calendar_tags %}
 {% block content %}
   <!-- Classroom list -->
   <section id="js-class-list" class="topbar">
     {% for classroom in view.CLASSROOMS %}
-      <!--
-        Resulting css class will be class-name-nameofclassroom;
-        i.e. class-name-Red
-      -->
       <i onclick="switch_calendar('{{ classroom.title }}', '{{ classroom.color }}')">
         <section id="class-name-{{ classroom.title }}" class="class-selector" style="background-color: {% to_lower classroom.color %};">
+          <!--
+            Resulting css id will be class-name-nameofclassroom;
+            i.e. class-name-Red
+          -->
           <p>{{ classroom.title }}</p>
         </section>
       </i>

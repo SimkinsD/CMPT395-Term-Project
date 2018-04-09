@@ -1,5 +1,5 @@
-window.onload = function() {
-  // Change calendars from being stacked to being on top of one another
+function startup(default_title, default_color) {
+  // Change calendars from being stacked to being in front of one another
   var calendars = document.getElementsByClassName("calendar");
   var total_height = 0;
   var max_height = 0;
@@ -19,7 +19,7 @@ window.onload = function() {
   var pagewrap_height = pagewrap.clientHeight;
   pagewrap.style.height = (pagewrap_height - total_height) + (max_height + header_height)  + "px";
   
-  switch_calendar("Red", "Red");
+  switch_calendar(default_title, default_color);
 }
 
 function toggle_popup(elemId) {
