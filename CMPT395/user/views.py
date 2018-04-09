@@ -102,10 +102,14 @@ class TimeTransferView(generic.TemplateView):
     template_name = "time_transfer.html"
     model = TimeTransfer
     transfer_form = TimeTransferForm
-    transfers = TimeTransfer.objects.all()
 
     def update(self):
-        self.transfers = TimeTransfer.objects.all()
+        self.sent_transfers = TimeTransfer.objects.all().filter(from_family=Family.objects.get(user=self.request.user))
+        self.received_transfers = TimeTransfer.objects.all().filter(to_family=Family.objects.get(user=self.request.user))
+
+    def get(self, request, *args, **kwargs):
+        self.update()
+        return render(request, self.template_name, {"view" : self})
 
     def post(self, request, *args, **kwargs):
         if "add-transfer" in request.POST:
