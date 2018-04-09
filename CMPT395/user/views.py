@@ -1,17 +1,20 @@
+# DJANGO IMPORTS
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView
 from django.shortcuts import render
 
-from .forms import MyUserCreationForm, EditUserForm
-
 from django.http import HttpResponseRedirect
 
 from django.db.models import Q
-
 from django.db import models
-from . models import MyUser, Family, Volunteer, Child
 
+# PYTHON IMPORTS
+import datetime
+
+# APP IMPORTS
+from . models import MyUser, Family, Volunteer, Child, TimeTransfer
+from .forms import MyUserCreationForm, EditUserForm, TimeTransferForm
 
 class SearchUserView(generic.ListView):
     template_name = "search_user.html"
@@ -94,3 +97,24 @@ class EditUser(generic.UpdateView):
     success_url = reverse_lazy('home')    
     def get_object(self, queryset=None):
         return self.request.user
+
+class TimeTransferView(generic.TemplateView):
+    template_name = "time_transfer.html"
+    model = TimeTransfer
+    transfer_form = TimeTransferForm
+    transfers = TimeTransfer.objects.all()
+
+    def update(self):
+        self.transfers = TimeTransfer.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        if "add-transfer" in request.POST:
+            tt_form = self.transfer_form(request.POST)
+            if tt_form.is_valid():
+              th = tt_form.save(commit=False)
+              th.date = datetime.date.today()
+              th.from_family = Family.objects.get(user=request.user)
+              th.save()
+        
+        self.update()
+        return render(request, self.template_name, {"view" : self})

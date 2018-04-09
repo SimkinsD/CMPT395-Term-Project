@@ -8,14 +8,16 @@
     <li>Weekly Hours:{{ view.week_total }}</li>
     <li>Month Hours:{{ view.month_total }}</li>
     <li>Required Hours:{{ view.required_hours }}</li>
-    <li>Upcoming Signups:</li>
+</ul>
+
+<section id="signups">
+    <h3>Upcoming Signups</h3>
     <ul>
-        {% for signup in view.current_signups %}
+    {% for signup in view.current_signups %}
         <li>
             {{ signup }}
         </li>
-        {% endfor %}
+    {% endfor %}
     </ul>
-</ul>
-
+</section>
 {% endblock task-content %}

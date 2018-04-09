@@ -1,0 +1,17 @@
+{% extends "base-user-task.html" %}
+
+{% block title %}<title>Transfer Hours</title>{% endblock title %}
+
+{% block task-content %}
+  <form method=POST>
+      {% csrf_token %}
+      {{ view.transfer_form.as_p }}
+      <button type="submit" name="add-transfer">Transfer</button>
+  </form>
+
+  <section>
+      {% for transfer in view.transfers %}
+        <p>{{ transfer }}</p>
+      {% endfor %}
+  </section>
+{% endblock task-content %}

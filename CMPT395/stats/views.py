@@ -12,8 +12,16 @@ class FamilyStats(generic.ListView):
 
 
     def get(self, request, *args, **kwargs):
-        self.week_total = (self.week_hours(datetime.date.today(), Family.objects.get(user=self.request.user))).total_seconds() //3600
-        self.month_total = (self.month_hours(datetime.date.today(), Family.objects.get(user=self.request.user))).total_seconds() // 3600
+        weekly_timedelta = self.week_hours(datetime.date.today(), Family.objects.get(user=self.request.user))
+        weekly_hours = weekly_timedelta.total_seconds() // 3600
+        weekly_minutes = (weekly_timedelta.total_seconds() - (weekly_hours * 3600)) // 60
+        self.week_total = str(weekly_hours) + "h " + str(weekly_minutes) + "m"
+
+        monthly_timedelta = self.month_hours(datetime.date.today(), Family.objects.get(user=self.request.user))
+        monthly_hours = monthly_timedelta.total_seconds() // 3600
+        monthly_minutes = (monthly_timedelta.total_seconds() - (monthly_hours * 3600)) // 60
+        self.month_total = str(monthly_hours) + "h " + str(monthly_minutes) + "m"
+
         self.required_hours = self.required_hours(Family.objects.get(user=self.request.user))
         self.current_signups = self.current_signups(Family.objects.get(user=self.request.user))
         return render(request, self.template_name, {'view':self})
@@ -45,6 +53,19 @@ class FamilyStats(generic.ListView):
             end = datetime.timedelta(hours=day.end_time.hour,minutes=day.end_time.minute)
             start = datetime.timedelta(hours=day.start_time.hour,minutes=day.start_time.minute)
             total = total + (end - start)
+
+        transfers_from = TimeTransfer.objects.filter(from_family = family,
+                                                    date__range=(begin_week, end_week))
+        transfers_to = TimeTransfer.objects.filter(to_family = family,
+                                                    date__range=(begin_week, end_week))
+
+        for transfer in transfers_from:
+            td = datetime.timedelta(hours=transfer.time.hour, minutes=transfer.time.minute)
+            total -= td
+        for transfer in transfers_to:
+            td = datetime.timedelta(hours=transfer.time.hour, minutes=transfer.time.minute)
+            total += td
+
         return total
 
 
@@ -66,14 +87,27 @@ class FamilyStats(generic.ListView):
         signups = Signup.objects.filter(volunteer__family__familyID = family.familyID, 
                                         date__year=current.year, date__month=current.month)
         # Goes through each signup for the family and calculates total hours for the month
-        total = datetime.timedelta(hours=0)
+        total = datetime.timedelta(hours=0, minutes=0)
         for day in signups:
             end = datetime.timedelta(hours=day.end_time.hour,minutes=day.end_time.minute)
             start = datetime.timedelta(hours=day.start_time.hour,minutes=day.start_time.minute)
-            total = total + (end - start)
-        return total
+            total = (total + (end - start))
 
 
+        transfers_from = TimeTransfer.objects.filter(from_family = family,
+                                                    date__year = current.year,
+                                                    date__month = current.month)
+        transfers_to = TimeTransfer.objects.filter(to_family = family,
+                                                    date__year = current.year,
+                                                    date__month = current.month)
+        for transfer in transfers_from:
+            td = datetime.timedelta(hours=transfer.time.hour, minutes=transfer.time.minute)
+            total -= td
+        for transfer in transfers_to:
+            td = datetime.timedelta(hours=transfer.time.hour, minutes=transfer.time.minute)
+            total += td
+
+        return total 
 
 
 
