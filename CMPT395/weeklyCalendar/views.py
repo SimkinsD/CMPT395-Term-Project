@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from .forms import SignUpForm
 from user.models import Signup as SignUp
 from user.models import Family, Volunteer
+from . import models
 
 import calendar
 import datetime as dt
@@ -23,15 +24,13 @@ class WeeklyCalendarView(TemplateView):
   # End TimeSlot  
   
   # Constants
-  CLASSROOMS = ["Red", "Blue", "Green"]
   WEEK_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday"
                , "Thursday", "Friday", "Saturday"]
-  TIME_SLOTS = [TimeSlot("Morning", dt.time(8, 45), dt.time(12)),
-                TimeSlot("Lunch", dt.time(11, 50), dt.time(13)),
-                TimeSlot("Afternoon", dt.time(12, 50), dt.time(15, 45))]
   
   
   def __init__(self):
+    self.CLASSROOMS = models.Classroom.objects.all().order_by('title')
+    self.TIME_SLOTS = models.TimeSlot.objects.all().order_by('start')
     self.current_date = dt.datetime.now()
     self.date_and_name = self.pair_date_name(self.WEEK_DAYS, self.get_week(self.current_date))
     self.signup_objects = SignUp.objects.all()

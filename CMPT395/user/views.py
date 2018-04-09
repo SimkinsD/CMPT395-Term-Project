@@ -1,4 +1,6 @@
+#
 # DJANGO IMPORTS
+# 
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 from django.views.generic.edit import CreateView
@@ -8,6 +10,14 @@ from django.http import HttpResponseRedirect
 
 from django.db.models import Q
 from django.db import models
+
+
+#
+# APP IMPORTS
+#
+from . models import MyUser, Family, Volunteer, Child
+from weeklyCalendar.models import TimeSlot, Classroom
+from weeklyCalendar.forms import TimeSlotForm, ClassroomForm
 
 # PYTHON IMPORTS
 import datetime
@@ -122,3 +132,36 @@ class TimeTransferView(generic.TemplateView):
         
         self.update()
         return render(request, self.template_name, {"view" : self})
+
+      
+class AdminToolsView(generic.TemplateView):
+    template_name = "admin_tools.html"
+    classForm = ClassroomForm
+    tsForm = TimeSlotForm
+    classrooms = Classroom.objects.all().order_by("title")
+    time_slots = TimeSlot.objects.all().order_by("start")
+
+    def update(self):
+        self.classrooms = Classroom.objects.all().order_by("title")
+        self.time_slots = TimeSlot.objects.all().order_by("start")
+
+    def post(self, request, *args, **kwargs):
+        if "add-ts" in request.POST:
+            ts = self.tsForm(request.POST)
+            ts.save()
+        
+        elif "del-ts" in request.POST:
+            tsid = request.POST.get("del-ts")
+            TimeSlot.objects.get(timeslotID=tsid).delete()
+
+        elif "add-class" in request.POST:
+            classroom = self.classForm(request.POST)
+            classroom.save()
+
+        elif "del-class" in request.POST:
+            crid = request.POST.get("del-class")
+            Classroom.objects.get(classroomID=crid).delete()
+
+        self.update()
+        return render(request, self.template_name, {"view" : self})
+

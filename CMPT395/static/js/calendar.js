@@ -19,7 +19,7 @@ window.onload = function() {
   var pagewrap_height = pagewrap.clientHeight;
   pagewrap.style.height = (pagewrap_height - total_height) + (max_height + header_height)  + "px";
   
-  switch_calendar("Red");
+  switch_calendar("Red", "Red");
 }
 
 function toggle_popup(elemId) {
@@ -41,9 +41,9 @@ function toggle_popup(elemId) {
     }
 }
 
-function switch_calendar(new_calendar_color) {
-  set_current_classroom(new_calendar_color);
-  var new_calendar = document.getElementById("js-" + new_calendar_color + "-calendar");
+function switch_calendar(new_calendar_title, new_calendar_color) {
+  set_current_classroom(new_calendar_title, new_calendar_color);
+  var new_calendar = document.getElementById("js-" + new_calendar_title + "-calendar");
   var calendars = document.getElementsByClassName("calendar");
   
   for (var i = 0; i < calendars.length; i++) {
@@ -54,12 +54,12 @@ function switch_calendar(new_calendar_color) {
   new_calendar.style.visibility = "visible";
 }
 
-function set_current_classroom(classroom) {
+function set_current_classroom(classroom_title, classroom_color) {
   var signup_class = document.getElementById("id_classroom");
   var class_list = document.getElementById("js-class-list");
 
-  signup_class.value = classroom;
-  class_list.style.backgroundColor = classroom.toLowerCase();
+  signup_class.value = classroom_title;
+  class_list.style.backgroundColor = classroom_color.toLowerCase();
 }
 
 function toggle_signup(day, date, start, end, formatted_date) {
