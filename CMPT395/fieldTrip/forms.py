@@ -14,7 +14,7 @@ class CreateFieldTripForm(forms.ModelForm):
 
     class Meta:
         model = FieldTrip
-        fields = ('location', 'title', 'info', 'date')
+        fields = ('location', 'title', 'classes', 'info', 'date')
         current = datetime.date.today()
         widgets = {'date' : DateInput()}
         queryset = FieldTrip.objects.filter(date__gte=current)
@@ -25,5 +25,4 @@ class SignupFieldTripForm(forms.ModelForm):
 
     class Meta:
         model = FieldTripSignup
-        fields = ('trip', 'volunteer', 'classroom')
-        widgets = {'classroom' : forms.Select(choices=CLASSES)}
+        fields = ('trip', 'volunteer')
