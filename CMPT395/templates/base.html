@@ -11,7 +11,7 @@
   {% block add_css %}{% endblock add_css %}
 </head>
 
-
+{% load calendar_tags %}
 {% block body_tag %}<body>{% endblock body_tag %}
   <div id="pagewrap">
     <section id="main-header" class="header">
@@ -24,8 +24,8 @@
       </div> <!-- End header item 2 -->
 
       <div class="right-align header-item">
-        {% block weeklyHours %}<p>This Week: 0/5 hours</p>{% endblock weeklyHours %}
-        {% block monthlyHours %}<p>This Month: 0/20 hours</p>{% endblock monthlyHours %}
+        {% block weeklyHours %}<p>This Week: {% weekly_hours view %}</p>{% endblock weeklyHours %}
+        {% block monthlyHours %}<p>This Month: {% monthly_hours view %}</p>{% endblock monthlyHours %}
       </div> <!-- End header item 3 -->
     </section> <!-- End main-header -->
 
