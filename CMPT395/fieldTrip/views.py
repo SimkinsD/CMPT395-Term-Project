@@ -24,13 +24,6 @@ class CurrentTrip(ListView):
     def get(self, request):
         field_trips = FieldTrip.objects.filter(date__gte=datetime.date.today())
         field_trip_signups = FieldTripSignup.objects.all()
-        print(end="\n\n\n")
-        print("**********************************************************************************************************")
-        print(field_trips)
-        print("type:", end="")
-        print(type(field_trips))
-        print("**********************************************************************************************************")
-        print(end="\n\n\n")
 
 
         return render(request, self.template_name, {'field_trips':field_trips, 'field_trip_signups':field_trip_signups})
