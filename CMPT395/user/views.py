@@ -53,7 +53,7 @@ class AddVolunteerView(CreateView):
 
 class AddFamilyView(CreateView):
     model = Family
-    success_url = reverse_lazy('family')
+    success_url = reverse_lazy('volunteer')
     template_name = 'add_family.html'
     fields = ['user', 'familyID', 'family_name', 'email', 'phone']
 

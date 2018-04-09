@@ -7,7 +7,7 @@ class MyUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=False)
     class Meta(UserCreationForm.Meta):
         model = MyUser
-        fields = ['username', 'is_superuser', 'email']
+        fields = ['username', 'is_superuser', 'is_staff', 'email']
 
 class EditUserForm(forms.ModelForm):
     last_name = forms.CharField(max_length=50)

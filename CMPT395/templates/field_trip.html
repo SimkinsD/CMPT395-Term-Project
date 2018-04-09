@@ -3,7 +3,7 @@
 {% block title %}<title>Add Field Trip</title>{% endblock %}
 
 {% block task-content %}
-  {% if request.user.is_superuser %}
+  {% if request.user.is_staff %}
 <h2>Add Field Trip</h2>
 <form method="post">
     {% csrf_token %}
