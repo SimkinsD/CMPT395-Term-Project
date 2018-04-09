@@ -1,3 +1,7 @@
+body {
+  background-color: gray;
+}
+
 .vol-select {
   width: 100px;
   padding: 10px;
@@ -15,8 +19,14 @@
 }
 
 .centering_div{
-  display:inline-block;
+  display: inline-block;
+  margin: 50px auto;
+  padding: 20px;
   text-align: center;
+  box-shadow: 4px 4px 6px #222;
+  background-color: white;
+  border: solid black 1px;
+  border-radius: 4px;
 }
 
 .basic_div{
