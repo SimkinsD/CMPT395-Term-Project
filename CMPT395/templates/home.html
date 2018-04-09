@@ -17,7 +17,7 @@
           <li><a href="{% url 'family_stats' %}">Family Stats</a></li>
           <li><a href="{% url 'view_family' %}">Change Volunteer</a></li>
           <li><a href="{% url 'view_field_trip' %}">Current Field Trips</a></li>
-          <li><a href="{% url 'weeklyCalendar' %}">Calendar</a></li>
+          <li><a href="{% url 'weeklyCalendar' %}">Sign Up To Volunteer</a></li>
           <li><a href="{% url 'password_change' %}">Change password</a></li>
           {% else %}
           <li><a href="{% url 'login' %}">Log in</a></li>
@@ -29,7 +29,7 @@
           <li><a href="{% url 'family' %}">Add Family</a></li>
           <li><a href="{% url 'person' %}">Add Volunteer</a></li>
           <li><a href="{% url 'child' %}">Add Child</a></li>
-          <li><a href="{% url 'admin:index' %}">Edit or Delete All Accounts</a></li>
+          <li><a href="{% url 'admin:index' %}">Visit Admin Page</a></li>
           {% endif %}
       </ul>
   </section>
