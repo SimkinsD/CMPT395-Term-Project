@@ -157,10 +157,10 @@ values ('Red', 'Red'),
 ('Green', 'Green'),
 ('Purple', 'Purple');
 
-insert into 395db.weeklycalendar_timeslot (title, start, end)
-values ('Morning', '8:45:00', '11:50:00'),
-('Lunch', '11:50:00', '13:00:00'),
-('Afternoon', '12:50', '15:45');
+insert into 395db.weeklycalendar_timeslot (title, start, end, multiplier)
+values ('Morning', '8:45:00', '11:50:00', 1),
+('Lunch', '11:50:00', '13:00:00', 2),
+('Afternoon', '12:50', '15:45', 1);
 
 
 insert into 395db.timeoffrequests_timeoffrequest (start_date, end_date, reason_for_time_off, status, family_id)
