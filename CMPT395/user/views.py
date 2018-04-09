@@ -42,7 +42,7 @@ class SearchUserView(generic.ListView):
 
 class RegistorView(generic.CreateView):
     form_class = MyUserCreationForm
-    success_url = reverse_lazy('registor')
+    success_url = reverse_lazy('family')
     template_name = 'registor.html'
 
 class AddVolunteerView(CreateView):
@@ -56,6 +56,7 @@ class AddFamilyView(CreateView):
     success_url = reverse_lazy('family')
     template_name = 'add_family.html'
     fields = ['user', 'familyID', 'family_name', 'email', 'phone']
+
 
 class AddChildView(CreateView):
     model = Child
