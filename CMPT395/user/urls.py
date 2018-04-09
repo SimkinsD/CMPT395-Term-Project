@@ -34,4 +34,5 @@ urlpatterns = [
     path('password_reset/done/', password_reset_done, name='password_reset_done'),
     path('reset/', password_reset_confirm, name='password_reset_confirm'),
     path('reset/done/', password_reset_complete, name='password_reset_complete'),
+    path('admin_tools', views.AdminToolsView.as_view(), name="admin-tools"),
 ]
