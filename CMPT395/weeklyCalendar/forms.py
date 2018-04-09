@@ -12,7 +12,7 @@ class TimeSlotForm(forms.ModelForm):
 
     class Meta:
         model = models.TimeSlot
-        fields = ("title", "start", "end")
+        fields = ("title", "start", "end", "multiplier")
 
 class ClassroomForm(forms.ModelForm):
     

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 from django.http import HttpResponse
 from user.models import *
+from weeklyCalendar import models as calendar_models
 import datetime, pprint, csv
 
 
@@ -52,7 +53,23 @@ class FamilyStats(generic.ListView):
         for day in signups:
             end = datetime.timedelta(hours=day.end_time.hour,minutes=day.end_time.minute)
             start = datetime.timedelta(hours=day.start_time.hour,minutes=day.start_time.minute)
+            time_slots = calendar_models.TimeSlot.objects.all()
+            for ts in time_slots:
+                if ts.multiplier != 1:
+                    ts_start_td = datetime.timedelta(hours=ts.start.hour, minutes=ts.start.minute)
+                    ts_end_td = datetime.timedelta(hours=ts.end.hour, minutes=ts.end.minute)
+                    if ts_start_td < end and ts_end_td > start:
+                        if ts_end_td > end:
+                            to_mult = end - ts_start_td
+                        else:
+                            to_mult = ts_end_td - start
+                        mult = to_mult * ts.multiplier
+                        total -= to_mult
+                        total += mult
+
             total = total + (end - start)
+
+        
 
         transfers_from = TimeTransfer.objects.filter(from_family = family,
                                                     date__range=(begin_week, end_week))
@@ -91,6 +108,20 @@ class FamilyStats(generic.ListView):
         for day in signups:
             end = datetime.timedelta(hours=day.end_time.hour,minutes=day.end_time.minute)
             start = datetime.timedelta(hours=day.start_time.hour,minutes=day.start_time.minute)
+            time_slots = calendar_models.TimeSlot.objects.all()
+            for ts in time_slots:
+                if ts.multiplier != 1:
+                    ts_start_td = datetime.timedelta(hours=ts.start.hour, minutes=ts.start.minute)
+                    ts_end_td = datetime.timedelta(hours=ts.end.hour, minutes=ts.end.minute)
+                    if ts_start_td < end and ts_end_td > start:
+                        if ts_end_td > end:
+                            to_mult = end - ts_start_td
+                        else:
+                            to_mult = ts_end_td - start
+                        mult = to_mult * ts.multiplier
+                        total -= to_mult
+                        total += mult
+
             total = (total + (end - start))
 
 
