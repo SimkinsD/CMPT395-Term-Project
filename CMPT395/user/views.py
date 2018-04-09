@@ -1,8 +1,8 @@
 # DJANGO IMPORTS
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 from django.views.generic.edit import CreateView
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.http import HttpResponseRedirect
 
@@ -39,7 +39,7 @@ class AddVolunteerView(CreateView):
     model = Volunteer
     success_url = reverse_lazy('volunteer')
     template_name = 'add_volunteer.html'
-    fields = ['volunteerID', 'family', 'first_name', 'last_name']
+    fields = ['volunteerID', 'family', 'first_name', 'last_name', 'email']
 
 class AddFamilyView(CreateView):
     model = Family
@@ -81,7 +81,7 @@ class ChooseVolunteerView(generic.ListView):
             family_id = volunteer.family.familyID
             #family = Family.objects.get(pk=family_id)
             Family.objects.filter(pk=family_id).update(current_volunteer=volunteer_id)
-        return HttpResponseRedirect(self.request.path_info)
+        return redirect(reverse('weeklyCalendar'))
 
 class Home(generic.ListView):
     model = MyUser  
