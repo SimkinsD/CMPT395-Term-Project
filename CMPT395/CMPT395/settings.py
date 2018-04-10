@@ -37,7 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'weeklyCalendar',
     'templateTest',
+    'user',
+    'stats',
+    'TimeOffRequests',
+    'fieldTrip',
 ]
 
 MIDDLEWARE = [
@@ -76,8 +81,14 @@ WSGI_APPLICATION = 'CMPT395.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+	#Use for Sqlite database
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+	#Use for MySQL database
+	'ENGINE': 'mysql.connector.django',
+	'NAME': '395db',
+	'USER': 'root',
+	'PASSWORD': 'toor',
     }
 }
 
@@ -120,3 +131,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+LOGIN_REDIRECT_URL = 'select_volunteer'
+LOGOUT_REDIRECT_URL = 'login'
+AUTH_USER_MODEL = 'user.MyUser'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
